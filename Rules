@@ -1,2 +1,14 @@
 - Variablen-Namen CamelCase und selbstdokumentierend (Negativbesipiel: int a , double b; Besser: int countItems,...)
-  Variablen und Methodennamen in Englisch
+   Variablen und Methodennamen in Englisch
+
+- KEINE UMLAUTE, sonder ae statt ä, ue statt ü,...
+  
+- Bei Commits eindeutige Beschreibungen schreiben
+- JavaDoc-Kommentare zwischendurch erstellen, um den anderen das Verstehen des Codes leichter zu machen 
+  (innerhalb von Methoden,... normale Kommentare)
+- Commits thematisch gruppieren:
+    wenn z.b. am Rendering programmiert wurde und man jetzt Spiellogik programmieren will, commiten
+- andere vor größeren Änderungen der Logik informieren, besonders wenn diese Module der Anderen beeinflusst (WhatsApp-Gruppe)
+
+- Wenn man mit einer Implementierung nicht fertig wird, soll ein TODO Eintrag im Code gemacht werden. (//TODO: <Beschreibung>)
+   (wie bei Automatisch generierten Methoden [//TODO: Auto-generated Method-stub])

@@ -1,0 +1,2 @@
+- Variablen-Namen CamelCase und selbstdokumentierend (Negativbesipiel: int a , double b; Besser: int countItems,...)
+  Variablen und Methodennamen in Englisch

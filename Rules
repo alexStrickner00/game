@@ -9,3 +9,6 @@
 - Commits thematisch gruppieren:
     wenn z.b. am Rendering programmiert wurde und man jetzt Spiellogik programmieren will, commiten
 - andere vor größeren Änderungen der Logik informieren, besonders wenn diese Module der Anderen beeinflusst (WhatsApp-Gruppe)
+
+- Wenn man mit einer Implementierung nicht fertig wird, soll ein TODO Eintrag im Code gemacht werden. (//TODO: <Beschreibung>)
+   (wie bei Automatisch generierten Methoden [//TODO: Auto-generated Method-stub])

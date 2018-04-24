@@ -1,1 +1,13 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.bu {
+
+-fx-background-color: #A0CEDE;	
+	
+}
+
+.background {
+	
+-fx-background-color: #B3C2BF;	
+	
+}

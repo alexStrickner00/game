@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.4" fx:controller="application.Main">
+<BorderPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
    <center>
       <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutX="289.0" layoutY="305.0" prefHeight="216.0" prefWidth="465.0">
+            <VBox alignment="CENTER" layoutX="72.0" layoutY="16.0" spacing="71.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" styleClass="bu" stylesheets="@application.css" text="PLAY" textFill="#e3e3e3">
-                     <font>
-                        <Font name="Verdana" size="24.0" />
-                     </font>
-                  </Button>
-                  <Button id="buttonStart" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" text="Button" />
+                  <ImageView fitHeight="297.0" fitWidth="890.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Documents/Schule/Programmieren/3.Klasse/Projekt%20/Grafiken/SWP%20Projekt%20LOGO.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="216.0" prefWidth="465.0">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="PLAY" textFill="#e3e3e3">
+                           <font>
+                              <Font name="Verdana" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="SETTINGS" textFill="#e3e3e3">
+                           <font>
+                              <Font name="Verdana" size="24.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" text="CREDITS" textFill="#e3e3e3">
+                           <font>
+                              <Font name="Verdana" size="24.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="404.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </center>

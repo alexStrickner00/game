@@ -1,8 +1,24 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.bu {
+.button {
 
 -fx-background-color: #A0CEDE;	
+-fx-font: normal normal 24px Verdana;
+-fx-text-fill: #e3e3e3;
+-fx-alignment: CENTER;
+-fx-border-color: black;
+	
+}
+
+.button:hover {
+	
+	-fx-background-color: #A0CEEF;	
+	
+}
+
+.button:pressed {
+	
+	-fx-background-color: #A0CEFF;	
 	
 }
 
@@ -11,3 +27,4 @@
 -fx-background-color: #B3C2BF;	
 	
 }
+

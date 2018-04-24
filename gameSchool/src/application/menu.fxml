@@ -16,7 +16,7 @@
                <children>
                   <ImageView fitHeight="297.0" fitWidth="890.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../Documents/Schule/Programmieren/3.Klasse/Projekt%20/Grafiken/SWP%20Projekt%20LOGO.png" />
+                        <Image url="@../resources/LOGO.png" />
                      </image>
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="216.0" prefWidth="465.0">

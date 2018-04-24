@@ -24,14 +24,7 @@ public class MainController {
 		gamePane.setPrefSize(1000, 600);
 		stage.setScene(new Scene(gamePane));
 		
-		BorderPane bp = (BorderPane)src.getScene().getRoot();
-		
-		Canvas canvas = new Canvas(1000,600);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		
-		bp.getChildren().add(canvas);
-		
-		Game game = new Game(gc);
+		Game game = new Game(gamePane);
 		Runnable r = new Runnable() {
 			
 			@Override

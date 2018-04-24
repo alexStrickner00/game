@@ -21,7 +21,7 @@
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="216.0" prefWidth="465.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="PLAY" textFill="#e3e3e3">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#startGame" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="PLAY" textFill="#e3e3e3">
                            <font>
                               <Font name="Verdana" size="24.0" />
                            </font>

@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.4" fx:controller="application.Main">
    <center>
@@ -28,3 +29,9 @@
       </Pane>
    </center>
 </BorderPane>
+=======
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+	<!-- TODO Add Nodes -->
+</AnchorPane>
+
+>>>>>>> branch 'master' of https://github.com/alexStrickner00/game.git

@@ -3,6 +3,7 @@ package sprites;
 import interfaces.Renderable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import lombok.Getter;
 
 public abstract class Sprite implements Renderable {
@@ -11,7 +12,15 @@ public abstract class Sprite implements Renderable {
 	private Rectangle2D boundaries;
 	@Getter
 	private Rectangle2D hitBox;
-
+	
+	@Getter
+	protected Image mainImage;
+	
+	private double velocityX;
+	private double velocityY;
+	private double posX;
+	private double posy;
+	
 	@Override
 	public void render(GraphicsContext gc) {
 
@@ -30,7 +39,7 @@ public abstract class Sprite implements Renderable {
 		
 	}
 	
-	public void intersects(Sprite sprite) {
-		
+	public boolean intersects(Sprite sprite) {
+		return sprite.getBoundaries().intersects(this.hitBox);
 	}
 }

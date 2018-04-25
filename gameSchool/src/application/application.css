@@ -22,6 +22,23 @@
 	
 }
 
+.toggle {
+	
+-fx-background-color: #A0CEDE;	
+-fx-font: normal normal 24px Verdana;
+-fx-text-fill: #e3e3e3;
+-fx-alignment: CENTER;
+-fx-border-color: black;
+	
+}
+
+.toggle:selected {
+	
+-fx-background-color: #A0CEDE;	
+	
+	
+}
+
 .background {
 	
 -fx-background-color: #B3C2BF;	

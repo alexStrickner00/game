@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -8,18 +9,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <center>
       <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" layoutX="55.0" layoutY="8.0" spacing="71.0">
+            <Label layoutX="18.0" layoutY="561.0" prefHeight="31.0" prefWidth="964.0" text="ALPHA 1.0                                                                                                                                                                                                                       © Strickner, Widerin, Zanon">
+               <font>
+                  <Font name="Silom" size="13.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="55.0" layoutY="8.0" spacing="80.0">
                <children>
                   <ImageView fitHeight="297.0" fitWidth="890.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../res/LOGO.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER" prefHeight="216.0" prefWidth="465.0">
+                  <VBox alignment="CENTER" prefHeight="216.0" prefWidth="890.0">
                      <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#startGame" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="PLAY" textFill="#e3e3e3">
                            <font>

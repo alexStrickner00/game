@@ -3,7 +3,7 @@
 .button {
 
 -fx-background-color: #A0CEDE;	
--fx-font: normal normal 24px Verdana;
+-fx-font: normal normal 24.0px Verdana;
 -fx-text-fill: #e3e3e3;
 -fx-alignment: CENTER;
 -fx-border-color: black;
@@ -22,20 +22,23 @@
 	
 }
 
-.label {
+.credit {
 
 -fx-background-color: #A0CEDE;	
--fx-font: black fat 24px Arial;
+-fx-font: normal normal 24.0px Verdana;
 -fx-text-fill: #000000;
 -fx-alignment: CENTER;
-
+-fx-border-color: black;
 	
 }
+
+
+
 
 .toggle {
 	
 -fx-background-color: #A0CEDE;	
--fx-font: normal normal 24px Verdana;
+-fx-font: normal normal 24.0px Verdana;
 -fx-text-fill: #e3e3e3;
 -fx-alignment: CENTER;
 -fx-border-color: black;

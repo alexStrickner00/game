@@ -10,6 +10,7 @@ public abstract class Sprite implements Renderable {
 
 	@Getter
 	private Rectangle2D boundaries;
+	
 	@Getter
 	private Rectangle2D hitBox;
 	

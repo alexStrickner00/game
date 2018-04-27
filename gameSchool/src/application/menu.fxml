@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <center>
       <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
@@ -32,12 +32,12 @@
                               <Font name="Verdana" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="SETTINGS" textFill="#e3e3e3">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToSettings" prefHeight="72.0" prefWidth="456.0" stylesheets="@application.css" text="SETTINGS" textFill="#e3e3e3">
                            <font>
                               <Font name="Verdana" size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="72.0" prefWidth="456.0" text="CREDITS" textFill="#e3e3e3">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToCredits" prefHeight="72.0" prefWidth="456.0" text="CREDITS" textFill="#e3e3e3">
                            <font>
                               <Font name="Verdana" size="24.0" />
                            </font>

@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.4" fx:controller="application.MainController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css">
+      <Pane prefHeight="621.0" prefWidth="1009.0" styleClass="background" stylesheets="@application.css">
          <children>
-            <Label layoutX="-3.0" layoutY="76.0" prefHeight="108.0" prefWidth="1004.0" styleClass="button" stylesheets="@application.css" text="Dieses Spiel wurde als ein Unterrichtsprojekt in der HTL Anichstraße entwickelt " />
+            <Button layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="183.0" text="BACK" />
+            <Label layoutX="-1.0" layoutY="124.0" prefHeight="69.0" prefWidth="1012.0" styleClass="credit" stylesheets="@application.css" text="Dieses Spiel wurde als ein Unterrichtsprojekt in der HTL Anichstraße entwickelt " />
+            <Label layoutX="-2.0" layoutY="228.0" prefHeight="141.0" prefWidth="1012.0" styleClass="credit" stylesheets="@application.css" text="ENTWICKLER: STRICKNER, WIDERIN, ZANON" />
+            <ImageView fitHeight="177.0" fitWidth="529.0" layoutX="236.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/LOGO.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="23.0" layoutY="585.0" prefHeight="31.0" prefWidth="964.0" style="-fx-background-color: 0;" styleClass="footer" stylesheets="@application.css" text="ALPHA 1.0                                                                                                                                                                                                                       © Strickner, Widerin, Zanon">
+               <font>
+                  <Font name="Silom" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -13,11 +13,6 @@
    <center>
       <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="18.0" layoutY="561.0" prefHeight="31.0" prefWidth="964.0" text="ALPHA 1.0                                                                                                                                                                                                                       © Strickner, Widerin, Zanon">
-               <font>
-                  <Font name="Silom" size="13.0" />
-               </font>
-            </Label>
             <VBox alignment="CENTER" layoutX="55.0" layoutY="8.0" spacing="80.0">
                <children>
                   <ImageView fitHeight="297.0" fitWidth="890.0" pickOnBounds="true" preserveRatio="true">

@@ -22,6 +22,16 @@
 	
 }
 
+.label {
+
+-fx-background-color: #A0CEDE;	
+-fx-font: black fat 24px Arial;
+-fx-text-fill: #000000;
+-fx-alignment: CENTER;
+
+	
+}
+
 .toggle {
 	
 -fx-background-color: #A0CEDE;	

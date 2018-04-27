@@ -8,12 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.4" fx:controller="application.MainController">
-=======
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
->>>>>>> refs/remotes/origin/master
    <children>
       <Pane prefHeight="621.0" prefWidth="1009.0" styleClass="background" stylesheets="@application.css">
          <children>
@@ -25,7 +20,7 @@
                   <Image url="@../../res/LOGO.png" />
                </image>
             </ImageView>
-            <Label layoutX="23.0" layoutY="585.0" prefHeight="31.0" prefWidth="964.0" style="-fx-background-color: 0;" styleClass="footer" stylesheets="@application.css" text="ALPHA 1.0                                                                                                                                                                                                                       © Strickner, Widerin, Zanon">
+            <Label layoutX="23.0" layoutY="585.0" prefHeight="31.0" prefWidth="964.0"  styleClass="footer" stylesheets="@application.css" text="ALPHA 1.0                                                                                                                                                                                                                       © Strickner, Widerin, Zanon">
                <font>
                   <Font name="Silom" size="13.0" />
                </font>

@@ -3,6 +3,7 @@ package game;
 import static enums.Team.ENEMY;
 import static enums.Team.PLAYER;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import hud.Shop;
@@ -13,7 +14,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import sprites.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import sprites.Castle;
+import sprites.GameFigure;
 
 public class Game {
 
@@ -27,6 +31,8 @@ public class Game {
 	private GraphicsContext gc;
 	private long lt;
 	private ArrayList<KeyCode> keysPressed;
+	
+	private MediaPlayer backgroundMusic;
 
 	public Game(Pane gamePane) {
 		this.pane = gamePane;
@@ -78,6 +84,12 @@ public class Game {
 	private void initGame() {
 		ownCastle = new Castle(PLAYER);
 		enemyCastle = new Castle(ENEMY);
+		ownSprites = new ArrayList<>();
+		enemySprites = new ArrayList<>();
+		/*TODO: Musik an angegebenen Pfad einfuegen
+		 * backgroundMusic = new MediaPlayer(new Media(new File("../../res/sound/music.wav").toURI().toString()));
+		 */
+		backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
 	}
 
 	public void run() {

@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
-<?import javafx.scene.layout.TilePane?>
-	
-<TilePane xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
-	<!-- TODO Add Nodes -->
-</TilePane>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.3996655518394649" prefHeight="400.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+            <TableView prefHeight="400.0" prefWidth="235.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="98.0" text="Entity Name" />
+              </columns>
+            </TableView>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="398.0" prefWidth="355.0" spacing="5.0" stylesheets="@application.css">
+                     <children>
+                        <HBox prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label styleClass="prop-text" stylesheets="@application.css" text="Entity ID:" />
+                              <TextField styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Name:" />
+                              <TextField styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

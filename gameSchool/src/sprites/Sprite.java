@@ -13,10 +13,10 @@ public abstract class Sprite implements Renderable {
 	
 	protected Image mainImage;
 	
-	private double velocityX;
-	private double velocityY;
-	private double posX;
-	private double posy;
+	protected double velocityX;
+	protected double velocityY;
+	protected double posX;
+	protected double posy;
 	
 	@Override
 	public void render(GraphicsContext gc) {

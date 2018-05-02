@@ -29,5 +29,13 @@ public class GameFigure extends Sprite {
 	private void addHealth(int healthToAdd) {
 		this.health += healthToAdd;
 	}
+	
+	@Override
+	public void update(double elapsedTime) {
+		super.update(elapsedTime);
+		
+		//Animation logik
+		
+	}
 
 }

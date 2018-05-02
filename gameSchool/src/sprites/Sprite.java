@@ -25,7 +25,8 @@ public abstract class Sprite implements Renderable {
 
 	@Override
 	public void update(double elapsedTime) {
-
+		this.posX += this.velocityX * elapsedTime;
+		this.posy += this.velocityY * elapsedTime;
 	}
 	
 	public void addVelocityX(double velToAdd) {

@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class GameFigure extends Sprite {
@@ -23,7 +25,8 @@ public class GameFigure extends Sprite {
 	protected long lastAttack;
 	protected int attackDelay;
 	protected int damage;
-	private double countdown;
+	private int nextSprite = 0;
+	private double start;
 
 	public GameFigure clone() {
 		return new GameFigure(this.entityId);
@@ -36,7 +39,7 @@ public class GameFigure extends Sprite {
 		this.attackDelay = attackDelay;
 		this.damage = damage;
 		loadSprites(spriteSheet);
-		countdown = SPRITE_SWITCH_TIME;
+		start = System.nanoTime();
 	}
 
 	public GameFigure(int entityId) {
@@ -74,7 +77,18 @@ public class GameFigure extends Sprite {
 	@Override
 	public void update(double elapsedTime) {
 		super.update(elapsedTime);
-
+		if (System.nanoTime() - start >= SPRITE_SWITCH_TIME) {
+			start = System.nanoTime();
+			if (super.velocityX == 0 && super.velocityY == 0) {
+				super.currentImage = sprites[3];
+			} else {
+				super.currentImage = sprites[nextSprite];
+			}
+			nextSprite++;
+		}
+		if (nextSprite > 2) {
+			nextSprite = 0;
+		}
 		// Animation logik
 
 	}

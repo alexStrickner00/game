@@ -8,19 +8,19 @@ import javafx.scene.image.Image;
 public abstract class Sprite implements Renderable {
 
 	private Rectangle2D boundaries;
-	
+
 	private Rectangle2D hitBox;
-	
-	protected Image mainImage;
-	
+
+	protected Image currentImage;
+
 	protected double velocityX;
 	protected double velocityY;
 	protected double posX;
 	protected double posy;
-	
+
 	@Override
 	public void render(GraphicsContext gc) {
-
+		gc.drawImage(currentImage, posX, posy);
 	}
 
 	@Override
@@ -28,21 +28,21 @@ public abstract class Sprite implements Renderable {
 		this.posX += this.velocityX * elapsedTime;
 		this.posy += this.velocityY * elapsedTime;
 	}
-	
+
 	public void addVelocityX(double velToAdd) {
-		
+
 	}
-	
+
 	public void addVelocityY(double velToAdd) {
-		
+
 	}
-	
+
 	public boolean intersects(Sprite sprite) {
 		return sprite.getBoundaries().intersects(this.hitBox);
 	}
-	
+
 	public Rectangle2D getBoundaries() {
 		return this.boundaries;
 	}
-	
+
 }

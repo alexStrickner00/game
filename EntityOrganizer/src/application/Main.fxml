@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.3996655518394649" prefHeight="400.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Save Entities" />
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Upload new Spritesheet..." />
+                  <MenuItem mnemonicParsing="false" text="Add Entity" />
+              <MenuItem mnemonicParsing="false" text="Delete Selected Entity" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.17735470941883769, 0.5390781563126252" layoutY="29.0" prefHeight="413.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0">
         <items>
-            <TableView prefHeight="400.0" prefWidth="235.0">
+            <TableView fx:id="table" prefHeight="400.0" prefWidth="235.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="98.0" text="Entity Name" />
+                <TableColumn fx:id="id_col" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="name_col" prefWidth="98.0" text="Entity Name" />
               </columns>
             </TableView>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -26,20 +48,89 @@
                         <HBox prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
                            <children>
                               <Label styleClass="prop-text" stylesheets="@application.css" text="Entity ID:" />
-                              <TextField styleClass="prop-textfield" stylesheets="@application.css" />
+                              <TextField fx:id="entityId" styleClass="prop-textfield" stylesheets="@application.css" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Name:" />
-                              <TextField styleClass="prop-textfield" stylesheets="@application.css" />
+                              <TextField fx:id="name" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Title:" />
+                              <TextField fx:id="title" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Health:" />
+                              <TextField fx:id="health" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Delay:" />
+                              <TextField fx:id="delay" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Damage:" />
+                              <TextField fx:id="damage" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Speed:" />
+                              <TextField fx:id="speed" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Shoots:" />
+                              <TextField fx:id="shooting" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Proj. ID:" />
+                              <TextField fx:id="projId" styleClass="prop-textfield" stylesheets="@application.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label fx:id="costs" prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Costs:" />
+                              <TextField fx:id="costs" styleClass="prop-textfield" stylesheets="@application.css" />
                            </children>
                         </HBox>
                      </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
                   </VBox>
                </children>
             </AnchorPane>
+            <ImageView fitHeight="400.0" fitWidth="456.0" pickOnBounds="true" preserveRatio="true" />
         </items>
       </SplitPane>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Save Entities" />
+                  <MenuItem mnemonicParsing="false" text="Add new Entity" />
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Upload new Spritesheet..." />
+                  <MenuItem mnemonicParsing="false" text="Delete selected Entity" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

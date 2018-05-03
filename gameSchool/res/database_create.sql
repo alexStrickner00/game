@@ -5,13 +5,14 @@ USE bloodtime;
 CREATE TABLE spielfigur(
 	entityId INT NOT NULL auto_increment,
     entity_name VARCHAR(255) NOT NULL,
-    title INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
     health INT NOT NULL,
     delay INT NOT NULL,
     damage INT NOT NULL,
     speed INT NOT NULL,
     shooting TINYINT NOT NULL,
     projectileId INT,
+    image MEDIUMBLOB NOT NULL,
     PRIMARY KEY(entityId)
 );
 

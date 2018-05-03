@@ -77,20 +77,23 @@ public class GameFigure extends Sprite {
 	@Override
 	public void update(double elapsedTime) {
 		super.update(elapsedTime);
+		
 		if (System.nanoTime() - start >= SPRITE_SWITCH_TIME) {
+			
 			start = System.nanoTime();
+			nextSprite++;
+
 			if (super.velocityX == 0 && super.velocityY == 0) {
-				super.currentImage = sprites[3];
+				super.currentImage = sprites[ATTACK_IMAGE];
 			} else {
 				super.currentImage = sprites[nextSprite];
 			}
-			nextSprite++;
-		}
-		if (nextSprite > 2) {
-			nextSprite = 0;
-		}
-		// Animation logik
 
+		}
+
+		if (nextSprite > WALK_IMAGE3) {
+			nextSprite = WALK_IMAGE1;
+		}
 	}
 
 }

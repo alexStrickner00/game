@@ -53,5 +53,5 @@ public class DBManager {
 		}
 		return list;
 	}
-	
+	//TODO implementierung der restlichen Methoden
 }

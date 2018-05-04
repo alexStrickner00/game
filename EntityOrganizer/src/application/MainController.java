@@ -16,25 +16,25 @@ public class MainController {
 
 	@FXML
 	TableView<GameFigureTableElement> table;
-	
+
 	@FXML
 	TableColumn<GameFigureTableElement, String> id_col;
-	
+
 	@FXML
-	TableColumn<GameFigureTableElement, String>name_col;
-	
+	TableColumn<GameFigureTableElement, String> name_col;
+
 	private final ObservableList<GameFigureTableElement> obsList = FXCollections.observableArrayList();
 	private DBManager dbmanager;
-	
-	
+
 	@FXML
 	public void initialize() {
-		
-		//		nid_column.setCellValueFactory(new PropertyValueFactory<Note, String>("notenID"));
-		
-		id_col.setCellValueFactory(new PropertyValueFactory<GameFigureTableElement,String>("entityId"));
+
+		// nid_column.setCellValueFactory(new PropertyValueFactory<Note,
+		// String>("notenID"));
+		System.out.println("test");
+		id_col.setCellValueFactory(new PropertyValueFactory<GameFigureTableElement, String>("entityId"));
 		name_col.setCellValueFactory(new PropertyValueFactory<GameFigureTableElement, String>("name"));
-	
+
 		table.setItems(obsList);
 		try {
 			dbmanager = new DBManager("databaseConnection.conf");
@@ -45,26 +45,37 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			syncTable();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void syncTable() throws SQLException {
-		
+
 		obsList.clear();
-		
+
 		ArrayList<GameFigureTableElement> list = dbmanager.getAllEntities();
-		
+
 		obsList.setAll(list);
 		table.refresh();
-		
+
 	}
-	
-	
+
+	public void addNewEntityIntoList() {
+		try {
+			dbmanager.addEmptyEntity();
+			syncTable();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("addNewEN");
+
+	}
+
 }

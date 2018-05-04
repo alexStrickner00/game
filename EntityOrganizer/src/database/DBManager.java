@@ -3,6 +3,7 @@ package database;
 import java.io.BufferedInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,14 +24,14 @@ public class DBManager {
 	public DBManager(String filePath) throws ClassNotFoundException, SQLException {
 		
 		ConfigReader cr = new ConfigReader(filePath);
-		
+		cr.readConfigFile();
 		uname = cr.getPropertyByName("username");
 		pw = cr.getPropertyByName("password");
 		address = cr.getPropertyByName("database_address");
 		driver = cr.getPropertyByName("database_driver");
 		
 		//TODO try and catch statt throw und Dialoge mit Fehlermeldung
-		
+		System.out.println(driver);
 		Class.forName(driver);
 		conn = DriverManager.getConnection(address, uname, pw);
 		
@@ -54,4 +55,26 @@ public class DBManager {
 		return list;
 	}
 	//TODO implementierung der restlichen Methoden
+
+	public void addEmptyEntity() throws SQLException {
+
+		String sql = "INSERT INTO spielfigur(entity_name , title, health, delay , damage, speed, shooting) values(?,?,?,?,?,?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "");
+		pstmt.setString(2, "");
+		pstmt.setInt(3, 0);
+		pstmt.setInt(4, 0);
+		pstmt.setInt(5, 0);
+		pstmt.setInt(6, 0);
+		pstmt.setInt(7, 0);
+		pstmt.setInt(8, -1);
+		System.out.println(pstmt.toString());
+		pstmt.executeUpdate();
+		
+		
+		
+	}
+	
+	
+	
 }

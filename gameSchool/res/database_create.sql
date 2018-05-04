@@ -12,14 +12,15 @@ CREATE TABLE spielfigur(
     speed INT NOT NULL,
     shooting TINYINT NOT NULL,
     projectileId INT,
-    image MEDIUMBLOB NOT NULL,
+    image MEDIUMBLOB,
     PRIMARY KEY(entityId)
 );
 
 CREATE TABLE projectile(
 	projectileId INT NOT NULL auto_increment,
 	projectile_name VARCHAR(255) NOT NULL,
-    flyspeed INT NOT NULL
+    flyspeed INT NOT NULL,
+    PRIMARY KEY(projectileId)
 );
 
 ALTER TABLE spielfigur

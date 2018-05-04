@@ -58,7 +58,7 @@ public class DBManager {
 
 	public void addEmptyEntity() throws SQLException {
 
-		String sql = "INSERT INTO spielfigur(entity_name , title, health, delay , damage, speed, shooting) values(?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO spielfigur(entity_name , title, health, delay , damage, speed, shooting, projectileId) values(?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, "");
 		pstmt.setString(2, "");

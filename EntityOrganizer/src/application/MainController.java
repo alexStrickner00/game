@@ -9,7 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import sprite.GameFigureTableElement;
 
 public class MainController {
@@ -23,6 +25,38 @@ public class MainController {
 	@FXML
 	TableColumn<GameFigureTableElement, String> name_col;
 
+	@FXML
+	TextField entId;
+	
+	@FXML
+	TextField name;
+	
+	@FXML
+	TextField title;
+	
+	@FXML
+	TextField health;
+	
+	@FXML
+	TextField delay;
+	
+	@FXML
+	TextField damage;
+	
+	@FXML
+	TextField speed;
+	
+	@FXML
+	TextField shooting;
+	
+	@FXML
+	TextField projectileId;
+	
+	@FXML
+	ImageView image;
+	
+	private GameFigureTableElement aktElement;
+	
 	private final ObservableList<GameFigureTableElement> obsList = FXCollections.observableArrayList();
 	private DBManager dbmanager;
 
@@ -78,4 +112,15 @@ public class MainController {
 
 	}
 
+	//TODO details bei click aktiualisieren
+	
+	public void refreshDetails() {
+		aktElement = table.getSelectionModel().getSelectedItems().get(0);
+		entId.setText(aktElement.getEntityId() + "");
+		name.setText(aktElement.getName());
+		title.setText(aktElement.getTitle());
+		health.setText(aktElement.getHealth() + "");
+		
+	}
+	
 }

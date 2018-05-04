@@ -16,26 +16,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Save Entities" />
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-                  <MenuItem mnemonicParsing="false" text="Upload new Spritesheet..." />
-                  <MenuItem mnemonicParsing="false" onAction="#addNewEntityIntoList" text="Add Entity" />
-              <MenuItem mnemonicParsing="false" text="Delete Selected Entity" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <SplitPane dividerPositions="0.17735470941883769, 0.5390781563126252" layoutY="29.0" prefHeight="413.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0">
         <items>
-            <TableView fx:id="table" prefHeight="400.0" prefWidth="235.0">
+            <TableView fx:id="table" onMouseClicked="#refreshDetails" prefHeight="400.0" prefWidth="235.0">
               <columns>
                 <TableColumn fx:id="id_col" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="name_col" prefWidth="98.0" text="Entity Name" />
@@ -101,7 +84,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
                            <children>
-                              <Label fx:id="costs" prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Costs:" />
+                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Costs:" />
                               <TextField fx:id="costs" styleClass="prop-textfield" stylesheets="@application.css" />
                            </children>
                         </HBox>
@@ -120,7 +103,7 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" text="Save Entities" />
-                  <MenuItem mnemonicParsing="false" text="Add new Entity" />
+                  <MenuItem mnemonicParsing="false" onAction="#addNewEntityIntoList" text="Add new Entity" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>

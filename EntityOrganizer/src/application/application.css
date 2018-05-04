@@ -1,6 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 .prop-text {
 -fx-font: normal normal 24.0px Verdana;
+-fx-pref-width: 150px;
 }
 
 .prop-textfield{

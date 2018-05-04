@@ -79,7 +79,7 @@
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Proj. ID:" />
-                              <TextField fx:id="projId" styleClass="prop-textfield" stylesheets="@application.css" />
+                              <TextField fx:id="projectileId" styleClass="prop-textfield" stylesheets="@application.css" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
@@ -95,21 +95,22 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="400.0" fitWidth="456.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="400.0" fitWidth="456.0" pickOnBounds="true" preserveRatio="true" />
         </items>
       </SplitPane>
-      <MenuBar>
+      <MenuBar fx:id="menuBar">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Save Entities" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveSelectedEntity" text="Save Entities" />
                   <MenuItem mnemonicParsing="false" onAction="#addNewEntityIntoList" text="Add new Entity" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#switchView" text="Show Projectiles" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Upload new Spritesheet..." />
+              <MenuItem mnemonicParsing="false" onAction="#uploadSpritesheet" text="Upload new Spritesheet..." />
                   <MenuItem mnemonicParsing="false" text="Delete selected Entity" />
             </items>
           </Menu>

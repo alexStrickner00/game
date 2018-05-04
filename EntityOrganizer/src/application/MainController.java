@@ -1,17 +1,27 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.DBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import sprite.GameFigureTableElement;
 
 public class MainController {
@@ -26,37 +36,43 @@ public class MainController {
 	TableColumn<GameFigureTableElement, String> name_col;
 
 	@FXML
-	TextField entId;
-	
+	TextField entityId;
+
 	@FXML
 	TextField name;
-	
+
 	@FXML
 	TextField title;
-	
+
 	@FXML
 	TextField health;
-	
+
 	@FXML
 	TextField delay;
-	
+
 	@FXML
 	TextField damage;
-	
+
 	@FXML
 	TextField speed;
-	
+
 	@FXML
 	TextField shooting;
-	
+
 	@FXML
 	TextField projectileId;
-	
+
+	@FXML
+	TextField costs;
+
 	@FXML
 	ImageView image;
 	
+	@FXML
+	MenuBar menuBar;
+
 	private GameFigureTableElement aktElement;
-	
+
 	private final ObservableList<GameFigureTableElement> obsList = FXCollections.observableArrayList();
 	private DBManager dbmanager;
 
@@ -97,7 +113,6 @@ public class MainController {
 
 		obsList.setAll(list);
 		table.refresh();
-
 	}
 
 	public void addNewEntityIntoList() {
@@ -112,15 +127,57 @@ public class MainController {
 
 	}
 
-	//TODO details bei click aktiualisieren
-	
+	// TODO details bei click aktiualisieren
+
 	public void refreshDetails() {
 		aktElement = table.getSelectionModel().getSelectedItems().get(0);
-		entId.setText(aktElement.getEntityId() + "");
+		entityId.setText(aktElement.getEntityId() + "");
 		name.setText(aktElement.getName());
 		title.setText(aktElement.getTitle());
 		health.setText(aktElement.getHealth() + "");
+		delay.setText(aktElement.getDelay() + "");
+		damage.setText(aktElement.getDamage() + "");
+		speed.setText(aktElement.getSpeed() + "");
+		shooting.setText(aktElement.getShooting() + "");
+		projectileId.setText(aktElement.getProjId() + "");
+		costs.setText(aktElement.getCosts() + "");
+
+		if (aktElement.getImage() != null) {
+			image.setImage(aktElement.getImage());
+		}
+	}
+
+	public void uploadSpritesheet() throws SQLException {
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Spritesheet auswaehlen...");
+		File file = chooser.showOpenDialog(null);
+
+		dbmanager.uploadSprite(aktElement, file);
+		syncTable();
+	}
+
+	public void saveSelectedEntity() throws SQLException {
+		aktElement.setName(name.getText());
+		aktElement.setTitle(title.getText());
+		aktElement.setEntityId(Integer.parseInt(entityId.getText()));
+		aktElement.setHealth(Integer.parseInt(health.getText()));
+		aktElement.setDelay(Integer.parseInt(delay.getText()));
+		aktElement.setDamage(Integer.parseInt(damage.getText()));
+		aktElement.setSpeed(Integer.parseInt(speed.getText()));
+		aktElement.setShooting(Integer.parseInt(shooting.getText()));
+		aktElement.setProjId(Integer.parseInt(projectileId.getText()));
+		aktElement.setCosts(Integer.parseInt(costs.getText()));
+
+		dbmanager.updateElement(aktElement);
+		
+		syncTable();
 		
 	}
 	
+	public void switchView() throws IOException {
+		Stage stage = (Stage) menuBar.getScene().getWindow();
+		AnchorPane root = FXMLLoader.load(getClass().getResource("projectileView.fxml"));
+		stage.setScene(new Scene(root));
+	}
+
 }

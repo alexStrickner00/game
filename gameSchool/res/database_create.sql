@@ -13,6 +13,7 @@ CREATE TABLE spielfigur(
     shooting TINYINT NOT NULL,
     projectileId INT,
     image MEDIUMBLOB,
+    costs INT NOT NULL,
     PRIMARY KEY(entityId)
 );
 
@@ -20,6 +21,7 @@ CREATE TABLE projectile(
 	projectileId INT NOT NULL auto_increment,
 	projectile_name VARCHAR(255) NOT NULL,
     flyspeed INT NOT NULL,
+    image MEDIUMBLOB,
     PRIMARY KEY(projectileId)
 );
 

@@ -31,11 +31,12 @@ public class Game {
 	private GraphicsContext gc;
 	private long lt;
 	private ArrayList<KeyCode> keysPressed;
-	
+	private boolean sound;
 	private MediaPlayer backgroundMusic;
 
-	public Game(Pane gamePane) {
+	public Game(Pane gamePane, boolean sound) {
 		this.pane = gamePane;
+		this.sound=sound;
 		this.canvas = new Canvas(1000, 600);
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);

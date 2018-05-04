@@ -21,6 +21,10 @@ CREATE TABLE projectile(
 	projectile_name VARCHAR(255) NOT NULL,
     flyspeed INT NOT NULL
 );
+CREATE TABLE config(
+	property VARCHAR(255) NOT NULL,
+	value VARCHAR(255) NOT NULL
+);
 
 ALTER TABLE spielfigur
 	ADD FOREIGN KEY(projectileId) REFERENCES projectile(projectileId);

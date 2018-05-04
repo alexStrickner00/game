@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <Pane prefHeight="613.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css">
          <children>
@@ -26,8 +26,8 @@
             </HBox>
             <HBox alignment="CENTER" layoutY="358.0" prefWidth="1000.0" stylesheets="@application.css">
                <children>
-                  <ToggleButton mnemonicParsing="false" prefHeight="75.0" prefWidth="500.0" styleClass="toggle" stylesheets="@application.css" text="MUSIC" />
-                  <ToggleButton mnemonicParsing="false" prefHeight="75.0" prefWidth="500.0" styleClass="toggle" stylesheets="@application.css" text="SOUND" />
+                  <ToggleButton fx:id="musicButton" mnemonicParsing="false" onAction="#music" prefHeight="75.0" prefWidth="500.0" styleClass="toggle" stylesheets="@application.css" text="MUSIC" />
+                  <ToggleButton fx:id="soundButton" mnemonicParsing="false" onAction="#sound" prefHeight="75.0" prefWidth="500.0" styleClass="toggle" stylesheets="@application.css" text="SOUND" />
                </children>
             </HBox>
             <Button layoutY="-3.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="75.0" prefWidth="182.0" text="BACK" />

@@ -1,23 +1,25 @@
 package application;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.DBManager;
+import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -25,6 +27,10 @@ import javafx.stage.Stage;
 import sprite.GameFigureTableElement;
 
 public class MainController {
+
+	protected static final long SWITCH_TIME = 200000000;
+
+	private static final int SPRITE_COUNT = 5;
 
 	@FXML
 	TableView<GameFigureTableElement> table;
@@ -67,7 +73,7 @@ public class MainController {
 
 	@FXML
 	ImageView image;
-	
+
 	@FXML
 	MenuBar menuBar;
 
@@ -75,6 +81,7 @@ public class MainController {
 
 	private final ObservableList<GameFigureTableElement> obsList = FXCollections.observableArrayList();
 	private DBManager dbmanager;
+	private Image[] sprites = new Image[SPRITE_COUNT];
 
 	@FXML
 	public void initialize() {
@@ -102,6 +109,27 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		AnimationTimer at = new AnimationTimer() {
+
+			private long lastSwitch = 0;
+			private int picToRender = 0;
+
+			@Override
+			public void handle(long now) {
+				if ((now - lastSwitch) > SWITCH_TIME) {
+					picToRender++;
+					lastSwitch = now;
+					if (picToRender >= SPRITE_COUNT) {
+						picToRender = 0;
+					}
+				}
+				if (sprites[0] != null)
+					image.setImage(sprites[picToRender]);
+			}
+		};
+
+		at.start();
 
 	}
 
@@ -143,7 +171,12 @@ public class MainController {
 		costs.setText(aktElement.getCosts() + "");
 
 		if (aktElement.getImage() != null) {
-			image.setImage(aktElement.getImage());
+			BufferedImage bi = null;
+			bi = SwingFXUtils.fromFXImage(aktElement.getImage(), null);
+			for (int i = 0; i < SPRITE_COUNT; i++) {
+				sprites[i] = SwingFXUtils.toFXImage(bi.getSubimage(i * 80, 0, 80, 100), null);
+			}
+
 		}
 	}
 
@@ -169,11 +202,11 @@ public class MainController {
 		aktElement.setCosts(Integer.parseInt(costs.getText()));
 
 		dbmanager.updateElement(aktElement);
-		
+
 		syncTable();
-		
+
 	}
-	
+
 	public void switchView() throws IOException {
 		Stage stage = (Stage) menuBar.getScene().getWindow();
 		AnchorPane root = FXMLLoader.load(getClass().getResource("projectileView.fxml"));

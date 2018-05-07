@@ -54,7 +54,7 @@ public class DBManager {
 		}
 		return list;
 	}
-	public GameFigure getGameFigureById(int entityId) {
+	public GameFigure getGameFigureById(int entityId) throws SQLException {
 		String sql="SELECT * FROM spielfigure WHERE entityId=?";
 		PreparedStatement pstmt= conn.prepareStatement(sql);
 		pstmt.setInt(1, 0);
@@ -65,7 +65,7 @@ public class DBManager {
 		image = new Image(bim);
 		return new GameFigure(rs.getInt("entityId"), rs.getString("entity_name"), rs.getString("title"), rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"), rs.getInt("speed"), rs.getInt("shooting"), rs.getInt("projectileId"), image, rs.getInt("costs"));
 	}
-	public void closeConnection() {
+	public void closeConnection() throws SQLException {
 		conn.close();
 	}
 	

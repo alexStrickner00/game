@@ -87,9 +87,8 @@ public class Game {
 		enemyCastle = new Castle(ENEMY);
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
-		/*TODO: Musik an angegebenen Pfad einfuegen
-		 * backgroundMusic = new MediaPlayer(new Media(new File("../../res/sound/music.wav").toURI().toString()));
-		 */
+		//backgroundMusic = new MediaPlayer(new Media(new File("../../res/sound/music.wav").toURI().toString()));
+		 
 		backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
 	}
 

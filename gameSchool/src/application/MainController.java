@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 
 import game.Game;
@@ -18,33 +19,42 @@ import javafx.stage.Stage;;
 
 public class MainController {
 
-	private static final String RES_SOUND_BACKGROUND_PATH = "../res/sound/background.wav";
+	private static final String RES_SOUND_BACKGROUND_PATH = "res/sound/background.wav";
 	private Thread gameThread;
 	private final static int width = 1000;
 	private final static int height = 600;
-	private boolean music;
-	private boolean sound;
-	private MediaPlayer mp;
+	private static boolean music = true;
+	private static boolean sound;
+	private static MediaPlayer mp;
+
 	@FXML
 	ToggleButton musicButton;
 	@FXML
 	ToggleButton soundButton;
-	
-	
+
 	@FXML
 	public void initialize() {
 		
-		mp= new MediaPlayer(new Media(RES_SOUND_BACKGROUND_PATH));
-		mp.setCycleCount(MediaPlayer.INDEFINITE);
+		if (mp == null) {
+			mp = new MediaPlayer(new Media(new File(RES_SOUND_BACKGROUND_PATH).toURI().toString()));
+			mp.setCycleCount(MediaPlayer.INDEFINITE);
+		}
+		
+		if (musicButton != null) {
+			System.out.println("Hallo");
+			musicButton.setSelected(music);
+		}
+		
 		music();
 	}
-	
+
 	public void music() {
-		music = musicButton.isSelected();
-		if(music) {
-			mp.play();
+		if (musicButton != null) {
+			music = musicButton.isSelected();
 		}
-		else {
+		if (music) {
+			mp.play();
+		} else {
 			mp.pause();
 		}
 	}
@@ -61,7 +71,7 @@ public class MainController {
 		Pane gamePane = new Pane();
 		stage.setScene(new Scene(gamePane, width, height));
 
-		Game game = new Game(gamePane,sound);
+		Game game = new Game(gamePane, sound);
 		Runnable r = new Runnable() {
 
 			@Override

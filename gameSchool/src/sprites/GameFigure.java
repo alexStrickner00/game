@@ -126,33 +126,7 @@ public class GameFigure extends Sprite {
 		return this.getX();
 		
 	}
-	
-	
-	
-	
 
-	
-
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-	
-	public int getY() {
-		
-		return this.getY();
-		
-	}
-	
-	public int getX() {
-		
-		return this.getX();
-		
-	}
-	
 	
 	
 	

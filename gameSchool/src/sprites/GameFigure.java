@@ -130,4 +130,6 @@ public class GameFigure extends Sprite {
 	
 	
 	
+
+	
 }

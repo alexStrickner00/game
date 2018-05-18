@@ -85,8 +85,8 @@ public class Game {
 	}
 
 	private void initGame() {
-		ownCastle = new Castle(PLAYER);
-		enemyCastle = new Castle(ENEMY);
+		ownCastle = Castle.createCastle(PLAYER);
+		enemyCastle = Castle.createCastle(ENEMY);
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());

@@ -1,7 +1,10 @@
 package sprites;
 
+import java.io.File;
+
 import enums.Team;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Castle extends Sprite {
@@ -12,16 +15,15 @@ public class Castle extends Sprite {
 	private double health;
 	private int level;
 	private Team team;
-	protected Image image;
 	protected Point2D spawnpoint;
 
-	public Castle createCastle(Team player) {
+	public static Castle createCastle(Team player) {
 		if (player == Team.PLAYER) {
-			return new Castle(player, 1, 100, new Image("res/base_player.png"),
+			return new Castle(player, 1, 100, new Image(new File("res/base_player.png").toURI().toString()),
 					new Point2D(PLAYER_SPAWN_X, PLAYER_SPAWN_Y));
 		} 
 		else {
-			return new Castle(player, 1, 100, new Image("res/base_enemy.png"),
+			return new Castle(player, 1, 100, new Image(new File("res/base_enemy.png").toURI().toString()),
 					new Point2D(ENEMY_SPAWN_X, ENEMY_SPAWN_Y));
 		}
 	}
@@ -30,7 +32,7 @@ public class Castle extends Sprite {
 		this.team = team;
 		this.level = level;
 		this.health = health;
-		this.image = image;
+		this.currentImage = image;
 		this.spawnpoint = spawnpoint;
 	}
 	public void increaseLevel() {
@@ -50,8 +52,10 @@ public class Castle extends Sprite {
 		return spawnpoint;
 	}
 
-	public Image getImage() {
-		return image;
+	@Override
+	public void render(GraphicsContext gc) {
+		super.render(gc);
+		System.out.println("render Castle");
 	}
 	public void addHealth(double damage) {
 		health+=damage;

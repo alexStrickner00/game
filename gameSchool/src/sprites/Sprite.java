@@ -20,7 +20,7 @@ public abstract class Sprite implements Renderable {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		if(velocityX>0) {
+		if(velocityX>0 || this instanceof Castle) {
 		gc.drawImage(currentImage, posX, posy, 80, 100);
 		}
 		else {

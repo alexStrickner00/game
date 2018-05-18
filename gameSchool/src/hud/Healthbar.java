@@ -54,6 +54,7 @@ public class Healthbar implements Renderable{
 		
     	
 	}
+	
 
 	@Override
 	public void update(double elapsedTime) {

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 
 public class Healthbar implements Renderable{
 
+	
 	private GameFigure parent;
 	private int whiteX;
 	private int y = 20;

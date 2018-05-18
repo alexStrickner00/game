@@ -11,10 +11,10 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import sprites.Castle;
 import sprites.GameFigure;
@@ -33,6 +33,7 @@ public class Game {
 	private ArrayList<KeyCode> keysPressed;
 	private boolean sound;
 	private MediaPlayer backgroundMusic;
+	private Image background;
 
 	public Game(Pane gamePane, boolean sound) {
 		this.pane = gamePane;
@@ -40,6 +41,7 @@ public class Game {
 		this.canvas = new Canvas(1000, 600);
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);
+		keysPressed = new ArrayList<>();
 		// TODO: Nur falls anklicken der SHopItems nicht anders moeglich
 		// pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 		//
@@ -87,9 +89,9 @@ public class Game {
 		enemyCastle = new Castle(ENEMY);
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
-		//backgroundMusic = new MediaPlayer(new Media(new File("../../res/sound/music.wav").toURI().toString()));
-		 
-		backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
+		background = new Image(new File("res/playground_clear.png").toURI().toString());
+		shop = new Shop();
+
 	}
 
 	public void run() {
@@ -103,6 +105,7 @@ public class Game {
 				long et = now - lt;
 				lt = now;
 
+				drawBackground();
 				ownCastle.update(et);
 				enemyCastle.update(et);
 				updateFigures(ownSprites, et);
@@ -131,6 +134,10 @@ public class Game {
 		}
 	}
 
+	private void drawBackground() {
+		gc.drawImage(background, 0, 0);
+	}
+	
 	private void doAttacks() {
 		for (GameFigure so : ownSprites) {
 			for (GameFigure se : enemySprites) {

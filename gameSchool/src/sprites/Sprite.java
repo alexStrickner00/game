@@ -20,7 +20,12 @@ public abstract class Sprite implements Renderable {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		gc.drawImage(currentImage, posX, posy);
+		if(velocityX>0) {
+		gc.drawImage(currentImage, posX, posy, 80, 100);
+		}
+		else {
+		gc.drawImage(currentImage, posX, posy, -80, 100);
+		}
 	}
 
 	@Override

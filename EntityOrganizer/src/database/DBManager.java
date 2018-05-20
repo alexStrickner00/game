@@ -78,7 +78,7 @@ public class DBManager {
 	}
 
 	public void updateElement(GameFigureTableElement element) throws SQLException{
-		String sql = "UPDATE spielfigur SET entity_name = ? , title = ? , health = ? , delay = ? , damage = ? , speed = ? , shooting = ? , projectileId = ? , costs = ? WHERE entityId = ?";
+		String sql = "UPDATE spielfigur SET entity_name = ? , title = ? , health = ? , delay = ? , damage = ? , speed = ? , shooting = ? , projectileId = ? , costs = ? , entityId = ? WHERE entityId = ?";
 		PreparedStatement stmt =  conn.prepareStatement(sql);
 		stmt.setString(1, element.getName());
 		stmt.setString(2, element.getTitle());
@@ -90,6 +90,7 @@ public class DBManager {
 		stmt.setInt(8, element.getProjId());
 		stmt.setInt(9, element.getCosts());
 		stmt.setInt(10, element.getEntityId());
+		stmt.setInt(11, element.getOldId());
 		System.out.println(stmt);
 		
 		stmt.executeUpdate();

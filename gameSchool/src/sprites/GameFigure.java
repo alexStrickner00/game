@@ -1,12 +1,9 @@
 package sprites;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class GameFigure extends Sprite {
@@ -46,10 +43,10 @@ public class GameFigure extends Sprite {
 		this.speed = speed;
 		this.shooting = shooting;
 		this.projectileId = projectileId;
+		sprites = new Image[ATTACK_IMAGE + 1];
 		loadSprites(image);
 		this.costs = costs;
 		start = System.nanoTime();
-		sprites = new Image[ATTACK_IMAGE + 1];
 	}
 
 	public GameFigure(int entityId) {
@@ -127,7 +124,14 @@ public class GameFigure extends Sprite {
 		
 	}
 
+	public void setY(double y) {
+		this.posY = y;
+	}
 	
-	
+	@Override
+	public void render(GraphicsContext gc) {
+		super.render(gc);
+		System.out.printf("render %s\tx: %f\ty: %f\tvelX: %f\n" , this.entity_name , this.posX , this.posY, this.velocityX);
+	}
 	
 }

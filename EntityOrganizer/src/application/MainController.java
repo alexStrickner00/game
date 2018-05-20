@@ -192,6 +192,7 @@ public class MainController {
 	public void saveSelectedEntity() throws SQLException {
 		aktElement.setName(name.getText());
 		aktElement.setTitle(title.getText());
+		aktElement.setOldId(aktElement.getEntityId());
 		aktElement.setEntityId(Integer.parseInt(entityId.getText()));
 		aktElement.setHealth(Integer.parseInt(health.getText()));
 		aktElement.setDelay(Integer.parseInt(delay.getText()));

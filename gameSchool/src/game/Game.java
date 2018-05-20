@@ -4,8 +4,10 @@ import static enums.Team.ENEMY;
 import static enums.Team.PLAYER;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import database.DBManager;
 import hud.Shop;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -34,6 +36,7 @@ public class Game {
 	private boolean sound;
 	private MediaPlayer backgroundMusic;
 	private Image background;
+	private DBManager dbmanager;
 
 	public Game(Pane gamePane, boolean sound) {
 		this.pane = gamePane;
@@ -41,6 +44,15 @@ public class Game {
 		this.canvas = new Canvas(1000, 600);
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);
+		
+		try {
+			this.dbmanager = new  DBManager("res/databaseConnection.conf");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		keysPressed = new ArrayList<>();
 		// TODO: Nur falls anklicken der SHopItems nicht anders moeglich
 		// pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -85,12 +97,16 @@ public class Game {
 	}
 
 	private void initGame() {
-		ownCastle = new Castle(PLAYER);
-		enemyCastle = new Castle(ENEMY);
+		ownCastle = Castle.createCastle(PLAYER);
+		enemyCastle = Castle.createCastle(ENEMY);
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop();
+		GameFigure g = dbmanager.getGameFigureById(1);
+		g.addVelocityX(10);
+		g.setY(419);
+		ownSprites.add(g);
 
 	}
 
@@ -102,8 +118,9 @@ public class Game {
 			@Override
 			public void handle(long now) {
 
-				long et = now - lt;
+				double et = now - lt;
 				lt = now;
+				et /= 1000000000.0;
 
 				drawBackground();
 				ownCastle.update(et);
@@ -128,7 +145,7 @@ public class Game {
 		at.start();
 	}
 
-	private void updateFigures(ArrayList<GameFigure> sprites, long et) {
+	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
 		for (GameFigure s : sprites) {
 			s.update(et);
 		}

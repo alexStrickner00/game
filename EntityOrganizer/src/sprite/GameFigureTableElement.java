@@ -17,6 +17,7 @@ public class GameFigureTableElement {
 	private final SimpleIntegerProperty projId;
 	private final SimpleIntegerProperty costs;
 	private Image image;
+	private int oldId;
 
 	public GameFigureTableElement(int entityId, String name, String title, int health, int delay, int damage, int speed,
 			int shooting, int projId, Image image, int costs) {
@@ -120,6 +121,14 @@ public class GameFigureTableElement {
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public void setOldId(int entityId2) {
+		oldId = entityId2;
+	}
+
+	public int getOldId() {
+		return oldId;
 	}
 
 }

@@ -16,30 +16,33 @@ public abstract class Sprite implements Renderable {
 	protected double velocityX;
 	protected double velocityY;
 	protected double posX;
-	protected double posy;
+	protected double posY;
 
 	@Override
 	public void render(GraphicsContext gc) {
-		if(velocityX>0) {
-		gc.drawImage(currentImage, posX, posy, 80, 100);
+		if(velocityX>0 || this instanceof Castle) {
+		gc.drawImage(currentImage, posX, posY, 80, 100);
 		}
 		else {
-		gc.drawImage(currentImage, posX, posy, -80, 100);
+		gc.drawImage(currentImage, posX, posY, -80, 100);
 		}
 	}
 
 	@Override
 	public void update(double elapsedTime) {
-		this.posX += this.velocityX * elapsedTime;
-		this.posy += this.velocityY * elapsedTime;
+		System.out.println(this.velocityX);
+		System.out.println(this.posX);
+		System.out.println(elapsedTime);
+		this.posX += (double)((double)this.velocityX * (double)elapsedTime);
+		this.posY += this.velocityY * elapsedTime;
 	}
 
 	public void addVelocityX(double velToAdd) {
-
+		this.velocityX += velToAdd;
 	}
 
 	public void addVelocityY(double velToAdd) {
-
+		this.velocityY += velToAdd;
 	}
 
 	public boolean intersects(Sprite sprite) {

@@ -44,7 +44,8 @@ public class MainController {
 			System.out.println("Hallo");
 			musicButton.setSelected(music);
 		}
-		
+		//waehrend Entwicklung
+		mp.setVolume(0.01);
 		music();
 	}
 

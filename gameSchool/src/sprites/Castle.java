@@ -1,5 +1,7 @@
 package sprites;
 
+import java.io.File;
+
 import enums.Team;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -9,19 +11,19 @@ public class Castle extends Sprite {
 	private static final int PLAYER_SPAWN_Y = 419;
 	private static final int ENEMY_SPAWN_X = 855;
 	private static final int ENEMY_SPAWN_Y = 419;
+	private static final int CASTLE_Y = 378;
 	private double health;
 	private int level;
 	private Team team;
-	protected Image image;
 	protected Point2D spawnpoint;
 
-	public Castle createCastle(Team player) {
+	public static Castle createCastle(Team player) {
 		if (player == Team.PLAYER) {
-			return new Castle(player, 1, 100, new Image("res/base_player.png"),
+			return new Castle(player, 1, 100, new Image(new File("res/base_player.png").toURI().toString()),
 					new Point2D(PLAYER_SPAWN_X, PLAYER_SPAWN_Y));
 		} 
 		else {
-			return new Castle(player, 1, 100, new Image("res/base_enemy.png"),
+			return new Castle(player, 1, 100, new Image(new File("res/base_enemy.png").toURI().toString()),
 					new Point2D(ENEMY_SPAWN_X, ENEMY_SPAWN_Y));
 		}
 	}
@@ -30,8 +32,14 @@ public class Castle extends Sprite {
 		this.team = team;
 		this.level = level;
 		this.health = health;
-		this.image = image;
+		this.currentImage = image;
 		this.spawnpoint = spawnpoint;
+		this.posY = CASTLE_Y;
+		if(team == Team.PLAYER) {
+			this.posX = 0;
+		} else {
+			this.posX = 900;
+		}
 	}
 	public void increaseLevel() {
 		level++;
@@ -48,10 +56,6 @@ public class Castle extends Sprite {
 	}
 	public Point2D getSpawnpoint() {
 		return spawnpoint;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 	public void addHealth(double damage) {
 		health+=damage;

@@ -96,7 +96,7 @@ public class GameFigure extends Sprite {
 				super.currentImage = sprites[nextSprite];
 			}
 
-			if (nextSprite > LAST_WALK_IMAGE) {
+			if (nextSprite >= LAST_WALK_IMAGE) {
 				nextSprite = FIRST_WALK_IMAGE;
 			}
 		}

@@ -4,10 +4,10 @@ import interfaces.Renderable;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Shop implements Renderable{
-
+	
 	@Override
 	public void render(GraphicsContext gc) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

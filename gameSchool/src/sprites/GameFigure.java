@@ -78,7 +78,9 @@ public class GameFigure extends Sprite {
 	private void addHealth(int healthToAdd) {
 		this.health += healthToAdd;
 	}
-
+	public void addDamage(int dg) {
+		this.damage+=dg;
+	}
 	@Override
 	public void update(double elapsedTime) {
 		super.update(elapsedTime);
@@ -100,7 +102,7 @@ public class GameFigure extends Sprite {
 				super.currentImage = sprites[nextSprite];
 			}
 
-			if (nextSprite > LAST_WALK_IMAGE) {
+			if (nextSprite >= LAST_WALK_IMAGE) {
 				nextSprite = FIRST_WALK_IMAGE;
 			}
 		}

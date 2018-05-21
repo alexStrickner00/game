@@ -3,7 +3,10 @@ package sprites;
 import java.io.File;
 
 import enums.Team;
+import hud.Healthbar;
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Castle extends Sprite {
@@ -16,6 +19,7 @@ public class Castle extends Sprite {
 	private int level;
 	private Team team;
 	protected Point2D spawnpoint;
+	private Healthbar healthbar;
 
 	public static Castle createCastle(Team player) {
 		if (player == Team.PLAYER) {
@@ -35,11 +39,17 @@ public class Castle extends Sprite {
 		this.currentImage = image;
 		this.spawnpoint = spawnpoint;
 		this.posY = CASTLE_Y;
+		
+		this.healthbar = new Healthbar(this);
+		
 		if(team == Team.PLAYER) {
 			this.posX = 0;
 		} else {
 			this.posX = 900;
 		}
+		
+		this.boundaries = new Rectangle2D(posX, posY, image.getWidth(), image.getHeight());
+		this.hitBox = new Rectangle2D(posX - 10, posY, image.getWidth() + 20, image.getHeight());
 	}
 	public void increaseLevel() {
 		level++;
@@ -59,5 +69,11 @@ public class Castle extends Sprite {
 	}
 	public void addHealth(double damage) {
 		health+=damage;
+	}
+	
+	@Override
+	public void render(GraphicsContext gc) {
+		super.render(gc);
+		healthbar.render(gc);
 	}
 }

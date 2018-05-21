@@ -74,4 +74,12 @@ public abstract class Sprite implements Renderable {
 		return this.boundaries;
 	}
 
+	public double getX() {
+		return this.posX;
+	}
+	
+	public double getY() {
+		return this.posY;
+	}
+	
 }

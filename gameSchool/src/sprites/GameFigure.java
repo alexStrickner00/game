@@ -10,10 +10,13 @@ import javafx.scene.image.Image;
 
 public class GameFigure extends Sprite {
 
+	private static final int HITBOX_MARGIN = 10;
 	private static final int FIRST_WALK_IMAGE = 0;
 	private static final int LAST_WALK_IMAGE = 3;
 	private static final int ATTACK_IMAGE = 4;
 	private static final double SPRITE_SWITCH_TIME = 150000000;
+	
+	public static final double BOUNDARY_MARGIN = 30;
 
 	protected int entityId;
 	protected Image[] sprites;
@@ -63,8 +66,8 @@ public class GameFigure extends Sprite {
 	}
 
 	private void refreshBoundaries() {
-		this.boundaries = new Rectangle2D(this.posX, this.posY, this.sprites[0].getWidth(), this.sprites[0].getWidth());
-		this.hitBox = new Rectangle2D(this.posX - 10, this.posY, this.sprites[0].getWidth() + 20,
+		this.boundaries = new Rectangle2D(this.posX - BOUNDARY_MARGIN, this.posY, this.sprites[0].getWidth() + BOUNDARY_MARGIN * 2, this.sprites[0].getWidth());
+		this.hitBox = new Rectangle2D(this.posX - HITBOX_MARGIN - BOUNDARY_MARGIN, this.posY, this.sprites[0].getWidth() + HITBOX_MARGIN * 2 + BOUNDARY_MARGIN * 2,
 				this.sprites[0].getHeight());
 	}
 
@@ -93,10 +96,22 @@ public class GameFigure extends Sprite {
 			this.lastAttack = System.nanoTime();
 		}
 	}
+	
+	public void attack(Castle castle) {
+		if (this.canAttack(castle) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
+			castle.addHealth(this.damage);
+			
+			//Wahrscheinlichkeit von 10%, dass es ein kritischer Hit ist
+			if(Math.random() > 0.9) {
+				castle.addHealth((int)(this.damage * 0.1));
+			}
+			
+			this.lastAttack = System.nanoTime();
+		}
+	}
 
 	private void addHealth(int healthToAdd) {
 		this.health += healthToAdd;
-		System.out.println(this.getHealth());
 	}
 	
 	public boolean isDead() {
@@ -145,14 +160,6 @@ public class GameFigure extends Sprite {
 
 	public void setHealth(int health) {
 		this.health = health;
-	}
-
-	public double getY() {
-		return this.posY;
-	}
-
-	public double getX() {
-		return this.posX;
 	}
 
 	public void setY(double y) {

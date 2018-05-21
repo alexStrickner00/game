@@ -198,6 +198,13 @@ public class Game {
 
 			}
 
+			if(so.intersects(enemyCastle)) {
+				so.setVelocityX(0);
+				vornFrei = false;
+			}
+			
+			so.attack(enemyCastle);
+			
 			if (vornFrei) {
 				so.setVelocityX(so.getSpeed());
 			}
@@ -212,23 +219,30 @@ public class Game {
 			}
 		}
 		
-		for (GameFigure so : enemySprites) {
+		for (GameFigure se : enemySprites) {
 
 			boolean vornFrei = true;
 
-			for (GameFigure se : ownSprites) {
+			for (GameFigure so : ownSprites) {
 
-				if (so != se) {
+				if (se != so) {
 
-					if (so.intersects(se)) {
-						so.setVelocityX(0);
+					if (se.intersects(so)) {
+						se.setVelocityX(0);
 						vornFrei = false;
 					}
 				}
 			}
+			
+			//check ob gegner bei eigener burg ist
+			if(se.intersects(ownCastle)) {
+				vornFrei = false;
+			}
 
+			se.attack(ownCastle);
+			
 			if (vornFrei) {
-				so.setVelocityX(so.getSpeed());
+				se.setVelocityX(se.getSpeed());
 			}
 		}
 	}

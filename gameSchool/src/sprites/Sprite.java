@@ -7,9 +7,9 @@ import javafx.scene.image.Image;
 
 public abstract class Sprite implements Renderable {
 
-	private Rectangle2D boundaries;
+	protected Rectangle2D boundaries;
 
-	private Rectangle2D hitBox;
+	protected Rectangle2D hitBox;
 
 	protected Image currentImage;
 
@@ -20,20 +20,29 @@ public abstract class Sprite implements Renderable {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		if(velocityX>0 || this instanceof Castle) {
-		gc.drawImage(currentImage, posX, posY, 80, 100);
-		}
-		else {
-		gc.drawImage(currentImage, posX, posY, -80, 100);
+
+		if (this instanceof GameFigure) {
+			GameFigure g = (GameFigure) this;
+			if ((g.getSpeed() > 0 || velocityX > 0) || this instanceof Castle) {
+				gc.drawImage(currentImage, posX, posY, 80, 100);
+			} else {
+				gc.drawImage(currentImage, posX, posY, -80, 100);
+			}
+			
+		} else {
+			
+			if (velocityX > 0 || this instanceof Castle) {
+				gc.drawImage(currentImage, posX, posY, 80, 100);
+			} else {
+				gc.drawImage(currentImage, posX, posY, -80, 100);
+			}
+			
 		}
 	}
 
 	@Override
 	public void update(double elapsedTime) {
-		System.out.println(this.velocityX);
-		System.out.println(this.posX);
-		System.out.println(elapsedTime);
-		this.posX += (double)((double)this.velocityX * (double)elapsedTime);
+		this.posX += (double) ((double) this.velocityX * (double) elapsedTime);
 		this.posY += this.velocityY * elapsedTime;
 	}
 
@@ -45,7 +54,19 @@ public abstract class Sprite implements Renderable {
 		this.velocityY += velToAdd;
 	}
 
+	public void setVelocityX(double vel) {
+		this.velocityX = vel;
+	}
+
+	public void setVelocityY(double vel) {
+		this.velocityY = vel;
+	}
+
 	public boolean intersects(Sprite sprite) {
+		return sprite.getBoundaries().intersects(this.boundaries);
+	}
+
+	public boolean canAttack(Sprite sprite) {
 		return sprite.getBoundaries().intersects(this.hitBox);
 	}
 

@@ -14,13 +14,13 @@ public class Healthbar implements Renderable{
 	private int whiteX;
 	private int y = 20;
 	private int redX;
-	public static final int HEIGHT = 10;
+	public static final int HEIGHT = 3;
 
-	private int maxHealth;
-	public static final int HEALTHBAR = 60;
+	private double maxHealth;
+	public static final double HEALTHBAR = 50;
 	private double health;
-	private int whiteLength;
-	private int redLength;
+	private double whiteLength;
+	private double redLength;
 	
 	
 	
@@ -42,12 +42,17 @@ public class Healthbar implements Renderable{
 	redLength = (int)(HEALTHBAR * health);
 	whiteLength = HEALTHBAR - redLength;
 	
+	int offset = 10;
 	
+	//Um das Spiegeln der Sprites zu beruecksichtigen
+	if(parent.getSpeed() < 0) {
+		offset -= parent.getBoundaries().getWidth();
+	}
 	
 	gc.setFill(Color.RED);
-	gc.fillRect(parent.getX() + 10, parent.getY() - y, redLength, HEIGHT);
+	gc.fillRect(parent.getX() + offset, parent.getY() - y, redLength, HEIGHT);
 	gc.setFill(Color.WHITE);
-	gc.fillRect(parent.getX() + 10 + redLength, parent.getY() - y, whiteLength, HEIGHT);
+	gc.fillRect(parent.getX() + offset + redLength, parent.getY() - y, whiteLength, HEIGHT);
 	
     
 		

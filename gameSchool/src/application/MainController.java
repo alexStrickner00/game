@@ -41,7 +41,6 @@ public class MainController {
 		}
 		
 		if (musicButton != null) {
-			System.out.println("Hallo");
 			musicButton.setSelected(music);
 		}
 		//waehrend Entwicklung

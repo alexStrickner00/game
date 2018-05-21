@@ -2,7 +2,10 @@ package sprites;
 
 import java.awt.image.BufferedImage;
 
+import hud.Healthbar;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class GameFigure extends Sprite {
@@ -26,13 +29,19 @@ public class GameFigure extends Sprite {
 	private int nextSprite = 0;
 	private double start;
 	private boolean fought = false;
+	private Image spritesheet;
+	private double lastAttack;
+	
+	private Healthbar healthbar;
 
 	public GameFigure clone() {
-		return new GameFigure(this.entityId);
+		return new GameFigure(this.entityId, this.entity_name, this.title, this.health, this.attackDelay, this.damage,
+				this.speed, this.shooting, this.projectileId, this.spritesheet, this.costs);
 	}
 
 	public GameFigure(int entityId, String entity_name, String title, int health, int attackDelay, int damage,
 			int speed, int shooting, int projectileId, Image image, int costs) {
+		this.spritesheet = image;
 		this.entityId = entityId;
 		this.entity_name = entity_name;
 		this.title = title;
@@ -46,10 +55,17 @@ public class GameFigure extends Sprite {
 		loadSprites(image);
 		this.costs = costs;
 		start = System.nanoTime();
+		lastAttack = System.nanoTime();
+
+		this.healthbar = new Healthbar(this);
+		
+		refreshBoundaries();
 	}
 
-	public GameFigure(int entityId) {
-		// TODO: Entity aus Daten aus Spielfiguren-Datenbank erstellen.
+	private void refreshBoundaries() {
+		this.boundaries = new Rectangle2D(this.posX, this.posY, this.sprites[0].getWidth(), this.sprites[0].getWidth());
+		this.hitBox = new Rectangle2D(this.posX - 10, this.posY, this.sprites[0].getWidth() + 20,
+				this.sprites[0].getHeight());
 	}
 
 	public void loadSprites(Image image) {
@@ -66,18 +82,38 @@ public class GameFigure extends Sprite {
 	}
 
 	public void attack(GameFigure figure) {
-		if (this.intersects(figure)) {
+		if (this.canAttack(figure) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
 			figure.addHealth(this.damage);
+			
+			//Wahrscheinlichkeit von 10%, dass es ein kritischer Hit ist
+			if(Math.random() > 0.9) {
+				figure.addHealth((int)(this.damage * 0.1));
+			}
+			
+			this.lastAttack = System.nanoTime();
 		}
 	}
 
 	private void addHealth(int healthToAdd) {
 		this.health += healthToAdd;
+		System.out.println(this.getHealth());
+	}
+	
+	public boolean isDead() {
+		return this.health <= 0;
 	}
 
 	@Override
+	public void render(GraphicsContext gc) {
+		super.render(gc);
+		healthbar.render(gc);
+	}
+	
+	@Override
 	public void update(double elapsedTime) {
 		super.update(elapsedTime);
+
+		refreshBoundaries();
 
 		if (System.nanoTime() - start >= SPRITE_SWITCH_TIME) {
 
@@ -110,17 +146,13 @@ public class GameFigure extends Sprite {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	
-	public int getY() {
-		
-		return this.getY();
-		
+
+	public double getY() {
+		return this.posY;
 	}
-	
-	public int getX() {
-		
-		return this.getX();
-		
+
+	public double getX() {
+		return this.posX;
 	}
 
 	public void setY(double y) {
@@ -129,7 +161,20 @@ public class GameFigure extends Sprite {
 
 	public void addDamage(int damageIncrease) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public double getSpeed() {
+		return this.speed;
+	}
+
+	public void setX(double x) {
+		this.posX = x;
 		
 	}
 	
+	public void inverseSpeed() {
+		this.speed = -speed;
+	}
+
 }

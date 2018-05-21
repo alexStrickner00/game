@@ -32,7 +32,6 @@ public class DBManager {
 		driver = cr.getPropertyByName("database_driver");
 
 		// TODO try and catch statt throw und Dialoge mit Fehlermeldung
-		System.out.println(driver);
 		Class.forName(driver);
 		conn = DriverManager.getConnection(address, uname, pw);
 

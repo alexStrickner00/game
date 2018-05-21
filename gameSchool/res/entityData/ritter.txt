@@ -1,2 +1,2 @@
 # entityId, entity_name, title, health, delay, damage, speed, shooting, projectileId, image, costs
-'3', 'ritter', 'Ritter', '100', '400', '10', '10', '0', '-1', ?, '100'
+'1', 'ritter', 'Ritter', '100', '400', '-10', '50', '0', '-1', <Image einfuegen>, '100'

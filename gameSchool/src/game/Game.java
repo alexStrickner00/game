@@ -40,19 +40,19 @@ public class Game {
 
 	public Game(Pane gamePane, boolean sound) {
 		this.pane = gamePane;
-		this.sound=sound;
+		this.sound = sound;
 		this.canvas = new Canvas(1000, 600);
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);
-		
+
 		try {
-			this.dbmanager = new  DBManager("res/databaseConnection.conf");
+			this.dbmanager = new DBManager("res/databaseConnection.conf");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		keysPressed = new ArrayList<>();
 		// TODO: Nur falls anklicken der SHopItems nicht anders moeglich
 		// pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -104,9 +104,16 @@ public class Game {
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop();
 		GameFigure g = dbmanager.getGameFigureById(1);
-		g.addVelocityX(10);
+		g.setVelocityX(g.getSpeed());
 		g.setY(419);
+		g.setHealth(200);
 		ownSprites.add(g);
+		GameFigure g2 = dbmanager.getGameFigureById(1);
+		g2.inverseSpeed();
+		g2.setVelocityX(g2.getSpeed());
+		g2.setY(419);
+		g2.setX(900);
+		enemySprites.add(g2);
 
 	}
 
@@ -154,12 +161,74 @@ public class Game {
 	private void drawBackground() {
 		gc.drawImage(background, 0, 0);
 	}
-	
+
+	// TODO: testen
 	private void doAttacks() {
+
+		ArrayList<GameFigure> deadSprites = new ArrayList<>();
+
 		for (GameFigure so : ownSprites) {
+
+			boolean vornFrei = true;
+
 			for (GameFigure se : enemySprites) {
-				so.attack(se);
-				se.attack(so);
+
+				if (so != se) {
+
+					if (so.intersects(se)) {
+						so.setVelocityX(0);
+						vornFrei = false;
+					}
+				}
+				if (!deadSprites.contains(so) && !deadSprites.contains(se)) {
+					so.attack(se);
+					se.attack(so);
+				}
+
+				if (so.isDead()) {
+					if (!deadSprites.contains(so)) {
+						deadSprites.add(so);
+					}
+				}
+				if (se.isDead()) {
+					if (!deadSprites.contains(se)) {
+						deadSprites.add(se);
+					}
+				}
+
+			}
+
+			if (vornFrei) {
+				so.setVelocityX(so.getSpeed());
+			}
+		}
+
+		for(GameFigure g : deadSprites) {
+			if(ownSprites.contains(g)) {
+				ownSprites.remove(g);
+			}
+			if(enemySprites.contains(g)) {
+				enemySprites.remove(g);
+			}
+		}
+		
+		for (GameFigure so : enemySprites) {
+
+			boolean vornFrei = true;
+
+			for (GameFigure se : ownSprites) {
+
+				if (so != se) {
+
+					if (so.intersects(se)) {
+						so.setVelocityX(0);
+						vornFrei = false;
+					}
+				}
+			}
+
+			if (vornFrei) {
+				so.setVelocityX(so.getSpeed());
 			}
 		}
 	}

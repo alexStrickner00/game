@@ -179,7 +179,9 @@ public class GameFigure extends Sprite {
 		this.posX = x;
 		
 	}
-	
+	public Image getMainImage() {
+		return sprites[0];
+	}
 	public void inverseSpeed() {
 		this.speed = -speed;
 	}

@@ -102,7 +102,7 @@ public class Game {
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
-		shop = new Shop();
+		//shop = new Shop();
 		GameFigure g = dbmanager.getGameFigureById(1);
 		g.setVelocityX(g.getSpeed());
 		g.setY(419);

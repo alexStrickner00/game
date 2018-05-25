@@ -1,5 +1,7 @@
 package hud;
 
+import java.awt.Font;
+
 import interfaces.Renderable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -84,6 +86,7 @@ public class shopItem implements Renderable {
 	public void render(GraphicsContext gc) {
 		gc.setFill(paint);
 		gc.fillRect(x, y, width, height);
+		
 		gc.fillText(itemName, x + 5, y + height - 5);
 		gc.drawImage(figure.getMainImage(), x + (width - figure.getMainImage().getWidth()) / 2, y + 5);
 	}

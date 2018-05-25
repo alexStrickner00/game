@@ -22,9 +22,9 @@ public class Shop implements Renderable {
 
 		DBManager db = new DBManager("gameSchool/res/database_create.sql");
 		ArrayList<GameFigure> figures= db.getAllEntities();
-		int recx=0;
+		int recx=15;
 		for (GameFigure figure : figures) {
-			Rectangle2D rec=new Rectangle2D(recx, 0, 0, 0);
+			Rectangle2D rec=new Rectangle2D(recx, 80, 0, 0);
 			recx+=rec.getWidth()+10;
 			shopitems.add(new shopItem(figure,figure.getEntity_name(),(int)((double)figure.getCosts()*COST_INCREASE_MULTIPLIER),(int)((double)figure.getCosts()*UPGRADE_COST_MULTIPLIER),(int)((double)figure.getDamage()*DAMAGE_INCREASE_MULTIPLIER),1,figure.getCosts(),rec,p));
 		}

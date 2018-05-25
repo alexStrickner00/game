@@ -28,6 +28,10 @@ import sprite.GameFigureTableElement;
 
 public class MainController {
 
+	private static final int SPRITE_HEIGHT = 65;
+
+	private static final int SPRITE_WIDTH = 60;
+
 	protected static final long SWITCH_TIME = 200000000;
 
 	private static final int SPRITE_COUNT = 5;
@@ -174,7 +178,7 @@ public class MainController {
 			BufferedImage bi = null;
 			bi = SwingFXUtils.fromFXImage(aktElement.getImage(), null);
 			for (int i = 0; i < SPRITE_COUNT; i++) {
-				sprites[i] = SwingFXUtils.toFXImage(bi.getSubimage(i * 80, 0, 80, 100), null);
+				sprites[i] = SwingFXUtils.toFXImage(bi.getSubimage(i * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT), null);
 			}
 
 		}

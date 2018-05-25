@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.DBManager;
+import enums.Team;
 import hud.Shop;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -39,6 +40,11 @@ public class Game {
 	private Image background;
 	private DBManager dbmanager;
 
+	private static final int PLAYER_SPAWN_X = 67;
+	private static final int PLAYER_SPAWN_Y = 419;
+	private static final int ENEMY_SPAWN_X = 855;
+	private static final int ENEMY_SPAWN_Y = 419;
+	
 	public Game(Pane gamePane, boolean sound) {
 		this.pane = gamePane;
 		this.sound = sound;
@@ -268,6 +274,19 @@ public class Game {
 	
 	public Pane getPane() {
 		return this.pane;
+	}
+
+	public void spawn(Team team, GameFigure clone) {
+		if(team == PLAYER) {
+			clone.setX(PLAYER_SPAWN_X);
+			clone.setY(PLAYER_SPAWN_Y);
+			ownSprites.add(clone);
+			
+		}else if(team == ENEMY) {
+			clone.setX(ENEMY_SPAWN_X);
+			clone.setY(ENEMY_SPAWN_Y);
+			enemySprites.add(clone);
+		}
 	}
 	
 }

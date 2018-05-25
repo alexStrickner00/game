@@ -4,13 +4,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.DBManager;
+import enums.Team;
 import game.Game;
 import interfaces.Renderable;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Dialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -58,6 +58,7 @@ public class Shop implements Renderable {
 					
 					if(itemspace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
 						System.out.println("clicked:" + shopitems.get(i).getFigure().getTitle());
+						game.spawn(Team.PLAYER , shopitems.get(i).getFigure().clone());
 					}
 					
 				}

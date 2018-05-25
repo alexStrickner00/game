@@ -10,10 +10,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Castle extends Sprite {
-	private static final int PLAYER_SPAWN_X = 167;
-	private static final int PLAYER_SPAWN_Y = 419;
-	private static final int ENEMY_SPAWN_X = 855;
-	private static final int ENEMY_SPAWN_Y = 419;
 	private static final int CASTLE_Y = 378;
 	private double health;
 	private int level;
@@ -23,21 +19,18 @@ public class Castle extends Sprite {
 
 	public static Castle createCastle(Team player) {
 		if (player == Team.PLAYER) {
-			return new Castle(player, 1, 100, new Image(new File("res/base_player.png").toURI().toString()),
-					new Point2D(PLAYER_SPAWN_X, PLAYER_SPAWN_Y));
+			return new Castle(player, 1, 100, new Image(new File("res/base_player.png").toURI().toString()));
 		} 
 		else {
-			return new Castle(player, 1, 100, new Image(new File("res/base_enemy.png").toURI().toString()),
-					new Point2D(ENEMY_SPAWN_X, ENEMY_SPAWN_Y));
+			return new Castle(player, 1, 100, new Image(new File("res/base_enemy.png").toURI().toString()));
 		}
 	}
 
-	public Castle(Team team, int level, double health, Image image, Point2D spawnpoint) {
+	public Castle(Team team, int level, double health, Image image) {
 		this.team = team;
 		this.level = level;
 		this.health = health;
 		this.currentImage = image;
-		this.spawnpoint = spawnpoint;
 		this.posY = CASTLE_Y;
 		
 		this.healthbar = new Healthbar(this);

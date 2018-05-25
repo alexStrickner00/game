@@ -1,11 +1,12 @@
 package hud;
 
-import java.awt.Font;
+
 
 import interfaces.Renderable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import sprites.GameFigure;
 
 public class shopItem implements Renderable {
@@ -86,8 +87,12 @@ public class shopItem implements Renderable {
 	public void render(GraphicsContext gc) {
 		gc.setFill(paint);
 		gc.fillRect(x, y, width, height);
+		gc.setFill(Paint.valueOf("yellow"));
+		gc.setFont(new Font("Arial",14));
+		gc.fillText("$" + price, x + 5, y + figure.getMainImage().getHeight()+20);
 		
-		gc.fillText(itemName, x + 5, y + height - 5);
+		//gc.fillText(itemName, x + 5, y + height - 5);
+		//gc.fillText(itemName, x + 5, y + height - 5);
 		gc.drawImage(figure.getMainImage(), x + (width - figure.getMainImage().getWidth()) / 2, y + 5);
 	}
 

@@ -24,17 +24,17 @@ public abstract class Sprite implements Renderable {
 		if (this instanceof GameFigure) {
 			GameFigure g = (GameFigure) this;
 			if ((g.getSpeed() > 0 || velocityX > 0) || this instanceof Castle) {
-				gc.drawImage(currentImage, posX, posY, 80, 100);
+				gc.drawImage(currentImage, posX, posY, 60, 65);
 			} else {
-				gc.drawImage(currentImage, posX, posY, -80, 100);
+				gc.drawImage(currentImage, posX, posY, -60, 65);
 			}
 			
 		} else {
 			
 			if (velocityX > 0 || this instanceof Castle) {
-				gc.drawImage(currentImage, posX, posY, 80, 100);
+				gc.drawImage(currentImage, posX, posY, 60, 65);
 			} else {
-				gc.drawImage(currentImage, posX, posY, -80, 100);
+				gc.drawImage(currentImage, posX, posY, -60, 65);
 			}
 			
 		}

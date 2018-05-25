@@ -65,6 +65,90 @@ public class GameFigure extends Sprite {
 		refreshBoundaries();
 	}
 
+	public static int getHitboxMargin() {
+		return HITBOX_MARGIN;
+	}
+
+	public static int getFirstWalkImage() {
+		return FIRST_WALK_IMAGE;
+	}
+
+	public static int getLastWalkImage() {
+		return LAST_WALK_IMAGE;
+	}
+
+	public static int getAttackImage() {
+		return ATTACK_IMAGE;
+	}
+
+	public static double getSpriteSwitchTime() {
+		return SPRITE_SWITCH_TIME;
+	}
+
+	public static double getBoundaryMargin() {
+		return BOUNDARY_MARGIN;
+	}
+
+	public int getEntityId() {
+		return entityId;
+	}
+
+	public Image[] getSprites() {
+		return sprites;
+	}
+
+	public String getEntity_name() {
+		return entity_name;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public int getShooting() {
+		return shooting;
+	}
+
+	public int getProjectileId() {
+		return projectileId;
+	}
+
+	public int getCosts() {
+		return costs;
+	}
+
+	public int getAttackDelay() {
+		return attackDelay;
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
+	public int getNextSprite() {
+		return nextSprite;
+	}
+
+	public double getStart() {
+		return start;
+	}
+
+	public boolean isFought() {
+		return fought;
+	}
+
+	public Image getSpritesheet() {
+		return spritesheet;
+	}
+
+	public double getLastAttack() {
+		return lastAttack;
+	}
+
+	public Healthbar getHealthbar() {
+		return healthbar;
+	}
+
 	private void refreshBoundaries() {
 		this.boundaries = new Rectangle2D(this.posX - BOUNDARY_MARGIN, this.posY, this.sprites[0].getWidth() + BOUNDARY_MARGIN * 2, this.sprites[0].getWidth());
 		this.hitBox = new Rectangle2D(this.posX - HITBOX_MARGIN - BOUNDARY_MARGIN, this.posY, this.sprites[0].getWidth() + HITBOX_MARGIN * 2 + BOUNDARY_MARGIN * 2,

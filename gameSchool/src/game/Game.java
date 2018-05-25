@@ -134,7 +134,7 @@ public class Game {
 				enemyCastle.update(et);
 				updateFigures(ownSprites, et);
 				updateFigures(enemySprites, et);
-				shop.update(et);
+				//shop.update(et);
 
 				doAttacks();
 
@@ -142,7 +142,7 @@ public class Game {
 				enemyCastle.render(gc);
 				renderFigures(ownSprites, gc);
 				renderFigures(enemySprites, gc);
-				shop.render(gc);
+				//shop.render(gc);
 
 				handleKeys();
 

@@ -160,8 +160,8 @@ public class GameFigure extends Sprite {
 
 		sprite = SwingFXUtils.fromFXImage(image, null);
 
-		int width = 80;
-		int height = 100;
+		int width = 60;
+		int height = 65;
 
 		for (int i = 0; i <= ATTACK_IMAGE; i++) {
 			sprites[i] = SwingFXUtils.toFXImage(sprite.getSubimage(width * i, 0, width, height), null);

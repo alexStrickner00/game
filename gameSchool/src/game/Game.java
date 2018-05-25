@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
 
@@ -102,7 +103,7 @@ public class Game {
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
-		//shop = new Shop();
+		shop = new Shop(this,Paint.valueOf("BLUE"));
 		GameFigure g = dbmanager.getGameFigureById(1);
 		g.setVelocityX(g.getSpeed());
 		g.setY(419);
@@ -142,7 +143,7 @@ public class Game {
 				enemyCastle.render(gc);
 				renderFigures(ownSprites, gc);
 				renderFigures(enemySprites, gc);
-				//shop.render(gc);
+				shop.render(gc);
 
 				handleKeys();
 
@@ -264,4 +265,9 @@ public class Game {
 		}
 
 	}
+	
+	public Pane getPane() {
+		return this.pane;
+	}
+	
 }

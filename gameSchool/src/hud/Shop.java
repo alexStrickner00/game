@@ -58,7 +58,7 @@ public class Shop implements Renderable {
 					
 					if(itemspace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
 						System.out.println("clicked:" + shopitems.get(i).getFigure().getTitle());
-						game.spawn(Team.PLAYER , shopitems.get(i).getFigure().clone());
+						game.spawn(Team.PLAYER , shopitems.get(i));
 					}
 					
 				}

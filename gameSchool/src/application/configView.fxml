@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <Pane prefHeight="613.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css">
          <children>
@@ -17,9 +17,9 @@
                <children>
                   <ToggleButtonGroup selectionType="SINGLE" styleClass="toggle" stylesheets="@application.css">
                      <toggles>
-                        <ToggleButton mnemonicParsing="false" prefHeight="75.0" prefWidth="335.0" styleClass="toggle" stylesheets="@application.css" text="EASY" />
-                        <ToggleButton mnemonicParsing="false" prefHeight="75.0" prefWidth="333.0" styleClass="toggle" stylesheets="@application.css" text="MEDIUM" />
-                        <ToggleButton mnemonicParsing="false" prefHeight="75.0" prefWidth="332.0" styleClass="toggle" stylesheets="@application.css" text="HARD" />
+                        <ToggleButton fx:id="easyButton" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="75.0" prefWidth="335.0" styleClass="toggle" stylesheets="@application.css" text="EASY" />
+                        <ToggleButton fx:id="mediumButton" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="75.0" prefWidth="333.0" styleClass="toggle" stylesheets="@application.css" text="MEDIUM" />
+                        <ToggleButton fx:id="hardButton" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="75.0" prefWidth="332.0" styleClass="toggle" stylesheets="@application.css" text="HARD" />
                      </toggles>
                   </ToggleButtonGroup>
                </children>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import database.DBManager;
 import enums.Team;
 import hud.Shop;
+import hud.shopItem;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -39,15 +40,21 @@ public class Game {
 	private MediaPlayer backgroundMusic;
 	private Image background;
 	private DBManager dbmanager;
+	private int difficulty;
+
+	private double ownMoney;
+	private double enemyMoney;
 
 	private static final int PLAYER_SPAWN_X = 67;
 	private static final int PLAYER_SPAWN_Y = 419;
 	private static final int ENEMY_SPAWN_X = 855;
 	private static final int ENEMY_SPAWN_Y = 419;
-	
-	public Game(Pane gamePane, boolean sound) {
+
+	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
 		this.sound = sound;
+		this.difficulty = difficulty;
+
 		this.canvas = new Canvas(1000, 600);
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);
@@ -109,7 +116,7 @@ public class Game {
 		ownSprites = new ArrayList<>();
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
-		shop = new Shop(this,Paint.valueOf("BLUE"));
+		shop = new Shop(this, Paint.valueOf("BLUE"));
 		GameFigure g = dbmanager.getGameFigureById(1);
 		g.setVelocityX(g.getSpeed());
 		g.setY(419);
@@ -121,6 +128,9 @@ public class Game {
 		g2.setY(419);
 		g2.setX(900);
 		enemySprites.add(g2);
+
+		ownMoney = 100;
+		enemyMoney = 100;
 
 	}
 
@@ -141,7 +151,7 @@ public class Game {
 				enemyCastle.update(et);
 				updateFigures(ownSprites, et);
 				updateFigures(enemySprites, et);
-				//shop.update(et);
+				// shop.update(et);
 
 				doAttacks();
 
@@ -205,27 +215,27 @@ public class Game {
 
 			}
 
-			if(so.intersects(enemyCastle)) {
+			if (so.intersects(enemyCastle)) {
 				so.setVelocityX(0);
 				vornFrei = false;
 			}
-			
+
 			so.attack(enemyCastle);
-			
+
 			if (vornFrei) {
 				so.setVelocityX(so.getSpeed());
 			}
 		}
 
-		for(GameFigure g : deadSprites) {
-			if(ownSprites.contains(g)) {
+		for (GameFigure g : deadSprites) {
+			if (ownSprites.contains(g)) {
 				ownSprites.remove(g);
 			}
-			if(enemySprites.contains(g)) {
+			if (enemySprites.contains(g)) {
 				enemySprites.remove(g);
 			}
 		}
-		
+
 		for (GameFigure se : enemySprites) {
 
 			boolean vornFrei = true;
@@ -240,14 +250,14 @@ public class Game {
 					}
 				}
 			}
-			
-			//check ob gegner bei eigener burg ist
-			if(se.intersects(ownCastle)) {
+
+			// check ob gegner bei eigener burg ist
+			if (se.intersects(ownCastle)) {
 				vornFrei = false;
 			}
 
 			se.attack(ownCastle);
-			
+
 			if (vornFrei) {
 				se.setVelocityX(se.getSpeed());
 			}
@@ -271,22 +281,29 @@ public class Game {
 		}
 
 	}
-	
+
 	public Pane getPane() {
 		return this.pane;
 	}
 
-	public void spawn(Team team, GameFigure clone) {
-		if(team == PLAYER) {
-			clone.setX(PLAYER_SPAWN_X);
-			clone.setY(PLAYER_SPAWN_Y);
-			ownSprites.add(clone);
-			
-		}else if(team == ENEMY) {
-			clone.setX(ENEMY_SPAWN_X);
-			clone.setY(ENEMY_SPAWN_Y);
-			enemySprites.add(clone);
+	public void spawn(Team team, shopItem item) {
+		GameFigure clone = item.getFigure().clone();
+		if (team == PLAYER) {
+			if (ownMoney >= item.getPrice()) {
+				clone.setX(PLAYER_SPAWN_X);
+				clone.setY(PLAYER_SPAWN_Y);
+				ownSprites.add(clone);
+				ownMoney -= item.getPrice();
+			}
+		} else if (team == ENEMY) {
+			if (enemyMoney >= item.getPrice()) {
+				clone.setX(ENEMY_SPAWN_X);
+				clone.setY(ENEMY_SPAWN_Y);
+				enemySprites.add(clone);
+				enemyMoney -= item.getPrice();
+			}
 		}
+		System.out.println(ownMoney);
 	}
-	
+
 }

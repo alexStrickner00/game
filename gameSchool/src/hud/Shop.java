@@ -36,7 +36,6 @@ public class Shop implements Renderable {
 			db = new DBManager("res/databaseConnection.conf");
 			figures = db.getAllEntities();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();

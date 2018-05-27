@@ -256,7 +256,6 @@ public class GameFigure extends Sprite {
 	}
 
 	public void addDamage(int damageIncrease) {
-		// TODO Auto-generated method stub
 
 	}
 

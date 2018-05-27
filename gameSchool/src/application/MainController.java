@@ -26,6 +26,7 @@ public class MainController {
 	private static boolean music = true;
 	private static boolean sound;
 	private static MediaPlayer mp;
+	private static int difficulty = 0;
 
 	@FXML
 	ToggleButton musicButton;
@@ -33,17 +34,37 @@ public class MainController {
 	ToggleButton soundButton;
 
 	@FXML
+	ToggleButton easyButton;
+
+	@FXML
+	ToggleButton mediumButton;
+
+	@FXML
+	ToggleButton hardButton;
+
+	private ToggleButton[] diffButtons = new ToggleButton[3];
+
+	@FXML
 	public void initialize() {
-		
+
+		diffButtons[0] = easyButton;
+		diffButtons[1] = mediumButton;
+		diffButtons[2] = hardButton;
+
 		if (mp == null) {
 			mp = new MediaPlayer(new Media(new File(RES_SOUND_BACKGROUND_PATH).toURI().toString()));
 			mp.setCycleCount(MediaPlayer.INDEFINITE);
 		}
-		
+
 		if (musicButton != null) {
 			musicButton.setSelected(music);
 		}
-		//waehrend Entwicklung
+
+		if (easyButton != null) {
+			diffButtons[difficulty].setSelected(true);
+		}
+
+		// waehrend Entwicklung
 		mp.setVolume(0.01);
 		music();
 	}
@@ -71,7 +92,7 @@ public class MainController {
 		Pane gamePane = new Pane();
 		stage.setScene(new Scene(gamePane, width, height));
 
-		Game game = new Game(gamePane, sound);
+		Game game = new Game(gamePane, sound, difficulty);
 		Runnable r = new Runnable() {
 
 			@Override
@@ -114,6 +135,16 @@ public class MainController {
 			stage.setScene(new Scene(root, width, height));
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void changeDifficulty() {
+		if (hardButton.isSelected()) {
+			difficulty = 2;
+		} else if (mediumButton.isSelected()) {
+			difficulty = 1;
+		} else {
+			difficulty = 0;
 		}
 	}
 }

@@ -86,7 +86,7 @@ public class shopItem implements Renderable {
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.setFill(paint);
-		gc.fillRect(x, y, width, height);
+		//gc.fillRect(x, y, width, height);
 		gc.setFill(Paint.valueOf("yellow"));
 		gc.setFont(new Font("Arial",14));
 		gc.fillText("$" + price, x + 5, y + figure.getMainImage().getHeight()+20);

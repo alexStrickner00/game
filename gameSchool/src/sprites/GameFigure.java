@@ -17,6 +17,7 @@ public class GameFigure extends Sprite {
 	private static final double SPRITE_SWITCH_TIME = 150000000;
 	
 	public static final double BOUNDARY_MARGIN = 30;
+	private static final double EARN_FACTOR = 0.3;
 
 	protected int entityId;
 	protected Image[] sprites;
@@ -49,7 +50,7 @@ public class GameFigure extends Sprite {
 		this.entity_name = entity_name;
 		this.title = title;
 		this.health = health;
-		this.attackDelay = attackDelay;
+		this.attackDelay = (int)(attackDelay * (0.8 + Math.random() * 0.4));
 		this.damage = damage;
 		this.speed = speed;
 		this.shooting = shooting;
@@ -272,6 +273,10 @@ public class GameFigure extends Sprite {
 	}
 	public void inverseSpeed() {
 		this.speed = -speed;
+	}
+
+	public double getEarnedMoney() {
+		return EARN_FACTOR * costs;
 	}
 
 }

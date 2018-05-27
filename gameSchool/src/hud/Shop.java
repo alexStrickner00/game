@@ -17,7 +17,7 @@ import javafx.scene.paint.Paint;
 import sprites.GameFigure;
 
 public class Shop implements Renderable {
-	ArrayList<shopItem> shopitems;
+	private ArrayList<shopItem> shopitems;
 	private static final double UPGRADE_COST_MULTIPLIER = 0.2;
 	private static final double COST_INCREASE_MULTIPLIER = 0.15;
 	private static final double DAMAGE_INCREASE_MULTIPLIER = 0.15;
@@ -78,4 +78,8 @@ public class Shop implements Renderable {
 
 	}
 
+	public ArrayList<shopItem> getShopItems(){
+		return shopitems;
+	}
+	
 }

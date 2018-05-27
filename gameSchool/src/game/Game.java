@@ -37,14 +37,13 @@ public class Game {
 	private long lt;
 	private ArrayList<KeyCode> keysPressed;
 	private boolean sound;
-	private MediaPlayer backgroundMusic;
 	private Image background;
-	private DBManager dbmanager;
 	private Thread timeMoneyThread;
-	
+	private EnemyController enemyController;
+
 	private int difficulty;
-	private boolean finished;
-	
+	private Team winner;
+
 	private double ownMoney;
 	private double enemyMoney;
 
@@ -62,25 +61,7 @@ public class Game {
 		this.gc = canvas.getGraphicsContext2D();
 		this.pane.getChildren().add(canvas);
 
-		try {
-			this.dbmanager = new DBManager("res/databaseConnection.conf");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 		keysPressed = new ArrayList<>();
-		// TODO: Nur falls anklicken der SHopItems nicht anders moeglich
-		// pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-		//
-		// @Override
-		// public void handle(MouseEvent event) {
-		//
-		//
-		// }
-		// });
-		//
 		addKeyListener();
 		initGame();
 	}
@@ -120,16 +101,8 @@ public class Game {
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
-		finished = false;
-		//test
-		GameFigure g2 = dbmanager.getGameFigureById(1);
-		g2.inverseSpeed();
-		g2.setVelocityX(g2.getSpeed());
-		g2.setY(419);
-		g2.setX(900);
-		enemySprites.add(g2);
 
-		ownMoney =200;
+		ownMoney = 100;
 		enemyMoney = 100;
 
 	}
@@ -147,11 +120,12 @@ public class Game {
 				et /= 1000000000.0;
 
 				drawBackground();
-				ownCastle.update(et);
-				enemyCastle.update(et);
-				updateFigures(ownSprites, et);
-				updateFigures(enemySprites, et);
-				// shop.update(et);
+				if (winner == null) {
+					ownCastle.update(et);
+					enemyCastle.update(et);
+					updateFigures(ownSprites, et);
+					updateFigures(enemySprites, et);
+				}
 
 				doAttacks();
 
@@ -161,14 +135,30 @@ public class Game {
 				renderFigures(enemySprites, gc);
 				shop.render(gc);
 
+				checkStateOfCastles();
+
 				handleKeys();
 
 			}
 
 		};
+
 		timeMoneyThread = new Thread(new MoneyRunnable(this));
+		enemyController = new EnemyController(this);
+
 		at.start();
 		timeMoneyThread.start();
+		enemyController.start();
+	}
+
+	private void checkStateOfCastles() {
+		if (ownCastle.getHealth() <= 0) {
+			winner = ENEMY;
+			return;
+		}
+		if (enemyCastle.getHealth() <= 0) {
+			winner = PLAYER;
+		}
 	}
 
 	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
@@ -207,11 +197,13 @@ public class Game {
 				if (so.isDead()) {
 					if (!deadSprites.contains(so)) {
 						deadSprites.add(so);
+						enemyMoney += so.getEarnedMoney();
 					}
 				}
 				if (se.isDead()) {
 					if (!deadSprites.contains(se)) {
 						deadSprites.add(se);
+						ownMoney += se.getEarnedMoney();
 					}
 				}
 
@@ -262,6 +254,8 @@ public class Game {
 
 			if (vornFrei) {
 				se.setVelocityX(se.getSpeed());
+			} else {
+				se.setVelocityX(0);
 			}
 		}
 	}
@@ -301,6 +295,7 @@ public class Game {
 			if (enemyMoney >= item.getPrice()) {
 				clone.setX(ENEMY_SPAWN_X);
 				clone.setY(ENEMY_SPAWN_Y);
+				clone.inverseSpeed();
 				enemySprites.add(clone);
 				enemyMoney -= item.getPrice();
 			}
@@ -309,13 +304,13 @@ public class Game {
 	}
 
 	public boolean isFinished() {
-		return finished;
+		return winner != null;
 	}
 
 	public void addMoney(Team player, double moneyFromDifficulty) {
-		if(player == PLAYER) {
+		if (player == PLAYER) {
 			ownMoney += moneyFromDifficulty;
-		} else if(player == ENEMY) {
+		} else if (player == ENEMY) {
 			enemyMoney += moneyFromDifficulty;
 		}
 	}

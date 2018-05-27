@@ -42,7 +42,7 @@ public class GameFigure extends Sprite {
 				this.speed, this.shooting, this.projectileId, this.spritesheet, this.costs);
 	}
 
-	public GameFigure(int entityId, String entity_name, String title, int health, int attackDelay, int damage,
+	public  GameFigure(int entityId, String entity_name, String title, int health, int attackDelay, int damage,
 			int speed, int shooting, int projectileId, Image image, int costs) {
 		this.spritesheet = image;
 		this.entityId = entityId;
@@ -54,9 +54,14 @@ public class GameFigure extends Sprite {
 		this.speed = speed;
 		this.shooting = shooting;
 		this.projectileId = projectileId;
-		sprites = new Image[ATTACK_IMAGE + 1];
-		loadSprites(image);
 		this.costs = costs;
+		initFigureData();
+	}
+
+	private synchronized void initFigureData() {
+		sprites = new Image[ATTACK_IMAGE + 1];
+		loadSprites();
+	
 		start = System.nanoTime();
 		lastAttack = System.nanoTime();
 
@@ -155,10 +160,10 @@ public class GameFigure extends Sprite {
 				this.sprites[0].getHeight());
 	}
 
-	public void loadSprites(Image image) {
+	public synchronized void loadSprites() {
 		BufferedImage sprite = null;
 
-		sprite = SwingFXUtils.fromFXImage(image, null);
+		sprite = SwingFXUtils.fromFXImage(this.spritesheet, null);
 
 		int width = 60;
 		int height = 65;

@@ -20,23 +20,24 @@ public abstract class Sprite implements Renderable {
 
 	@Override
 	public void render(GraphicsContext gc) {
+		if (currentImage != null) {
+			if (this instanceof GameFigure) {
+				GameFigure g = (GameFigure) this;
+				if ((g.getSpeed() > 0 || velocityX > 0) || this instanceof Castle) {
+					gc.drawImage(currentImage, posX, posY, currentImage.getWidth(), currentImage.getHeight());
+				} else {
+					gc.drawImage(currentImage, posX, posY, -currentImage.getWidth(), currentImage.getHeight());
+				}
 
-		if (this instanceof GameFigure) {
-			GameFigure g = (GameFigure) this;
-			if ((g.getSpeed() > 0 || velocityX > 0) || this instanceof Castle) {
-				gc.drawImage(currentImage, posX, posY, currentImage.getWidth(),currentImage.getHeight() );
 			} else {
-				gc.drawImage(currentImage, posX, posY, -currentImage.getWidth(),currentImage.getHeight() );
+
+				if (velocityX > 0 || this instanceof Castle) {
+					gc.drawImage(currentImage, posX, posY, currentImage.getWidth(), currentImage.getHeight());
+				} else {
+					gc.drawImage(currentImage, posX, posY, -currentImage.getWidth(), currentImage.getHeight());
+				}
+
 			}
-			
-		} else {
-			
-			if (velocityX > 0 || this instanceof Castle) {
-				gc.drawImage(currentImage, posX, posY, currentImage.getWidth(),currentImage.getHeight() );
-			} else {
-				gc.drawImage(currentImage, posX, posY, -currentImage.getWidth(),currentImage.getHeight());
-			}
-			
 		}
 	}
 
@@ -77,9 +78,9 @@ public abstract class Sprite implements Renderable {
 	public double getX() {
 		return this.posX;
 	}
-	
+
 	public double getY() {
 		return this.posY;
 	}
-	
+
 }

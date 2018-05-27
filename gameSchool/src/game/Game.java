@@ -40,8 +40,11 @@ public class Game {
 	private MediaPlayer backgroundMusic;
 	private Image background;
 	private DBManager dbmanager;
+	private Thread timeMoneyThread;
+	
 	private int difficulty;
-
+	private boolean finished;
+	
 	private double ownMoney;
 	private double enemyMoney;
 
@@ -117,11 +120,8 @@ public class Game {
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
-		GameFigure g = dbmanager.getGameFigureById(1);
-		g.setVelocityX(g.getSpeed());
-		g.setY(419);
-		g.setHealth(200);
-		ownSprites.add(g);
+		finished = false;
+		//test
 		GameFigure g2 = dbmanager.getGameFigureById(1);
 		g2.inverseSpeed();
 		g2.setVelocityX(g2.getSpeed());
@@ -129,7 +129,7 @@ public class Game {
 		g2.setX(900);
 		enemySprites.add(g2);
 
-		ownMoney = 100;
+		ownMoney =200;
 		enemyMoney = 100;
 
 	}
@@ -166,7 +166,9 @@ public class Game {
 			}
 
 		};
+		timeMoneyThread = new Thread(new MoneyRunnable(this));
 		at.start();
+		timeMoneyThread.start();
 	}
 
 	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
@@ -286,7 +288,7 @@ public class Game {
 		return this.pane;
 	}
 
-	public void spawn(Team team, shopItem item) {
+	public synchronized void spawn(Team team, shopItem item) {
 		GameFigure clone = item.getFigure().clone();
 		if (team == PLAYER) {
 			if (ownMoney >= item.getPrice()) {
@@ -304,6 +306,22 @@ public class Game {
 			}
 		}
 		System.out.println(ownMoney);
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void addMoney(Team player, double moneyFromDifficulty) {
+		if(player == PLAYER) {
+			ownMoney += moneyFromDifficulty;
+		} else if(player == ENEMY) {
+			enemyMoney += moneyFromDifficulty;
+		}
+	}
+
+	public double getDifficulty() {
+		return difficulty;
 	}
 
 }

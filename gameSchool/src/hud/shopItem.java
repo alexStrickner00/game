@@ -109,7 +109,7 @@ public class shopItem implements Renderable {
 		gc.setFont(new Font("Arial",14));
 		gc.setFill(Paint.valueOf("yellow"));
 		gc.fillText(" $" + price+ " Level "+this.getLevel(), xi + 5, yi + figure.getMainImage().getHeight()+20);
-		gc.fillText("Upgrade", xu + 5, yu+25 );
+		gc.fillText("Upgrade", xu + 5, yu+15 );
 		//gc.fillText(itemName, x + 5, y + height - 5);
 		gc.drawImage(figure.getMainImage(), xi + (widthi - figure.getMainImage().getWidth()) / 2, yi + 5);
 	}

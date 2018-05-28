@@ -42,8 +42,8 @@ public class Shop implements Renderable {
 		}
 		int recx = 100;
 		for (GameFigure figure : figures) {
-			Rectangle2D rec = new Rectangle2D(recx, 100, 100, 100);
-			Rectangle2D rec2 = new Rectangle2D(recx, 200, 100, 40);
+			Rectangle2D rec = new Rectangle2D(recx, pane.getHeight()-120, 100, 100);
+			Rectangle2D rec2 = new Rectangle2D(recx,  pane.getHeight()-25, 100, 20);
 			recx += rec.getWidth() + 10;
 			shopitems.add(new shopItem(figure, figure.getEntity_name(),
 					(int) ((double) figure.getCosts() * COST_INCREASE_MULTIPLIER),

@@ -17,7 +17,7 @@ import javafx.scene.paint.Paint;
 import sprites.GameFigure;
 
 public class Shop implements Renderable {
-	private ArrayList<shopItem> shopitems;
+	private static ArrayList<shopItem> shopitems;
 	private static final double UPGRADE_COST_MULTIPLIER = 0.2;
 	private static final double COST_INCREASE_MULTIPLIER = 0.15;
 	private static final double DAMAGE_INCREASE_MULTIPLIER = 0.15;
@@ -43,26 +43,26 @@ public class Shop implements Renderable {
 		int recx = 100;
 		for (GameFigure figure : figures) {
 			Rectangle2D rec = new Rectangle2D(recx, 100, 100, 100);
-			Rectangle2D rec2= new Rectangle2D(recx, 200, 100, 40);
+			Rectangle2D rec2 = new Rectangle2D(recx, 200, 100, 40);
 			recx += rec.getWidth() + 10;
 			shopitems.add(new shopItem(figure, figure.getEntity_name(),
 					(int) ((double) figure.getCosts() * COST_INCREASE_MULTIPLIER),
 					(int) ((double) figure.getCosts() * UPGRADE_COST_MULTIPLIER),
-					(int) ((double) figure.getDamage() * DAMAGE_INCREASE_MULTIPLIER), 1, figure.getCosts(), rec ,rec2, p));
+					(int) ((double) figure.getDamage() * DAMAGE_INCREASE_MULTIPLIER), 1, figure.getCosts(), rec, rec2,
+					p));
 		}
 
 		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
-				for (int i = 0; i < shopitems.size(); i++) {
-					Rectangle2D itemspace = shopitems.get(i).getItemspace();
-					Rectangle2D upgradespace = shopitems.get(i).getUpgradespace();
-					if(itemspace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
-						System.out.println("clicked:" + shopitems.get(i).getFigure().getTitle());
-						game.spawn(Team.PLAYER , shopitems.get(i));
+				for (shopItem s : shopitems) {
+					Rectangle2D itemspace = s.getItemspace();
+					Rectangle2D upgradespace = s.getUpgradespace();
+					if (itemspace.contains(new Point2D(event.getSceneX(), event.getSceneY()))) {
+						game.spawn(Team.PLAYER, s);
 					}
-					if(upgradespace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
-						System.out.println("upgraded:" + shopitems.get(i).getLevel());
-						shopitems.get(i).upgrade();
+					if (upgradespace.contains(new Point2D(event.getSceneX(), event.getSceneY()))) {
+						s.upgrade();
+						System.out.println("upgraded:" + s.getLevel());
 					}
 				}
 			}
@@ -71,10 +71,9 @@ public class Shop implements Renderable {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		for (int i = 0; i < shopitems.size(); i++) {
-			shopitems.get(i).render(gc);
+		for (shopItem s : shopitems) {
+			s.render(gc);
 		}
-
 	}
 
 	@Override
@@ -82,8 +81,8 @@ public class Shop implements Renderable {
 
 	}
 
-	public ArrayList<shopItem> getShopItems(){
+	public ArrayList<shopItem> getShopItems() {
 		return shopitems;
 	}
-	
+
 }

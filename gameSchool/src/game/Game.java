@@ -4,10 +4,8 @@ import static enums.Team.ENEMY;
 import static enums.Team.PLAYER;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import database.DBManager;
 import enums.Team;
 import hud.Shop;
 import hud.shopItem;
@@ -19,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
@@ -300,7 +297,6 @@ public class Game {
 				enemyMoney -= item.getPrice();
 			}
 		}
-		System.out.println(ownMoney);
 	}
 
 	public boolean isFinished() {

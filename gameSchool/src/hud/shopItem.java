@@ -18,7 +18,7 @@ public class shopItem implements Renderable {
 	protected int upgradeCostIncrease;
 	protected int upgradeCost;
 	protected int damageIncrease;
-	protected int level;
+	private int level;
 	protected int price;
 	Rectangle2D itemspace;
 	Rectangle2D upgradespace;
@@ -55,7 +55,7 @@ public class shopItem implements Renderable {
 	}
 
 	public void upgrade() {
-		level++;
+		this.level += 1;
 		this.calcItemData();
 	}
 

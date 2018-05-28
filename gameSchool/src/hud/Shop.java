@@ -42,24 +42,28 @@ public class Shop implements Renderable {
 		}
 		int recx = 100;
 		for (GameFigure figure : figures) {
-			Rectangle2D rec = new Rectangle2D(recx, 100, 80, 100);
+			Rectangle2D rec = new Rectangle2D(recx, 100, 100, 100);
+			Rectangle2D rec2= new Rectangle2D(recx, 200, 100, 40);
 			recx += rec.getWidth() + 10;
 			shopitems.add(new shopItem(figure, figure.getEntity_name(),
 					(int) ((double) figure.getCosts() * COST_INCREASE_MULTIPLIER),
 					(int) ((double) figure.getCosts() * UPGRADE_COST_MULTIPLIER),
-					(int) ((double) figure.getDamage() * DAMAGE_INCREASE_MULTIPLIER), 1, figure.getCosts(), rec, p));
+					(int) ((double) figure.getDamage() * DAMAGE_INCREASE_MULTIPLIER), 1, figure.getCosts(), rec ,rec2, p));
 		}
 
 		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				for (int i = 0; i < shopitems.size(); i++) {
 					Rectangle2D itemspace = shopitems.get(i).getItemspace();
-					
+					Rectangle2D upgradespace = shopitems.get(i).getUpgradespace();
 					if(itemspace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
 						System.out.println("clicked:" + shopitems.get(i).getFigure().getTitle());
 						game.spawn(Team.PLAYER , shopitems.get(i));
 					}
-					
+					if(upgradespace.contains(new Point2D(event.getSceneX() , event.getSceneY()))) {
+						System.out.println("upgraded:" + shopitems.get(i).getLevel());
+						shopitems.get(i).upgrade();
+					}
 				}
 			}
 		});

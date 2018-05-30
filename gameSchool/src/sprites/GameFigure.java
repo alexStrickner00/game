@@ -176,11 +176,11 @@ public class GameFigure extends Sprite {
 
 	public void attack(GameFigure figure) {
 		if (this.canAttack(figure) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
-			figure.addHealth(this.damage);
+			figure.decHealth(this.damage);
 			
 			//Wahrscheinlichkeit von 10%, dass es ein kritischer Hit ist
 			if(Math.random() > 0.9) {
-				figure.addHealth((int)(this.damage * 0.1));
+				figure.decHealth((int)(this.damage * 0.1));
 			}
 			
 			this.lastAttack = System.nanoTime();
@@ -189,19 +189,19 @@ public class GameFigure extends Sprite {
 	
 	public void attack(Castle castle) {
 		if (this.canAttack(castle) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
-			castle.addHealth(this.damage);
+			castle.decHealth(this.damage);
 			
 			//Wahrscheinlichkeit von 10%, dass es ein kritischer Hit ist
 			if(Math.random() > 0.9) {
-				castle.addHealth((int)(this.damage * 0.1));
+				castle.decHealth((int)(this.damage * 0.5));
 			}
 			
 			this.lastAttack = System.nanoTime();
 		}
 	}
 
-	private void addHealth(int healthToAdd) {
-		this.health += healthToAdd;
+	private void decHealth(int healthToDec) {
+		this.health -= healthToDec;
 	}
 	
 	public boolean isDead() {
@@ -257,7 +257,7 @@ public class GameFigure extends Sprite {
 	}
 
 	public void addDamage(int damageIncrease) {
-
+		this.damage += damageIncrease;
 	}
 
 	public double getSpeed() {

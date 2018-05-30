@@ -20,7 +20,7 @@ public class Shop implements Renderable {
 	private static ArrayList<shopItem> shopitems;
 	private static final double UPGRADE_COST_MULTIPLIER = 0.2;
 	private static final double COST_INCREASE_MULTIPLIER = 0.15;
-	private static final double DAMAGE_INCREASE_MULTIPLIER = 0.15;
+	private static final double DAMAGE_INCREASE_MULTIPLIER = 0.5;
 	private Pane pane;
 	private Game game;
 
@@ -42,8 +42,8 @@ public class Shop implements Renderable {
 		}
 		int recx = 100;
 		for (GameFigure figure : figures) {
-			Rectangle2D rec = new Rectangle2D(recx, pane.getHeight()-120, 100, 100);
-			Rectangle2D rec2 = new Rectangle2D(recx,  pane.getHeight()-25, 100, 20);
+			Rectangle2D rec = new Rectangle2D(recx, pane.getHeight() - 120, 100, 100);
+			Rectangle2D rec2 = new Rectangle2D(recx, pane.getHeight() - 20, 100, 20);
 			recx += rec.getWidth() + 10;
 			shopitems.add(new shopItem(figure, figure.getEntity_name(),
 					(int) ((double) figure.getCosts() * COST_INCREASE_MULTIPLIER),
@@ -61,8 +61,9 @@ public class Shop implements Renderable {
 						game.spawn(Team.PLAYER, s);
 					}
 					if (upgradespace.contains(new Point2D(event.getSceneX(), event.getSceneY()))) {
-						s.upgrade();
-						System.out.println("upgraded:" + s.getLevel());
+						if (game.upgradeItem(Team.PLAYER, s))
+							s.upgrade();
+						//System.out.println("upgraded:" + s.getLevel());
 					}
 				}
 			}

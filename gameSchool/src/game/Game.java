@@ -99,7 +99,7 @@ public class Game {
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
 
-		ownMoney = 100;
+		ownMoney = 100; 
 		enemyMoney = 100;
 
 	}
@@ -313,6 +313,16 @@ public class Game {
 
 	public double getDifficulty() {
 		return difficulty;
+	}
+
+	public boolean upgradeItem(Team team , shopItem item) {
+		if(team == PLAYER) {
+			if(ownMoney >=item.getUpgradeCost() ) {
+				ownMoney -= item.getUpgradeCost();
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

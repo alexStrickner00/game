@@ -1,7 +1,5 @@
 package hud;
 
-
-
 import java.io.File;
 
 import interfaces.Renderable;
@@ -31,6 +29,7 @@ public class shopItem implements Renderable {
 	double yu;
 	double widthu;
 	double heightu;
+
 	public shopItem(GameFigure figure, String itemName, int uci, int uc, int di, int level, int price,
 			Rectangle2D itemspace, Rectangle2D upgradespace, Paint paint) {
 		this.figure = figure;
@@ -46,12 +45,12 @@ public class shopItem implements Renderable {
 		this.yi = itemspace.getMinY();
 		this.widthi = itemspace.getWidth();
 		this.heighti = itemspace.getHeight();
-		this.upgradespace=upgradespace;
+		this.upgradespace = upgradespace;
 		this.xu = upgradespace.getMinX();
-		this.yu= upgradespace.getMinY();
+		this.yu = upgradespace.getMinY();
 		this.widthu = upgradespace.getWidth();
 		this.heightu = upgradespace.getHeight();
-		
+
 	}
 
 	public void upgrade() {
@@ -60,21 +59,10 @@ public class shopItem implements Renderable {
 	}
 
 	private void calcItemData() {
+		this.price += upgradeCost;
 		this.upgradeCost += this.upgradeCostIncrease;
 		figure.addDamage(damageIncrease);
-		damageIncrease -= 10;
-	}
-
-	public int getUpgradeCostIncrease() {
-		return upgradeCostIncrease;
-	}
-
-	public int getUpgradeCost() {
-		return upgradeCost;
-	}
-
-	public int getDamageIncrease() {
-		return damageIncrease;
+		damageIncrease += 10;
 	}
 
 	public int getLevel() {
@@ -93,28 +81,40 @@ public class shopItem implements Renderable {
 		return itemspace;
 	}
 
-	public void setItemspace(Rectangle2D itemspace) {
-		this.itemspace = itemspace;
-	}
 	public Rectangle2D getUpgradespace() {
 		return upgradespace;
 	}
+
 	@Override
 	public void render(GraphicsContext gc) {
-		Image i= new Image(new File("res/button_template.png").toURI().toString());
-		gc.setFill(paint);
-		gc.drawImage(i ,xi, yi);
-		gc.setFill(paint);
-		gc.fillRect(xu, yu, widthu, heightu);
-		gc.setFont(new Font("Arial",14));
+		Image imageButton = new Image(new File("res/button_template.png").toURI().toString());
+		Image imageUpgrade = new Image(new File("res/button_small.png").toURI().toString());
+
+		// BUTTON BUY
+		gc.drawImage(imageButton, xi, yi);
+		gc.setFont(new Font("Arial", 14));
 		gc.setFill(Paint.valueOf("yellow"));
-		gc.fillText(" $" + price+ " Level "+this.getLevel(), xi + 5, yi + figure.getMainImage().getHeight()+20);
-		gc.fillText("Upgrade", xu + 5, yu+15 );
-		//gc.fillText(itemName, x + 5, y + height - 5);
+		gc.fillText(" $" + this.price + " Level " + this.getLevel(), xi + 5, yi + figure.getMainImage().getHeight() + 20);
+
+		// BUTTON UPGRADE
+		gc.drawImage(imageUpgrade, xu, yu);
+		// gc.setFill(paint);
+		// gc.fillText("Upgrade", xu + 5, yu+15 );
+		// gc.fillRect(xu, yu, widthu, heightu);
+		//TODO: Hier Upgrade-Kosten neben "UPGRADE" Schriftzug einfuegen
+		
+		
+		// gc.fillText(itemName, x + 5, y + height - 5);
+
+		// IMAGE
 		gc.drawImage(figure.getMainImage(), xi + (widthi - figure.getMainImage().getWidth()) / 2, yi + 5);
 	}
 
 	@Override
 	public void update(double elapsedTime) {
+	}
+
+	public double getUpgradeCost() {
+		return this.upgradeCost;
 	}
 }

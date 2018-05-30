@@ -60,8 +60,8 @@ public class Castle extends Sprite {
 		return health;
 	}
 
-	public void addHealth(double damage) {
-		health += damage;
+	public void decHealth(double damage) {
+		health -= damage;
 	}
 
 	@Override

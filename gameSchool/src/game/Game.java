@@ -10,6 +10,7 @@ import enums.Team;
 import hud.Shop;
 import hud.shopItem;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -37,6 +38,8 @@ public class Game {
 	private Image background;
 	private Thread timeMoneyThread;
 	private EnemyController enemyController;
+
+	private SimpleStringProperty moneyProperty;
 
 	private int difficulty;
 	private Team winner;
@@ -99,7 +102,7 @@ public class Game {
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
 
-		ownMoney = 100; 
+		ownMoney = 100;
 		enemyMoney = 100;
 
 	}
@@ -135,6 +138,7 @@ public class Game {
 				checkStateOfCastles();
 
 				handleKeys();
+				refreshProperties();
 
 			}
 
@@ -146,6 +150,10 @@ public class Game {
 		at.start();
 		timeMoneyThread.start();
 		enemyController.start();
+	}
+
+	private void refreshProperties() {
+		moneyProperty.set("$ " + ownMoney);
 	}
 
 	private void checkStateOfCastles() {
@@ -315,9 +323,9 @@ public class Game {
 		return difficulty;
 	}
 
-	public boolean upgradeItem(Team team , shopItem item) {
-		if(team == PLAYER) {
-			if(ownMoney >=item.getUpgradeCost() ) {
+	public boolean upgradeItem(Team team, shopItem item) {
+		if (team == PLAYER) {
+			if (ownMoney >= item.getUpgradeCost()) {
 				ownMoney -= item.getUpgradeCost();
 				return true;
 			}

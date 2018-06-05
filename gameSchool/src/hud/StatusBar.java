@@ -19,6 +19,10 @@ public class StatusBar implements Renderable {
 			// Format: *NAME*: *VALUE* dargestellt werden
 		}
 	}
+	
+	//Geld: ca. (125/20) 
+	//XP: ca. (325/20)
+	//Zeit: ca. (525/20)
 
 	@Override
 	public void update(double elapsedTime) {

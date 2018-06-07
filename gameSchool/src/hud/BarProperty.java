@@ -5,15 +5,29 @@ import javafx.beans.property.SimpleStringProperty;
 public class BarProperty {
 
 	private String propertyName;
-	private SimpleStringProperty value;
+	private int value;
+	private int x;
+	private int y;
 	
-	public BarProperty(String name , SimpleStringProperty prop) {
+	public BarProperty(String name , int i, int x, int y) {
 		this.propertyName = name;
-		this.value = prop;
+		this.value = i;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public String getValue() {
-		return value.getValue();
+		return Integer.toString(value);
 	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+	
+	
 	
 }

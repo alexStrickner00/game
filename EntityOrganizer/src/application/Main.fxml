@@ -104,7 +104,6 @@
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#saveSelectedEntity" text="Save Entities" />
                   <MenuItem mnemonicParsing="false" onAction="#addNewEntityIntoList" text="Add new Entity" />
-              <MenuItem mnemonicParsing="false" onAction="#switchView" text="Show Projectiles" />
                   <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>

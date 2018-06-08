@@ -13,14 +13,11 @@ public class GameFigureTableElement {
 	private final SimpleIntegerProperty delay;
 	private final SimpleIntegerProperty damage;
 	private final SimpleIntegerProperty speed;
-	private final SimpleIntegerProperty shooting;
-	private final SimpleIntegerProperty projId;
 	private final SimpleIntegerProperty costs;
 	private Image image;
 	private int oldId;
 
-	public GameFigureTableElement(int entityId, String name, String title, int health, int delay, int damage, int speed,
-			int shooting, int projId, Image image, int costs) {
+	public GameFigureTableElement(int entityId, String name, String title, int health, int delay, int damage, int speed, Image image, int costs) {
 
 		this.entityId = new SimpleIntegerProperty(entityId);
 		this.name = new SimpleStringProperty(name);
@@ -29,8 +26,6 @@ public class GameFigureTableElement {
 		this.delay = new SimpleIntegerProperty(delay);
 		this.damage = new SimpleIntegerProperty(damage);
 		this.speed = new SimpleIntegerProperty(speed);
-		this.shooting = new SimpleIntegerProperty(shooting);
-		this.projId = new SimpleIntegerProperty(projId);
 		this.image = image;
 		this.costs = new SimpleIntegerProperty(costs);
 	}
@@ -89,22 +84,6 @@ public class GameFigureTableElement {
 
 	public void setSpeed(int speed) {
 		this.speed.set(speed);
-	}
-
-	public int getShooting() {
-		return shooting.get();
-	}
-
-	public void setShooting(int shooting) {
-		this.shooting.set(shooting);
-	}
-
-	public int getProjId() {
-		return projId.get();
-	}
-
-	public void setProjId(int projId) {
-		this.projId.set(projId);
 	}
 
 	public int getCosts() {

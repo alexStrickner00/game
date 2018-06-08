@@ -82,7 +82,18 @@ public class DBManager {
 		return null;
 
 	}
-
+	public void pushStats(int xp, String gameTime) {
+		try {
+		String sql = "INSERT INTO stats (xp,gameTime) VALUES (?,?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, xp);
+		pstmt.setString(2, gameTime);
+		pstmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void closeConnection() throws SQLException {
 		conn.close();
 	}

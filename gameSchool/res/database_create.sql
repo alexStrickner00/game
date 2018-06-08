@@ -24,6 +24,10 @@ CREATE TABLE projectile(
     image MEDIUMBLOB,
     PRIMARY KEY(projectileId)
 );
-
+CREATE TABLE stats(
+	xp INT NOT NULL,
+	gameTime VARCHAR(255) NOT NULL,
+	timestamp TIMESTAMP
+);
 ALTER TABLE spielfigur
 	ADD FOREIGN KEY(projectileId) REFERENCES projectile(projectileId);

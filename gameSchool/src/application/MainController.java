@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import game.Game;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;;
 
 public class MainController {
 
@@ -43,7 +45,8 @@ public class MainController {
 	ToggleButton hardButton;
 
 	private ToggleButton[] diffButtons = new ToggleButton[3];
-
+	private Game game;
+	
 	@FXML
 	public void initialize() {
 
@@ -88,11 +91,19 @@ public class MainController {
 		Node src = ((Node) ae.getSource());
 
 		Stage stage = (Stage) src.getScene().getWindow();
-
+		MainController c = this;
+		stage.setOnHidden(new EventHandler<WindowEvent>() {
+			
+			@Override
+			public void handle(WindowEvent event) {
+				c.onClose();
+			}
+		});
+		
 		Pane gamePane = new Pane();
 		stage.setScene(new Scene(gamePane, width, height));
 
-		Game game = new Game(gamePane, sound, difficulty);
+		game = new Game(gamePane, sound, difficulty);
 		Runnable r = new Runnable() {
 
 			@Override
@@ -146,5 +157,9 @@ public class MainController {
 		} else {
 			difficulty = 0;
 		}
+	}
+
+	public void onClose() {
+	 game.stopGame();
 	}
 }

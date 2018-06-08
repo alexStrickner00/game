@@ -18,9 +18,9 @@ public class Castle extends Sprite {
 
 	public static Castle createCastle(Team player) {
 		if (player == Team.PLAYER) {
-			return new Castle(player, 1, 100, new Image(new File("res/base_player.png").toURI().toString()));
+			return new Castle(player, 1,1000, new Image(new File("res/base_player.png").toURI().toString()));
 		} else {
-			return new Castle(player, 1, 100, new Image(new File("res/base_enemy.png").toURI().toString()));
+			return new Castle(player, 1, 1000, new Image(new File("res/base_enemy.png").toURI().toString()));
 		}
 	}
 

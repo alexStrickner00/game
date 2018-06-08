@@ -72,18 +72,6 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
                            <children>
-                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Shoots:" />
-                              <TextField fx:id="shooting" styleClass="prop-textfield" stylesheets="@application.css" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
-                           <children>
-                              <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Proj. ID:" />
-                              <TextField fx:id="projectileId" styleClass="prop-textfield" stylesheets="@application.css" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" stylesheets="@application.css">
-                           <children>
                               <Label prefHeight="37.0" prefWidth="104.0" styleClass="prop-text" stylesheets="@application.css" text="Costs:" />
                               <TextField fx:id="costs" styleClass="prop-textfield" stylesheets="@application.css" />
                            </children>

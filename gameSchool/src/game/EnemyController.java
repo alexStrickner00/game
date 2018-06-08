@@ -9,7 +9,8 @@ public class EnemyController extends Thread {
 
 	private Game game;
 	private Shop shop;
-
+	private boolean shutdown;
+	
 	public EnemyController(Game game) {
 		this.game = game;
 		shop = new Shop(game, null);
@@ -17,7 +18,7 @@ public class EnemyController extends Thread {
 
 	@Override
 	public void run() {
-		while (!game.isFinished()) {
+		while (!game.isFinished() && !shutdown) {
 
 			if (Math.random() < 0.2) {
 				game.spawn(Team.ENEMY, shop.getShopItems().get((int) ((Math.random() * shop.getShopItems().size()))));
@@ -29,6 +30,10 @@ public class EnemyController extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void stopController() {
+		shutdown = true;
 	}
 
 }

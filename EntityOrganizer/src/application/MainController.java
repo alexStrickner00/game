@@ -67,12 +67,6 @@ public class MainController {
 	TextField speed;
 
 	@FXML
-	TextField shooting;
-
-	@FXML
-	TextField projectileId;
-
-	@FXML
 	TextField costs;
 
 	@FXML

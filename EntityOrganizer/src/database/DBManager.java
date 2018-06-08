@@ -60,7 +60,7 @@ public class DBManager {
 
 	public void addEmptyEntity() throws SQLException {
 
-		String sql = "INSERT INTO spielfigur(entity_name , title, health, delay , damage, speed, shooting, projectileId,costs) values(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO spielfigur(entity_name , title, health, delay , damage, speed,costs) values(?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, "");
 		pstmt.setString(2, "");
@@ -69,8 +69,6 @@ public class DBManager {
 		pstmt.setInt(5, 0);
 		pstmt.setInt(6, 0);
 		pstmt.setInt(7, 0);
-		pstmt.setInt(8, -1);
-		pstmt.setInt(9, 0);
 		
 		pstmt.executeUpdate();
 		pstmt.close();
@@ -115,13 +113,4 @@ public class DBManager {
 		
 	}
 
-	public void addEmptyProjectile() throws SQLException{
-		String sql = "INSERT INTO projectile(projectile_name , flyspeed) values(? , ?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, "");
-		pstmt.setInt(2, 0);
-		
-		pstmt.executeUpdate();
-		pstmt.close();
-	}
 }

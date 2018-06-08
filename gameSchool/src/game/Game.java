@@ -46,6 +46,7 @@ public class Game {
 	private Thread timeMoneyThread;
 	private EnemyController enemyController;
 	private StatusBar statusBar;
+	private MoneyRunnable mRunnable;
 
 	private SimpleStringProperty moneyProperty;
 	private SimpleStringProperty xpProperty;
@@ -126,9 +127,9 @@ public class Game {
 		
 		statusBar = new StatusBar();
 		
-		statusBar.addProperty(new BarProperty("Money", moneyProperty , 675, 35));
-		statusBar.addProperty(new BarProperty("Money",xpProperty, 795, 35));
-		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 35));
+		statusBar.addProperty(new BarProperty("Money", moneyProperty , 675, 65));
+		statusBar.addProperty(new BarProperty("Money",xpProperty, 795, 65));
+		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 65));
 
 		
 		ownMoney = 100;
@@ -185,7 +186,8 @@ public class Game {
 
 		};
 
-		timeMoneyThread = new Thread(new MoneyRunnable(this));
+		mRunnable = new MoneyRunnable(this);
+		timeMoneyThread = new Thread(mRunnable);
 		enemyController = new EnemyController(this);
 
 		at.start();
@@ -194,14 +196,14 @@ public class Game {
 	}
 
 	private void refreshProperties() {
-		moneyProperty.set("$ " + ownMoney);
-		xpProperty.set("XP");
+		moneyProperty.set("" + (int)ownMoney);
+		xpProperty.set("" + (int)xp);
 		timeProperty.set("" + getPlayTime());
 		
 	}
 	
 	private int getPlayTime() {
-		return (int)(System.nanoTime() - time) / 1000000000;
+		return(int) ((double)(System.nanoTime() - time) / 1000000000.0);
 	}
 
 	private void checkStateOfCastles() {
@@ -397,6 +399,11 @@ public class Game {
 			}
 		}
 		return false;
+	}
+
+	public void stopGame() {
+		enemyController.stopController();
+		mRunnable.stopRunnable();
 	}
 
 }

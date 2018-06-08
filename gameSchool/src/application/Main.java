@@ -1,12 +1,13 @@
 package application;
 	
+import java.io.File;
+
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 //Klasse
 public class Main extends Application {
@@ -20,6 +21,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Bloodtime");
+			primaryStage.getIcons().add(new Image(new File("res/icon_wo_bg.png").toURI().toString()));
 			
 			primaryStage.show();
 		} catch(Exception e) {

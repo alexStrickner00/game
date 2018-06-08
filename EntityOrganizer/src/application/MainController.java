@@ -170,8 +170,6 @@ public class MainController {
 		delay.setText(aktElement.getDelay() + "");
 		damage.setText(aktElement.getDamage() + "");
 		speed.setText(aktElement.getSpeed() + "");
-		shooting.setText(aktElement.getShooting() + "");
-		projectileId.setText(aktElement.getProjId() + "");
 		costs.setText(aktElement.getCosts() + "");
 
 		if (aktElement.getImage() != null) {
@@ -202,8 +200,6 @@ public class MainController {
 		aktElement.setDelay(Integer.parseInt(delay.getText()));
 		aktElement.setDamage(Integer.parseInt(damage.getText()));
 		aktElement.setSpeed(Integer.parseInt(speed.getText()));
-		aktElement.setShooting(Integer.parseInt(shooting.getText()));
-		aktElement.setProjId(Integer.parseInt(projectileId.getText()));
 		aktElement.setCosts(Integer.parseInt(costs.getText()));
 
 		dbmanager.updateElement(aktElement);
@@ -212,10 +208,5 @@ public class MainController {
 
 	}
 
-	public void switchView() throws IOException {
-		Stage stage = (Stage) menuBar.getScene().getWindow();
-		AnchorPane root = FXMLLoader.load(getClass().getResource("projectileView.fxml"));
-		stage.setScene(new Scene(root));
-	}
 
 }

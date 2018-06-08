@@ -51,8 +51,8 @@ public class DBManager {
 			image = new Image(bim);
 
 			list.add(new GameFigure(rs.getInt("entityId"), rs.getString("entity_name"), rs.getString("title"),
-					rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"), rs.getInt("speed"),
-					rs.getInt("shooting"), rs.getInt("projectileId"), image, rs.getInt("costs")));
+					rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"), rs.getInt("speed"), image,
+					rs.getInt("costs")));
 		}
 		return list;
 	}
@@ -70,8 +70,8 @@ public class DBManager {
 				BufferedInputStream bim = new BufferedInputStream(rs.getBinaryStream("image"));
 				image = new Image(bim);
 				return new GameFigure(rs.getInt("entityId"), rs.getString("entity_name"), rs.getString("title"),
-						rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"), rs.getInt("speed"),
-						rs.getInt("shooting"), rs.getInt("projectileId"), image, rs.getInt("costs"));
+						rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"), rs.getInt("speed"), image,
+						rs.getInt("costs"));
 			} else {
 				System.err.println("Keine Spielfigur mit dieser ID gefunden!");
 			}
@@ -82,18 +82,19 @@ public class DBManager {
 		return null;
 
 	}
+
 	public void pushStats(int xp, String gameTime) {
 		try {
-		String sql = "INSERT INTO stats (xp,gameTime) VALUES (?,?)";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, xp);
-		pstmt.setString(2, gameTime);
-		pstmt.executeUpdate();
-		}
-		catch(Exception e) {
+			String sql = "INSERT INTO stats (xp,gameTime) VALUES (?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, xp);
+			pstmt.setString(2, gameTime);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void closeConnection() throws SQLException {
 		conn.close();
 	}

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import configuration.ConfigReader;
 import javafx.scene.image.Image;
 import sprite.GameFigureTableElement;
-import sprite.ProjectileTableElement;
 
 public class DBManager {
 
@@ -53,7 +52,7 @@ public class DBManager {
 			image= new Image(new BufferedInputStream(rs.getBinaryStream("image")));
 			list.add(new GameFigureTableElement(rs.getInt("entityId"), rs.getString("entity_name"),
 					rs.getString("title"), rs.getInt("health"), rs.getInt("delay"), rs.getInt("damage"),
-					rs.getInt("speed"), rs.getInt("shooting"), rs.getInt("projectileId"), image, rs.getInt("costs")));
+					rs.getInt("speed"),  image, rs.getInt("costs")));
 		}
 		return list;
 	}
@@ -78,7 +77,7 @@ public class DBManager {
 	}
 
 	public void updateElement(GameFigureTableElement element) throws SQLException{
-		String sql = "UPDATE spielfigur SET entity_name = ? , title = ? , health = ? , delay = ? , damage = ? , speed = ? , shooting = ? , projectileId = ? , costs = ? , entityId = ? WHERE entityId = ?";
+		String sql = "UPDATE spielfigur SET entity_name = ? , title = ? , health = ? , delay = ? , damage = ? , speed = ?  , costs = ? , entityId = ? WHERE entityId = ?";
 		PreparedStatement stmt =  conn.prepareStatement(sql);
 		stmt.setString(1, element.getName());
 		stmt.setString(2, element.getTitle());
@@ -86,11 +85,9 @@ public class DBManager {
 		stmt.setInt(4, element.getDelay());
 		stmt.setInt(5, element.getDamage());
 		stmt.setInt(6, element.getSpeed());
-		stmt.setShort(7 , (short)element.getShooting());
-		stmt.setInt(8, element.getProjId());
-		stmt.setInt(9, element.getCosts());
-		stmt.setInt(10, element.getEntityId());
-		stmt.setInt(11, element.getOldId());
+		stmt.setInt(7, element.getCosts());
+		stmt.setInt(8, element.getEntityId());
+		stmt.setInt(9, element.getOldId());
 		System.out.println(stmt);
 		
 		stmt.executeUpdate();
@@ -118,27 +115,6 @@ public class DBManager {
 		
 	}
 
-	public ArrayList<ProjectileTableElement> getAllProjectiles() throws SQLException{
-		ArrayList<ProjectileTableElement> list = new ArrayList<>();
-		
-		String sql = "SELECT * FROM projectile";
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		
-		while(rs.next()) {
-			
-			Image image;
-			
-			BufferedInputStream bis = new BufferedInputStream(rs.getBinaryStream("image"));
-			image = new Image(bis);
-			
-			list.add(new ProjectileTableElement(rs.getInt("projectileId"), rs.getString("projectile_name"), rs.getInt("flyspeed"), image));
-		}
-		
-		stmt.close();
-		return list;
-	}
-
 	public void addEmptyProjectile() throws SQLException{
 		String sql = "INSERT INTO projectile(projectile_name , flyspeed) values(? , ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -148,43 +124,4 @@ public class DBManager {
 		pstmt.executeUpdate();
 		pstmt.close();
 	}
-
-	public void uploadProjectileSprite(ProjectileTableElement element ,File file) throws SQLException, FileNotFoundException{
-		String sql = "UPDATE projectile SET image = ? WHERE projectileId=?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setInt(2, element.getProjectileId());
-		FileInputStream fis = new FileInputStream(file);
-		BufferedInputStream bis = new BufferedInputStream(fis);
-		
-		pstmt.setBinaryStream(1, bis);
-		
-		pstmt.executeUpdate();
-		pstmt.close();
-		
-	}
-	
-	public void updateProjectile(ProjectileTableElement element) throws SQLException{
-		String sql = "UPDATE projectile SET projectileId = ? , projectile_name = ? , flyspeed = ? WHERE projectileId = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setInt(1, element.getProjectileId());
-		pstmt.setString(2, element.getName());
-		pstmt.setInt(3, element.getFlyspeed());
-		pstmt.setInt(4, element.getOldProjectileId());
-		
-		pstmt.executeUpdate();
-		pstmt.close();
-		
-	}
-
-	public void deleteProjectile(ProjectileTableElement aktElement) throws SQLException{
-		String sql = "DELETE FROM projectile WHERE projectileId = ?";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, aktElement.getProjectileId());
-		
-		stmt.executeUpdate();
-		stmt.close();
-	}
-	
 }

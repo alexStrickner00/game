@@ -7,7 +7,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import enums.Team;
+import hud.BarProperty;
 import hud.Shop;
+import hud.StatusBar;
 import hud.shopItem;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,8 +40,14 @@ public class Game {
 	private Image background;
 	private Thread timeMoneyThread;
 	private EnemyController enemyController;
+	private StatusBar statusBar;
 
 	private SimpleStringProperty moneyProperty;
+	private SimpleStringProperty xpProperty;
+	private SimpleStringProperty timeProperty;
+	
+	private double xp;
+	private long time;
 
 	private int difficulty;
 	private Team winner;
@@ -101,7 +109,21 @@ public class Game {
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
+		
+		time = System.nanoTime();
+		
+		moneyProperty = new SimpleStringProperty();
+		xpProperty = new SimpleStringProperty();
+		timeProperty = new SimpleStringProperty();
+		
+		
+		statusBar = new StatusBar();
+		
+		statusBar.addProperty(new BarProperty("Money", moneyProperty , 675, 35));
+		statusBar.addProperty(new BarProperty("Money",xpProperty, 795, 35));
+		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 35));
 
+		
 		ownMoney = 100;
 		enemyMoney = 100;
 
@@ -134,7 +156,7 @@ public class Game {
 				renderFigures(ownSprites, gc);
 				renderFigures(enemySprites, gc);
 				shop.render(gc);
-
+                statusBar.render(gc);
 				checkStateOfCastles();
 
 				handleKeys();
@@ -154,6 +176,9 @@ public class Game {
 
 	private void refreshProperties() {
 		moneyProperty.set("$ " + ownMoney);
+		xpProperty.set("XP");
+		timeProperty.set("" + time/1000000000);
+		
 	}
 
 	private void checkStateOfCastles() {

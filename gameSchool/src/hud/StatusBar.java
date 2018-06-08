@@ -11,17 +11,17 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class StatusBar implements Renderable {
 
-	ArrayList<BarProperty> props = new ArrayList<>();
+	private ArrayList<BarProperty> props;
 	
-	BarProperty money = new BarProperty("Money", 10, 675, 35);
-	
-	BarProperty xp = new BarProperty("Money",10, 795, 35);
-	
-	BarProperty time = new BarProperty("Money",10, 915, 35);
+	public StatusBar() {
+	props = new ArrayList<>();
+	}
 	
 	//Geld: ca. (75/15) 
 	//XP: ca. (195/15)
 	//Zeit: ca. (315/15)
+	
+	
 	
 	@Override
 	public void render(GraphicsContext gc) {
@@ -30,9 +30,7 @@ public class StatusBar implements Renderable {
 		Image bar = new Image("res/statusbar_small.png");
 	    gc.drawImage( bar, 600, 25);
 	    
-	    addProperty(money);
-	    addProperty(xp);
-	    addProperty(time);
+
 		
 		
 		for (BarProperty b : props) {

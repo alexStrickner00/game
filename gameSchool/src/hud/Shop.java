@@ -38,7 +38,7 @@ public class Shop implements Renderable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		int recx = 100;
 		for (GameFigure figure : figures) {

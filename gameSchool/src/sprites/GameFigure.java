@@ -25,8 +25,6 @@ public class GameFigure extends Sprite {
 	protected String title;
 	protected int health;
 	protected int speed;
-	protected int shooting;
-	protected int projectileId;
 	protected int costs;
 	protected int attackDelay;
 	protected int damage;
@@ -40,11 +38,11 @@ public class GameFigure extends Sprite {
 
 	public GameFigure clone() {
 		return new GameFigure(this.entityId, this.entity_name, this.title, this.health, this.attackDelay, this.damage,
-				this.speed, this.shooting, this.projectileId, this.spritesheet, this.costs);
+				this.speed , this.spritesheet, this.costs);
 	}
 
 	public  GameFigure(int entityId, String entity_name, String title, int health, int attackDelay, int damage,
-			int speed, int shooting, int projectileId, Image image, int costs) {
+			int speed, Image image, int costs) {
 		this.spritesheet = image;
 		this.entityId = entityId;
 		this.entity_name = entity_name;
@@ -53,8 +51,6 @@ public class GameFigure extends Sprite {
 		this.attackDelay = (int)(attackDelay * (0.8 + Math.random() * 0.4));
 		this.damage = damage;
 		this.speed = speed;
-		this.shooting = shooting;
-		this.projectileId = projectileId;
 		this.costs = costs;
 		initFigureData();
 	}
@@ -109,14 +105,6 @@ public class GameFigure extends Sprite {
 
 	public String getTitle() {
 		return title;
-	}
-
-	public int getShooting() {
-		return shooting;
-	}
-
-	public int getProjectileId() {
-		return projectileId;
 	}
 
 	public int getCosts() {
@@ -174,7 +162,7 @@ public class GameFigure extends Sprite {
 		}
 	}
 
-	public void attack(GameFigure figure) {
+	public boolean attack(GameFigure figure) {
 		if (this.canAttack(figure) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
 			figure.decHealth(this.damage);
 			
@@ -184,10 +172,12 @@ public class GameFigure extends Sprite {
 			}
 			
 			this.lastAttack = System.nanoTime();
+			return true;
 		}
+		return false;
 	}
 	
-	public void attack(Castle castle) {
+	public boolean attack(Castle castle) {
 		if (this.canAttack(castle) && (System.nanoTime() - lastAttack)/1000000 > this.attackDelay) {
 			castle.decHealth(this.damage);
 			
@@ -197,7 +187,9 @@ public class GameFigure extends Sprite {
 			}
 			
 			this.lastAttack = System.nanoTime();
+			return true;
 		}
+		return false;
 	}
 
 	protected void decHealth(int healthToDec) {

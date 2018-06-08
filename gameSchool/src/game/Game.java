@@ -23,6 +23,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
@@ -63,6 +65,7 @@ public class Game {
 	private static final int ENEMY_SPAWN_X = 855;
 	private static final int ENEMY_SPAWN_Y = 419;
 
+	private MediaPlayer mp;
 	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
 		this.sound = sound;
@@ -75,6 +78,7 @@ public class Game {
 		keysPressed = new ArrayList<>();
 		addKeyListener();
 		initGame();
+		
 	}
 
 	private void addKeyListener() {
@@ -239,19 +243,34 @@ public class Game {
 					}
 				}
 				if (!deadSprites.contains(so) && !deadSprites.contains(se)) {
-					so.attack(se);
-					se.attack(so);
+					if(so.attack(se) || se.attack(so)) {
+						if(sound) {
+							mp=new MediaPlayer(new Media(new File("res/sword_hit.wav").toURI().toString()));
+							mp.setCycleCount(1);
+							mp.play();
+						}
+					}
 				}
 
 				if (so.isDead()) {
 					if (!deadSprites.contains(so)) {
 						deadSprites.add(so);
+						if(sound) {
+							mp=new MediaPlayer(new Media(new File("res/death_shot.wav").toURI().toString()));
+							mp.setCycleCount(1);
+							mp.play();
+						}
 						enemyMoney += so.getEarnedMoney();
 					}
 				}
 				if (se.isDead()) {
 					if (!deadSprites.contains(se)) {
 						deadSprites.add(se);
+						if(sound) {
+							mp=new MediaPlayer(new Media(new File("res/death_shot.wav").toURI().toString()));
+							mp.setCycleCount(1);
+							mp.play();
+						}
 						ownMoney += se.getEarnedMoney();
 						xp+=se.getEarnedMoney()*0.1;
 					}
@@ -263,8 +282,10 @@ public class Game {
 				so.setVelocityX(0);
 				vornFrei = false;
 			}
-
-			so.attack(enemyCastle);
+			
+			if(so.attack(enemyCastle)) {
+				
+			}
 
 			if (vornFrei) {
 				so.setVelocityX(so.getSpeed());

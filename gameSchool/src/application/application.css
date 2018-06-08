@@ -48,6 +48,7 @@
 .toggle:selected {
 	
 -fx-background-color: #B0DEEE;	
+-fx-text-fill:#616161;
 	
 	
 }

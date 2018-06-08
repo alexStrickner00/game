@@ -29,6 +29,7 @@ public class MainController {
 	private static boolean sound = true;
 	private static MediaPlayer mp;
 	private static int difficulty = 0;
+	private ToggleButton currentDiffButton;
 
 	@FXML
 	ToggleButton musicButton;
@@ -65,6 +66,7 @@ public class MainController {
 
 		if (easyButton != null) {
 			diffButtons[difficulty].setSelected(true);
+			currentDiffButton = diffButtons[difficulty];
 		}
 		
 		if(soundButton != null) {
@@ -156,7 +158,14 @@ public class MainController {
 		}
 	}
 
-	public void changeDifficulty() {
+	public void changeDifficulty(ActionEvent ae) {
+		
+		if(ae.getSource() == currentDiffButton) {
+			currentDiffButton.setSelected(true);
+		} else {
+			currentDiffButton = (ToggleButton)ae.getSource();
+		}
+		
 		if (hardButton.isSelected()) {
 			difficulty = 2;
 		} else if (mediumButton.isSelected()) {

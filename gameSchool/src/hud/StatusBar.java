@@ -1,13 +1,15 @@
 package hud;
 
 
+import java.io.File;
 import java.util.ArrayList;
-import javafx.scene.image.*;
+
+import interfaces.Renderable;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import interfaces.Renderable;
-import javafx.scene.canvas.GraphicsContext;
 
 public class StatusBar implements Renderable {
 
@@ -27,7 +29,7 @@ public class StatusBar implements Renderable {
 	public void render(GraphicsContext gc) {
 		
 	
-		Image bar = new Image("res/statusbar_small.png");
+		Image bar = new Image(new File("res/statusbar_small.png").toURI().toString());
 	    gc.drawImage( bar, 600, 25);
 	    
 
@@ -36,14 +38,10 @@ public class StatusBar implements Renderable {
 		for (BarProperty b : props) {
 			
 		    gc.setFill( Color.BLACK );
-		    Font theFont = Font.font( "Verdana", FontWeight.BOLD, 48 );
+		    Font theFont = Font.font( "Verdana", FontWeight.BOLD, 18 );
 		    gc.setFont( theFont );
 		    gc.fillText( b.getValue(), b.getX(), b.getY() );
 		    gc.strokeText( b.getValue(), b.getX(), b.getY() );
-			
-			
-			// TODO: Implementierung des Leistenrenderings, hier sollen alle Properties im
-			// Format: *NAME*: *VALUE* dargestellt werden
 		}
 	}
 	
@@ -51,7 +49,6 @@ public class StatusBar implements Renderable {
 
 	@Override
 	public void update(double elapsedTime) {
-		//TODO: wahrscheinlich leer
 	}
 
 	public void addProperty(BarProperty b) {

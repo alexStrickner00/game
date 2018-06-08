@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
+import sprites.ShootingFigure;
 
 public class Game {
 
@@ -214,7 +215,7 @@ public class Game {
 
 				if (so != se) {
 
-					if (so.intersects(se)) {
+					if (so.intersects(se) ) {
 						so.setVelocityX(0);
 						vornFrei = false;
 					}

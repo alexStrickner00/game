@@ -200,7 +200,7 @@ public class GameFigure extends Sprite {
 		}
 	}
 
-	private void decHealth(int healthToDec) {
+	protected void decHealth(int healthToDec) {
 		this.health -= healthToDec;
 	}
 	

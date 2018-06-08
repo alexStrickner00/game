@@ -68,7 +68,7 @@ public class MainController {
 		}
 
 		// waehrend Entwicklung
-		mp.setVolume(0.01);
+		mp.setVolume(1);
 		music();
 	}
 

@@ -66,7 +66,7 @@ public class Game {
 	private static final int ENEMY_SPAWN_X = 855;
 	private static final int ENEMY_SPAWN_Y = 419;
 
-	private MediaPlayer mp;
+	
 	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
 		this.sound = sound;
@@ -170,6 +170,13 @@ public class Game {
 				handleKeys();
 				refreshProperties();
 				if(isFinished()) {
+				
+					if(sound) {
+						MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/castle_explode.wav").toURI().toString()));
+						mp.setCycleCount(1);
+						mp.play();
+					}
+					
 					try {
 						DBManager db=new DBManager("res/databaseConnection.conf");
 						db.pushStats((int)xp, ""+getPlayTime());
@@ -247,7 +254,7 @@ public class Game {
 				if (!deadSprites.contains(so) && !deadSprites.contains(se)) {
 					if(so.attack(se) || se.attack(so)) {
 						if(sound) {
-							mp=new MediaPlayer(new Media(new File("res/sword_hit.wav").toURI().toString()));
+							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/sword_hit.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
@@ -258,7 +265,7 @@ public class Game {
 					if (!deadSprites.contains(so)) {
 						deadSprites.add(so);
 						if(sound) {
-							mp=new MediaPlayer(new Media(new File("res/death_shot.wav").toURI().toString()));
+							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_shot.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
@@ -269,7 +276,7 @@ public class Game {
 					if (!deadSprites.contains(se)) {
 						deadSprites.add(se);
 						if(sound) {
-							mp=new MediaPlayer(new Media(new File("res/death_shot.wav").toURI().toString()));
+							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_shot.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}

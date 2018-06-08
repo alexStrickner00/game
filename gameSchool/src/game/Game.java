@@ -187,6 +187,13 @@ public class Game {
 						
 						e.printStackTrace();
 					}
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					this.stop();
 				}
 			}
@@ -265,7 +272,7 @@ public class Game {
 					if (!deadSprites.contains(so)) {
 						deadSprites.add(so);
 						if(sound) {
-							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_shot.wav").toURI().toString()));
+							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_sound.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
@@ -276,7 +283,7 @@ public class Game {
 					if (!deadSprites.contains(se)) {
 						deadSprites.add(se);
 						if(sound) {
-							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_shot.wav").toURI().toString()));
+							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_sound.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}

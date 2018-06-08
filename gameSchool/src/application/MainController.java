@@ -26,7 +26,7 @@ public class MainController {
 	private final static int width = 1000;
 	private final static int height = 600;
 	private static boolean music = true;
-	private static boolean sound;
+	private static boolean sound = true;
 	private static MediaPlayer mp;
 	private static int difficulty = 0;
 
@@ -66,6 +66,10 @@ public class MainController {
 		if (easyButton != null) {
 			diffButtons[difficulty].setSelected(true);
 		}
+		
+		if(soundButton != null) {
+			soundButton.setSelected(sound);
+		}
 
 		// waehrend Entwicklung
 		mp.setVolume(1);
@@ -84,7 +88,9 @@ public class MainController {
 	}
 
 	public void sound() {
-		sound = soundButton.isSelected();
+		if(soundButton != null) {
+			sound =soundButton.isSelected();
+		}
 	}
 
 	public void startGame(ActionEvent ae) {
@@ -109,6 +115,7 @@ public class MainController {
 			@Override
 			public void run() {
 				game.run();
+				
 			}
 		};
 		gameThread = new Thread(r);

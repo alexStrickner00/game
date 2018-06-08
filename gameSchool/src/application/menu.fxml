@@ -9,10 +9,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <center>
       <Pane prefHeight="600.0" prefWidth="1000.0" styleClass="background" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
+            <Label layoutX="12.0" layoutY="565.0" prefHeight="31.0" prefWidth="981.0" text="ALPHA 1.0                                                                                                                                                                                                                           © Strickner, Widerin, Zanon">
+               <font>
+                  <Font name="Silom" size="13.0" />
+               </font>
+            </Label>
             <VBox alignment="CENTER" layoutX="55.0" layoutY="8.0" spacing="80.0">
                <children>
                   <ImageView fitHeight="297.0" fitWidth="890.0" pickOnBounds="true" preserveRatio="true">
@@ -41,11 +46,6 @@
                   </VBox>
                </children>
             </VBox>
-            <Label layoutX="12.0" layoutY="565.0" prefHeight="31.0" prefWidth="981.0" text="ALPHA 1.0                                                                                                                                                                                                                           © Strickner, Widerin, Zanon">
-               <font>
-                  <Font name="Silom" size="13.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </center>

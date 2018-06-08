@@ -167,6 +167,7 @@ public class Game {
 				if(isFinished()) {
 					try {
 						DBManager db=new DBManager("res/databaseConnection.conf");
+						db.pushStats((int)xp, ""+getPlayTime());
 					} catch (ClassNotFoundException e) {
 						
 						e.printStackTrace();
@@ -191,8 +192,12 @@ public class Game {
 	private void refreshProperties() {
 		moneyProperty.set("$ " + ownMoney);
 		xpProperty.set("XP");
-		timeProperty.set("" + time/1000000000);
+		timeProperty.set("" + getPlayTime());
 		
+	}
+	
+	private int getPlayTime() {
+		return (int)(System.nanoTime() - time) / 1000000000;
 	}
 
 	private void checkStateOfCastles() {

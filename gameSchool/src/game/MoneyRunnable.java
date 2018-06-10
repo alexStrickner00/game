@@ -4,7 +4,7 @@ import enums.Team;
 
 public class MoneyRunnable implements Runnable {
 
-	private static final double MONEY_PER_SECOND = 3;
+	private static final double MONEY_PER_SECOND = 5;
 	private static final double DIFF_MULTYPLIER = 0.2;
 	private boolean shutdown;
 	

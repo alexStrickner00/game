@@ -28,6 +28,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
+import sprites.Sprite;
 
 public class Game {
 
@@ -168,7 +169,15 @@ public class Game {
 				handleKeys();
 				refreshProperties();
 				if (isFinished()) {
-
+					Sprite sp=new Sprite();
+					if(winner== Team.PLAYER) {
+						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 800, 500);
+						sp.render(gc);
+					}
+					else {
+						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 110, 380);
+						sp.render(gc);
+					}
 					if (sound) {
 						MediaPlayer mp = new MediaPlayer(
 								new Media(new File("res/sound/castle_explode.wav").toURI().toString()));

@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
  * @author Widerin Alexander, Strickner Alexander
  * @version 1.0
  */
-public abstract class Sprite implements Renderable {
+public class Sprite implements Renderable {
 
 	protected Rectangle2D boundaries;
 

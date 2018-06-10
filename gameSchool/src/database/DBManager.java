@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import configuration.ConfigReader;
 import javafx.scene.image.Image;
 import sprites.GameFigure;
-
+/**
+ * In dieser Klasse befinden sich die ausprogrammierten Methoden, die dazu benoetigt werden, Daten aus der Datenbank zu holen und zu speichern 
+ * @author Widerin Alexander
+ * @version 1.0
+ */
 public class DBManager {
 	private String uname;
 	private String pw;
@@ -21,7 +25,12 @@ public class DBManager {
 	private Connection conn;
 
 	// TODO: alle throws entfernen und innerhalb diese Klasse behandeln
-
+	/**
+	 * Im Konstruktur wird eine Verbindung zur Datenbank hergestellt
+	 * @param filePath Pfad zur Config-Datei
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public DBManager(String filePath) throws ClassNotFoundException, SQLException {
 
 		ConfigReader cr = new ConfigReader(filePath);
@@ -36,7 +45,11 @@ public class DBManager {
 		conn = DriverManager.getConnection(address, uname, pw);
 
 	}
-
+	/**
+	 * Diese Methode gibt alle GameFigure-Objekte aus der Datenbank in einer ArrayList zurück 
+	 * @return ArrayList with type GameFigure
+	 * @throws SQLException
+	 */
 	public ArrayList<GameFigure> getAllEntities() throws SQLException {
 		String sql = "SELECT * from spielfigur";
 		Statement stmt = conn.createStatement();
@@ -56,7 +69,11 @@ public class DBManager {
 		}
 		return list;
 	}
-
+	/**
+	 * Diese Methode gibt die GameFigure aus der Datenbank zurueck, deren Id mit dem Methodenparameter uebereinstimmt.
+	 * @param entityId Id of inquired GameFigure
+	 * @return
+	 */
 	public GameFigure getGameFigureById(int entityId) {
 
 		try {
@@ -82,7 +99,11 @@ public class DBManager {
 		return null;
 
 	}
-
+	/**
+	 * Diese Methode pusht die aktuellen Spieldaten(Fortschritt, Laufzeit) in die Datenbank
+	 * @param xp Fortschrittswert des Spielers im aktuellen Spiel
+	 * @param gameTime Aktuelle Laufzeit des Spiels
+	 */
 	public void pushStats(int xp, String gameTime) {
 		try {
 			String sql = "INSERT INTO stats (xp,gameTime) VALUES (?,?)";
@@ -94,7 +115,10 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Verbindung zur Datenbank wird beendet
+	 * @throws SQLException
+	 */
 	public void closeConnection() throws SQLException {
 		conn.close();
 	}

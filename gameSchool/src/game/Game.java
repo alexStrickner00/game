@@ -28,6 +28,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
 import sprites.Castle;
 import sprites.GameFigure;
+import sprites.Sprite;
 
 public class Game {
 
@@ -79,7 +80,7 @@ public class Game {
 		keysPressed = new ArrayList<>();
 		addKeyListener();
 		initGame();
-		
+
 	}
 
 	private void addKeyListener() {
@@ -117,21 +118,19 @@ public class Game {
 		enemySprites = new ArrayList<>();
 		background = new Image(new File("res/playground_clear.png").toURI().toString());
 		shop = new Shop(this, Paint.valueOf("BLUE"));
-		
+
 		time = System.nanoTime();
-		
+
 		moneyProperty = new SimpleStringProperty();
 		xpProperty = new SimpleStringProperty();
 		timeProperty = new SimpleStringProperty();
-		
-		
+
 		statusBar = new StatusBar();
-		
-		statusBar.addProperty(new BarProperty("Money", moneyProperty , 675, 65));
-		statusBar.addProperty(new BarProperty("Money",xpProperty, 795, 65));
+
+		statusBar.addProperty(new BarProperty("Money", moneyProperty, 675, 65));
+		statusBar.addProperty(new BarProperty("Money", xpProperty, 795, 65));
 		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 65));
 
-		
 		ownMoney = 100;
 		enemyMoney = 100;
 
@@ -164,15 +163,24 @@ public class Game {
 				renderFigures(ownSprites, gc);
 				renderFigures(enemySprites, gc);
 				shop.render(gc);
-                statusBar.render(gc);
+				statusBar.render(gc);
 				checkStateOfCastles();
 
 				handleKeys();
 				refreshProperties();
-				if(isFinished()) {
-				
-					if(sound) {
-						MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/castle_explode.wav").toURI().toString()));
+				if (isFinished()) {
+					Sprite sp=new Sprite();
+					if(winner== Team.PLAYER) {
+						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 800, 500);
+						sp.render(gc);
+					}
+					else {
+						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 110, 380);
+						sp.render(gc);
+					}
+					if (sound) {
+						MediaPlayer mp = new MediaPlayer(
+								new Media(new File("res/sound/castle_explode.wav").toURI().toString()));
 						mp.setCycleCount(1);
 						mp.play();
 					}

@@ -5,6 +5,14 @@ import sprites.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/**
+ * In dieser Klasse befindet sich die Funktionalitaet fuer die Health-Bars, die
+ * im Spiel zu sehen sind
+ * 
+ * @author Zanon Simon
+ * @version 1.0
+ *
+ */
 public class Healthbar implements Renderable {
 
 	private GameFigure parent;
@@ -20,6 +28,11 @@ public class Healthbar implements Renderable {
 	private double whiteLength;
 	private double redLength;
 
+	/**
+	 * Konstruktor fuer die Truppen-Healthbar
+	 * 
+	 * @param parent
+	 */
 	public Healthbar(GameFigure parent) {
 
 		this.parent = parent;
@@ -27,17 +40,27 @@ public class Healthbar implements Renderable {
 
 	}
 
+	/**
+	 * Konstruktor fuer die Schloss-Healthbar
+	 * 
+	 * @param parent
+	 */
 	public Healthbar(Castle castleParent) {
 		this.castleParent = castleParent;
 		this.maxHealth = castleParent.getHealth();
 	}
 
 	@Override
+	/**
+	 * Zeichnet die Health-Bar nach jedem Frame and die richtige Stelle ueber dem
+	 * Sprite der Truppe oder des Schlosses mit der richtigen Laenge, die Abhaengig
+	 * von der Health des Objekts ist
+	 */
 	public void render(GraphicsContext gc) {
 
 		double x = 0;
 		double y = 0;
-		
+
 		if (castleParent != null) {
 			health = castleParent.getHealth() / maxHealth;
 			x = castleParent.getX();
@@ -48,7 +71,7 @@ public class Healthbar implements Renderable {
 
 		if (parent != null) {
 			health = parent.getHealth() / maxHealth;
-			
+
 			x = parent.getX();
 			y = parent.getY();
 			// Um das Spiegeln der Sprites zu beruecksichtigen

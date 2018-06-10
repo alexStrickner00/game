@@ -16,6 +16,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import sprites.GameFigure;
 
+/**
+ * In dieser Klasse befindet sich die notwendige Funktionalitaet um den Shop im
+ * Spiel anzuzeigen und um Figuren zu kaufen und upzugraden
+ * 
+ * @author Widerin Alexander
+ * @version 1.0
+ */
 public class Shop implements Renderable {
 	private static ArrayList<shopItem> shopitems;
 	private static final double UPGRADE_COST_MULTIPLIER = 0.2;
@@ -24,6 +31,17 @@ public class Shop implements Renderable {
 	private Pane pane;
 	private Game game;
 
+	/**
+	 * Im Konstruktor werden die Figuren aus der Datenbank geholt, deren Position im
+	 * Shop festgelegt. Außerdem befindet sich darin die Handle Methode, für die
+	 * Benutzereingabe(Truppe kaufen und upgraden)
+	 * 
+	 * @param game
+	 *            Wird benötigt um das Spielfeld zu erhalten, in dem der Shop
+	 *            gezeichnet wird
+	 * @param p
+	 *            Shopfarbe
+	 */
 	public Shop(Game game, Paint p) {
 
 		shopitems = new ArrayList<>();
@@ -38,7 +56,7 @@ public class Shop implements Renderable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			
+
 		}
 		int recx = 100;
 		for (GameFigure figure : figures) {
@@ -53,6 +71,9 @@ public class Shop implements Renderable {
 		}
 
 		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			/**
+			 * Wird ausgefuehrt, wenn Benutzer auf das Shopitem klickt
+			 */
 			public void handle(MouseEvent event) {
 				for (shopItem s : shopitems) {
 					Rectangle2D itemspace = s.getItemspace();
@@ -63,7 +84,7 @@ public class Shop implements Renderable {
 					if (upgradespace.contains(new Point2D(event.getSceneX(), event.getSceneY()))) {
 						if (game.upgradeItem(Team.PLAYER, s))
 							s.upgrade();
-						//System.out.println("upgraded:" + s.getLevel());
+						// System.out.println("upgraded:" + s.getLevel());
 					}
 				}
 			}
@@ -71,6 +92,9 @@ public class Shop implements Renderable {
 	}
 
 	@Override
+	/**
+	 * Zeichnet den Shop(die einzelnen Shopitems) auf das Spielfeld
+	 */
 	public void render(GraphicsContext gc) {
 		for (shopItem s : shopitems) {
 			s.render(gc);

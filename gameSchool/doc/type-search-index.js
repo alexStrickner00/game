@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"sprites","l":"Castle"},{"p":"database","l":"DBManager"},{"p":"game","l":"EnemyController"},{"p":"game","l":"Game"},{"p":"sprites","l":"GameFigure"},{"p":"application","l":"Main"},{"p":"application","l":"MainController"},{"p":"game","l":"MoneyRunnable"},{"p":"sprites","l":"Sprite"}]

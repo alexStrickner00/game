@@ -4,17 +4,61 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
+/**
+ * Diese Klasse dient zum Beschreiben eines Elementes in der Tabelle.
+ * @author alex
+ *
+ */
 public class GameFigureTableElement {
 
+	/**
+	 * ID des Entities
+	 */
 	private final SimpleIntegerProperty entityId;
+	
+	/**
+	 * Name des Entities
+	 */
 	private final SimpleStringProperty name;
+	
+	/**
+	 * Titel des Entities
+	 */
 	private final SimpleStringProperty title;
+	
+	/**
+	 * Health des Entities
+	 */
 	private final SimpleIntegerProperty health;
+	
+	/**
+	 * Attacken-Delay des Entities
+	 */
 	private final SimpleIntegerProperty delay;
+	
+	/**
+	 * Schaden des Entities
+	 */
 	private final SimpleIntegerProperty damage;
+	
+	/**
+	 * Geschwindigkeit des Entities
+	 */
 	private final SimpleIntegerProperty speed;
+	
+	/**
+	 * Kosten des Entities
+	 */
 	private final SimpleIntegerProperty costs;
+	
+	/**
+	 * Spritesheet des Entities
+	 */
 	private Image image;
+	
+	/**
+	 * Zwischenspeicher der alten ID, falls diese im Organizer geaendert wird
+	 */
 	private int oldId;
 
 	public GameFigureTableElement(int entityId, String name, String title, int health, int delay, int damage, int speed, Image image, int costs) {

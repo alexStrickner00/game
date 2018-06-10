@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"configuration","l":"ConfigReader"},{"p":"database","l":"DBManager"},{"p":"sprite","l":"GameFigureTableElement"},{"p":"application","l":"Main"},{"p":"application","l":"MainController"}]

@@ -9,9 +9,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-//Klasse
+/**
+ * Die Main-Klasse erbt von Application und ist damit die Startklasse unseres Programms
+ * @author Strickner Alexander
+ * @version 1.0
+ */
 public class Main extends Application {
 	@Override
+	/**
+	 * Erstellt bei Programmstart das Anwednugsfenster mit dem Menue und ladet alle notwendigen Elemente hinein(Buttons,Labels,...). 
+	 */
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));

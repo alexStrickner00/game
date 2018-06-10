@@ -13,11 +13,12 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public class Main extends Application {
-	@Override
+	
 	/**
 	 * Diese Methode wird beim Start der JavaFX-Anwendung aufgerufen und erstellt
 	 * das Fester, teilt diesem Elemente zu und legt ein Design darueber.
 	 */
+	@Override
 	public void start(Stage primaryStage) {
 		try {
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Main.fxml"));

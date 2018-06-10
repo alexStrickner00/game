@@ -55,82 +55,82 @@ public class MainController {
 	 */
 	private static final int SPRITE_COUNT = 5;
 
-	@FXML
 	/**
 	 * Referenz auf die Tabelle in der Anwendung
 	 */
+	@FXML
 	TableView<GameFigureTableElement> table;
 
-	@FXML
 	/**
 	 * Referenz auf die ID-Spalte in der Anwendung
 	 */
+	@FXML
 	TableColumn<GameFigureTableElement, String> id_col;
 
-	@FXML
 	/**
 	 * Referenz auf die NAME-Spalte in der Anwendung
 	 */
+	@FXML
 	TableColumn<GameFigureTableElement, String> name_col;
 
-	@FXML
 	/**
 	 * Referenz auf das ID-Textfeld
 	 */
+	@FXML
 	TextField entityId;
 
-	@FXML
 	/**
 	 * Referenz auf das Name-Textfeld
 	 */
+	@FXML
 	TextField name;
 
-	@FXML
 	/**
 	 * Referenz auf das Titel-Textfeld
 	 */
+	@FXML
 	TextField title;
 
-	@FXML
 	/**
 	 * Referenz auf das Health-Textfeld
 	 */
+	@FXML
 	TextField health;
 
-	@FXML
 	/**
 	 * Referenz auf das Delay-Textfeld
 	 */
+	@FXML
 	TextField delay;
 
-	@FXML
 	/**
 	 * Referenz auf das Damage-Textfeld
 	 */
+	@FXML
 	TextField damage;
 
-	@FXML
 	/**
 	 * Referenz auf das Speed-Textfeld
 	 */
+	@FXML
 	TextField speed;
 
-	@FXML
 	/**
 	 * Referenz auf das Costs-Textfeld
 	 */
+	@FXML
 	TextField costs;
 
-	@FXML
 	/**
 	 * Referenz auf das ImageView fuer die Spritevorschau
 	 */
+	@FXML
 	ImageView image;
 
-	@FXML
 	/**
 	 * Referenz auf die Menueleiste
 	 */
+	@FXML
 	MenuBar menuBar;
 
 	/**
@@ -153,12 +153,12 @@ public class MainController {
 	 */
 	private Image[] sprites = new Image[SPRITE_COUNT];
 
-	@FXML
 	/**
 	 * Wird beim Aufruf der Seite ausgefuehrt, hier wird die Tabelle mit den Werten
 	 * verknuepft, der Datenbank-Manager instanziiert und die Werte aus der
 	 * Datenbank geholt.
 	 */
+	@FXML
 	public void initialize() {
 
 		// nid_column.setCellValueFactory(new PropertyValueFactory<Note,

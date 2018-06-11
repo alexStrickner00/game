@@ -184,7 +184,6 @@ public class Game {
 						mp.setCycleCount(1);
 						mp.play();
 					}
-					
 					try {
 						DBManager db=new DBManager("res/databaseConnection.conf");
 						db.pushStats((int)xp, ""+getPlayTime());
@@ -195,13 +194,17 @@ public class Game {
 						
 						e.printStackTrace();
 					}
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					try{
+					    Thread.sleep(2000);
+					}catch(InterruptedException e){
+					    e.printStackTrace();
 					}
-					
+					if(winner==Team.PLAYER) {
+						gc.drawImage(new Image(new File("res/finish_victory.png").toURI().toString()), 0, 0);
+					}
+					else {
+						gc.drawImage(new Image(new File("res/finish_loss.png").toURI().toString()), 0, 0);
+					}
 					this.stop();
 				}
 			}
@@ -426,17 +429,7 @@ public class Game {
 	public void stopGame() {
 		enemyController.stopController();
 		mRunnable.stopRunnable();
-		try{
-		    Thread.sleep(2000);
-		}catch(InterruptedException e){
-		    e.printStackTrace();
-		}
-		if(winner==Team.PLAYER) {
-			gc.drawImage(new Image(new File("res/finish_victory.png").toURI().toString()), 0, 0);
-		}
-		else {
-			gc.drawImage(new Image(new File("res/finish_loss.png").toURI().toString()), 0, 0);
-		}
+		
 	}
 
 }

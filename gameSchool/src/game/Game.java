@@ -200,17 +200,9 @@ public class Game {
 					    e.printStackTrace();
 					}
 					this.stop();
-					try{
-					    Thread.sleep(1000);
-					}catch(InterruptedException e){
-					    e.printStackTrace();
-					}
-					if(winner==Team.PLAYER) {
-						gc.drawImage(new Image(new File("res/finish_victory.png").toURI().toString()), 0, 0);
-					}
-					else {
-						gc.drawImage(new Image(new File("res/finish_loss.png").toURI().toString()), 0, 0);
-					}
+					EndRunnable ed= new EndRunnable(gc,winner);
+					Thread edt= new Thread(ed);
+					edt.start();
 					
 				}
 			}

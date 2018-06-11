@@ -5,7 +5,7 @@ import enums.Team;
 public class MoneyRunnable implements Runnable {
 
 	private static final double MONEY_PER_SECOND = 5;
-	private static final double DIFF_MULTYPLIER = 0.2;
+	private static final double DIFF_MULTYPLIER = 0.05;
 	private boolean shutdown;
 	
 	private Game game;
@@ -30,9 +30,9 @@ public class MoneyRunnable implements Runnable {
 	private double getMoneyFromDifficulty(Team player) {
 
 		if (player == Team.PLAYER) {
-			return MONEY_PER_SECOND * Math.pow((1.0 - DIFF_MULTYPLIER), game.getDifficulty());
+			return MONEY_PER_SECOND;
 		}
-		return MONEY_PER_SECOND;
+		return MONEY_PER_SECOND * Math.pow((1.0 - DIFF_MULTYPLIER), game.getDifficulty());
 	}
 
 	public void stopRunnable() {

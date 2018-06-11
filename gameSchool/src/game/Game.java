@@ -132,7 +132,7 @@ public class Game {
 		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 65));
 
 		ownMoney = 100;
-		enemyMoney = 100;
+		enemyMoney = 50+this.getDifficulty()*20;
 
 	}
 
@@ -171,7 +171,7 @@ public class Game {
 				if (isFinished()) {
 					Sprite sp=new Sprite();
 					if(winner== Team.PLAYER) {
-						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 800, 500);
+						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 1000, 380);
 						sp.render(gc);
 					}
 					else {
@@ -426,6 +426,17 @@ public class Game {
 	public void stopGame() {
 		enemyController.stopController();
 		mRunnable.stopRunnable();
+		try{
+		    Thread.sleep(2000);
+		}catch(InterruptedException e){
+		    e.printStackTrace();
+		}
+		if(winner==Team.PLAYER) {
+			gc.drawImage(new Image(new File("res/finish_victory.png").toURI().toString()), 0, 0);
+		}
+		else {
+			gc.drawImage(new Image(new File("res/finish_loss.png").toURI().toString()), 0, 0);
+		}
 	}
 
 }

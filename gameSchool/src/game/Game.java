@@ -214,8 +214,8 @@ public class Game {
 
 	/**
 	 * Konstruktor fuer das Game-Objekt
-	 * @param gamePane 
-	 * @param sound Sound-Variable
+	 * @param gamePane Spielpane
+	 * @param sound Sound-Variable 
 	 * @param difficulty Schwierigkeitsgrad
 	 */
 	
@@ -417,8 +417,8 @@ public class Game {
 	
 	/**
 	 * Methode um die Sprites/Truppen zu updaten
-	 * @param sprites
-	 * @param et
+	 * @param sprites Sprites
+	 * @param et ET
 	 */
 
 	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
@@ -546,8 +546,8 @@ public class Game {
 
 	/**
 	 * Methode zum Rendern der Figuren
-	 * @param sprites
-	 * @param gc
+	 * @param sprites Sprite
+	 * @param gc Grafikkontext
 	 */
 	
 	private void renderFigures(ArrayList<GameFigure> sprites, GraphicsContext gc) {
@@ -575,7 +575,7 @@ public class Game {
 	
 	/**
 	 * Gibt das Pane zurueck
-	 * @return
+	 * @return Pane
 	 */
 
 	public Pane getPane() {
@@ -584,8 +584,8 @@ public class Game {
 	
 	/**
 	 * Methode um Truppen zu spawnen
-	 * @param team
-	 * @param item
+	 * @param team Team
+	 * @param item Item
 	 */
 
 	public synchronized void spawn(Team team, shopItem item) {
@@ -610,7 +610,7 @@ public class Game {
 	
 	/**
 	 * Methode um zu ueberpruefen ob das Spiel zu Ende ist
-	 * @return
+	 * @return Victory
 	 */
 
 	public boolean isFinished() {
@@ -642,9 +642,9 @@ public class Game {
 	
 	/**
 	 * Methode um das Geld nach Einkauf im Shop upzudaten
-	 * @param team
-	 * @param item
-	 * @return
+	 * @param team Team
+	 * @param item Item
+	 * @return Upgrade
 	 */
 
 	public boolean upgradeItem(Team team, shopItem item) {

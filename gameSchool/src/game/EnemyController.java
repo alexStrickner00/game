@@ -33,7 +33,7 @@ public class EnemyController extends Thread {
 	
 	/**
 	 * Konstruktor fuer den Controller
-	 * @param game
+	 * @param game Spiel
 	 */
 	
 	public EnemyController(Game game) {

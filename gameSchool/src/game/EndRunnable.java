@@ -13,18 +13,34 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
+/**
+ * Klasse fuer den Endscreen
+ * @author SimonZanon
+ *
+ */
 
 public class EndRunnable implements Runnable {
 	private GraphicsContext gc;
+	
+	/**
+	 * Variable zur Auswahl des Endscreens
+	 */
+	
 	private Team winner;
-	private final static int width = 1000;
-	private final static int height = 600;
 
+
+	/*
+	 * Konstruktor fuer die Endscreens
+	 */
+	
 	public EndRunnable(GraphicsContext gc, Team winner) {
 		this.gc = gc;
 		this.winner = winner;
 	}
+	
+	/**
+	 * In dieser Methode wird das eigentliche Bild vom Endscreen aufgerufen
+	 */
 
 	@Override
 	public void run() {

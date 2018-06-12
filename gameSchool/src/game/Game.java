@@ -30,43 +30,194 @@ import sprites.Castle;
 import sprites.GameFigure;
 import sprites.Sprite;
 
+/**
+ * Klasse fuer das eigentliche Hauptspiel
+ * @author SimonZanon
+ *
+ */
+
 public class Game {
 
+	/**
+	 * Arraylist fuer die Animationen der eigenen Truppen
+	 */
+	
 	private ArrayList<GameFigure> ownSprites;
+	
+	/**
+	 * Arraylist fuer die Animation der feindlichen Truppen
+	 */
+	
 	private ArrayList<GameFigure> enemySprites;
+	
+	/**
+	 * Eigenes Base-Objekt
+	 */
+	
 	private Castle ownCastle;
+	
+	/**
+	 * Feindliches Base-Objekt
+	 */
+	
 	private Castle enemyCastle;
+	
+	/**
+	 * Shop-Objekt zum Upgraden der Truppen
+	 */
+	
 	private Shop shop;
+	
+	/**
+	 * Pane, um das eigentliche Spiel zu zeichnen
+	 */
+	
 	private Pane pane;
+	
+	/**
+	 * Canvas-Objekt auf dem gezeichnet wird und das auf dem Pane sitzt
+	 */
+	
 	private Canvas canvas;
+	
+	/**
+	 * Grafik-Kontext vom Canvas
+	 */
+	
 	private GraphicsContext gc;
+	
+	/**
+	 * Variable zur Bestimmen der Zeit zwischen Frames
+	 */
+	
 	private long lt;
+	
+	/**
+	 * ArrayList fuer aktuell gedrueckte Taste - eventuell fuer Tastenkuerzel
+	 */
+	
 	private ArrayList<KeyCode> keysPressed;
+	
+	/**
+	 * Variable zum Ein- und Ausschalten vom Sound
+	 */
+	
 	private boolean sound;
+	
+	/**
+	 * Das Spielfeld selbst auf dem Basen und Truppen plaziert werden
+	 */
+	
 	private Image background;
+	
+	/**
+	 * Thread welcher zeitlich das Geld an beide Bases verteilt
+	 */
+	
 	private Thread timeMoneyThread;
+	
+	/**
+	 * Controller zur Steuerung des Feindes
+	 */
+	
 	private EnemyController enemyController;
+	
+	/**
+	 * Statusbar zum Anzeigen des Geldes, der Zeit und den XP
+	 */
+	
 	private StatusBar statusBar;
+	
+	/**
+	 * Runnable, welches timeMoneyThread uebergeben wird zur Verteilung des Geldes
+	 */
+	
 	private MoneyRunnable mRunnable;
+	
+	/**
+	 * moneyProperty fuer die Statusbar
+	 */
 
 	private SimpleStringProperty moneyProperty;
+	
+	/**
+	 * xpProperty fuer die Statusbar
+	 */
+	
 	private SimpleStringProperty xpProperty;
+	
+	/**
+	 * timeProperty fuer die Statusbar
+	 */
+	
 	private SimpleStringProperty timeProperty;
 	
+	/**
+	 * Variable fuer die XP, die in der Statusbar angezeigt werden
+	 */
+	
 	private double xp;
+	
+	/**
+	 * Variable, die die Zeit seit Spielbeginn speichert
+	 */
+	
 	private long time;
 
+	/**
+	 * Variable zur Speicherung des Schwierigkeitsgrades
+	 */
+	
 	private int difficulty;
+	
+	/**
+	 * Enum zur Speicherung, welches Team gewonnen hat
+	 */
+	
 	private Team winner;
 
+	/**
+	 * Variable vom eigenen Geld-Stand
+	 */
+	
 	private double ownMoney;
+	
+	/**
+	 * Variable vom gegnerischen Geld-Stand
+	 */
+	
 	private double enemyMoney;
+	
+	/**
+	 * Spawn-Punkt fuer eigene Truppen
+	 */
 
 	private static final int PLAYER_SPAWN_X = 67;
+	
+	/**
+	 * Spawn-Punkt fuer eigene Truppen
+	 */
+	
 	private static final int PLAYER_SPAWN_Y = 419;
+	
+	/**
+	 * Spawn-Punkt fuer feindliche Truppen
+	 */
+	
 	private static final int ENEMY_SPAWN_X = 855;
+	
+	/**
+	 * Spawn-Punkt fuer feindliche Truppen
+	 */
+	
 	private static final int ENEMY_SPAWN_Y = 419;
 
+	/**
+	 * Konstruktor fuer das Game-Objekt
+	 * @param gamePane 
+	 * @param sound Sound-Variable
+	 * @param difficulty Schwierigkeitsgrad
+	 */
 	
 	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
@@ -82,6 +233,10 @@ public class Game {
 		initGame();
 
 	}
+	
+	/**
+	 * Key-Listener zur Aufnahme von gedrueckten Tasten
+	 */
 
 	private void addKeyListener() {
 

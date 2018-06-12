@@ -5,17 +5,46 @@ import java.awt.Paint;
 import enums.Team;
 import hud.Shop;
 
+/**
+ * Klasse zur Einstellung des Feindes
+ * @author SimonZanon
+ *
+ */
+
 public class EnemyController extends Thread {
 
+	
+	/**
+	 * Das Spiel selbst
+	 */
 	private Game game;
+	
+	/**
+	 * Shop fuer Truppen
+	 */
+	
 	private Shop shop;
+	
+	/**
+	 * Variable fuer ein unplanmaessiges Schliessen
+	 */
+	
 	private boolean shutdown;
+	
+	/**
+	 * Konstruktor fuer den Controller
+	 * @param game
+	 */
 	
 	public EnemyController(Game game) {
 		this.game = game;
 		shop = new Shop(game, null);
 	}
 
+	/**
+	 * Methode zur Ausfuehrung des eigentlichen 
+	 */
+	
 	@Override
 	public void run() {
 		while (!game.isFinished() && !shutdown) {
@@ -31,6 +60,10 @@ public class EnemyController extends Thread {
 			}
 		}
 	}
+	
+	/**
+	 * Methode zum Stoppen des Feindes
+	 */
 
 	public void stopController() {
 		shutdown = true;

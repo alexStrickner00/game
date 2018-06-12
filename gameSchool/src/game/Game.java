@@ -265,6 +265,10 @@ public class Game {
 		});
 
 	}
+	
+	/**
+	 * Methode, um das Game zu initialisierung (Fuer den Start wichtige und einmalige Methoden aufrufen)
+	 */
 
 	private void initGame() {
 		ownCastle = Castle.createCastle(PLAYER);
@@ -290,6 +294,10 @@ public class Game {
 		enemyMoney = 50+this.getDifficulty()*20;
 
 	}
+	
+	/**
+	 * Methode, um das Spiel zu starte
+	 */
 
 	public void run() {
 
@@ -372,6 +380,10 @@ public class Game {
 		timeMoneyThread.start();
 		enemyController.start();
 	}
+	
+	/**
+	 * Properties fuer die Statusbar aktualisieren
+	 */
 
 	private void refreshProperties() {
 		moneyProperty.set("" + (int)ownMoney);
@@ -380,9 +392,18 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Methode, die die Zeit seit Spielbeginn zurueckgibt
+	 * @return Zeit
+	 */
+	
 	private int getPlayTime() {
 		return(int) ((double)(System.nanoTime() - time) / 1000000000.0);
 	}
+	
+	/**
+	 * Gibt das Leben der Basen zurueck
+	 */
 
 	private void checkStateOfCastles() {
 		if (ownCastle.getHealth() <= 0) {
@@ -393,18 +414,30 @@ public class Game {
 			winner = PLAYER;
 		}
 	}
+	
+	/**
+	 * Methode um die Sprites/Truppen zu updaten
+	 * @param sprites
+	 * @param et
+	 */
 
 	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
 		for (GameFigure s : sprites) {
 			s.update(et);
 		}
 	}
+	
+	/**
+	 * Spielfeld wird gezeichnet
+	 */
 
 	private void drawBackground() {
 		gc.drawImage(background, 0, 0);
 	}
 
-	// TODO: testen
+	/**
+	 * Truppen attakieren die Gegnerischen
+	 */
 	private void doAttacks() {
 
 		ArrayList<GameFigure> deadSprites = new ArrayList<>();
@@ -511,12 +544,23 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Methode zum Rendern der Figuren
+	 * @param sprites
+	 * @param gc
+	 */
+	
 	private void renderFigures(ArrayList<GameFigure> sprites, GraphicsContext gc) {
 		for (GameFigure s : sprites) {
 			s.render(gc);
 		}
 	}
 
+	
+	/**
+	 * Methode, um die gedrueckten Keys einzulesen
+	 */
+	
 	private void handleKeys() {
 
 		for (KeyCode c : keysPressed) {
@@ -528,10 +572,21 @@ public class Game {
 		}
 
 	}
+	
+	/**
+	 * Gibt das Pane zurueck
+	 * @return
+	 */
 
 	public Pane getPane() {
 		return this.pane;
 	}
+	
+	/**
+	 * Methode um Truppen zu spawnen
+	 * @param team
+	 * @param item
+	 */
 
 	public synchronized void spawn(Team team, shopItem item) {
 		GameFigure clone = item.getFigure().clone();
@@ -552,10 +607,21 @@ public class Game {
 			}
 		}
 	}
+	
+	/**
+	 * Methode um zu ueberpruefen ob das Spiel zu Ende ist
+	 * @return
+	 */
 
 	public boolean isFinished() {
 		return winner != null;
 	}
+	
+	/**
+	 * Methode um den Spielerkonten Geld hinzuzufuegen
+	 * @param player Spieler
+	 * @param moneyFromDifficulty Geldmenge
+	 */
 
 	public void addMoney(Team player, double moneyFromDifficulty) {
 		if (player == PLAYER) {
@@ -564,10 +630,22 @@ public class Game {
 			enemyMoney += moneyFromDifficulty;
 		}
 	}
+	
+	/**
+	 * Gibt den Schwierigkeitsgrad zurueck
+	 * @return Schwierigkeit
+	 */
 
 	public double getDifficulty() {
 		return difficulty;
 	}
+	
+	/**
+	 * Methode um das Geld nach Einkauf im Shop upzudaten
+	 * @param team
+	 * @param item
+	 * @return
+	 */
 
 	public boolean upgradeItem(Team team, shopItem item) {
 		if (team == PLAYER) {
@@ -578,6 +656,10 @@ public class Game {
 		}
 		return false;
 	}
+	
+	/**
+	 * Methode um das Spiel zu stoppen
+	 */
 
 	public void stopGame() {
 		enemyController.stopController();

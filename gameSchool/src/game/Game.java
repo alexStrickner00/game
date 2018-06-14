@@ -44,7 +44,7 @@ import sprites.Sprite;
  */
 
 public class Game {
-
+	DBManager db;
 	/**
 	 * Arraylist fuer die Animationen der eigenen Truppen
 	 */
@@ -350,7 +350,16 @@ public class Game {
 				refreshProperties();
 				if (isFinished()) {
 
-					
+					try {
+						DBManager db = new DBManager("res/databaseConnection.conf");
+						db.pushStats((int) xp, "" + getPlayTime());
+					} catch (ClassNotFoundException e) {
+
+						e.printStackTrace();
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
 					if (winTime == -1) {
 						System.out.println("expl");
 						Sprite sp = new Sprite();
@@ -374,10 +383,7 @@ public class Game {
 					if (System.currentTimeMillis() - winTime > 1000) {
 						at.stop();
 						try {
-							DBManager db = new DBManager("res/databaseConnection.conf");
-							if(winner==Team.PLAYER) {
-								xp+=100;
-							}
+							db = new DBManager("res/databaseConnection.conf");
 							db.pushStats((int) xp, "" + getPlayTime());
 						} catch (ClassNotFoundException e) {
 
@@ -386,7 +392,12 @@ public class Game {
 
 							e.printStackTrace();
 						}
-						showEndcard();
+						try {
+							showEndcard();
+						} catch (SQLException e) {
+	
+							e.printStackTrace();
+						}
 					}
 
 				}
@@ -713,8 +724,9 @@ public class Game {
 
 	/**
 	 * Methode, um zur Endcard Ansicht zu gelangen
+	 * @throws SQLException 
 	 */
-	private void showEndcard() {
+	private void showEndcard() throws SQLException {
 
 		Stage stage = (Stage) pane.getScene().getWindow();
 		AnchorPane pane = null;
@@ -738,9 +750,15 @@ public class Game {
 		pane.getChildren().add(canvas);
 		Scene scene = new Scene(pane, 1000, 600);
 		stage.setScene(scene);
+		ArrayList<String> stats=db.getStats(); 
 		
 		GraphicsContext gcc = canvas.getGraphicsContext2D();
-		//TODO: stats mit gcc rendern
+		gcc.fillText("BEST 3 RESULTS", 20, 10);
+		gcc.fillText("1. "+stats.get(0), 30, 50);
+		gcc.fillText("2. "+stats.get(1), 30, 90);
+		gcc.fillText("3. "+stats.get(2), 30, 130);
+		gcc.fillText("CURRENT RESULT:", 20, 180);
+		gcc.fillText("xp: "+" Played Time: "+getPlayTime(), 30, 240);
 		
 	}
 

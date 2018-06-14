@@ -138,12 +138,12 @@ public class DBManager {
 	 * @throws SQLException
 	 */
 	public ArrayList<String> getStats() throws SQLException {
-		String sql = "SELECT * FROM stats ORDER BY timestamp";
+		String sql = "SELECT * FROM stats ORDER BY xp DESC";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		ArrayList<String> stats = new ArrayList<String>();
 		while (rs.next()) {
-			stats.add(rs.getTimestamp("timestamp") + " " + rs.getInt("xp") + " " + rs.getString("gameTime"));
+			stats.add(rs.getTimestamp("timestamp") + "  XP: " + rs.getInt("xp") + "  Time Played: " + rs.getString("gameTime"));
 		}
 		return stats;
 	}

@@ -5,9 +5,11 @@ import static enums.Team.ENEMY;
 import static enums.Team.PLAYER;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import application.Main;
 import database.DBManager;
 import enums.Team;
 import hud.BarProperty;
@@ -17,21 +19,26 @@ import hud.shopItem;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import sprites.Castle;
 import sprites.GameFigure;
 import sprites.Sprite;
 
 /**
  * Klasse fuer das eigentliche Hauptspiel
+ * 
  * @author SimonZanon
  *
  */
@@ -41,178 +48,192 @@ public class Game {
 	/**
 	 * Arraylist fuer die Animationen der eigenen Truppen
 	 */
-	
+
 	private ArrayList<GameFigure> ownSprites;
-	
+
 	/**
 	 * Arraylist fuer die Animation der feindlichen Truppen
 	 */
-	
+
 	private ArrayList<GameFigure> enemySprites;
-	
+
 	/**
 	 * Eigenes Base-Objekt
 	 */
-	
+
 	private Castle ownCastle;
-	
+
 	/**
 	 * Feindliches Base-Objekt
 	 */
-	
+
 	private Castle enemyCastle;
-	
+
 	/**
 	 * Shop-Objekt zum Upgraden der Truppen
 	 */
-	
+
 	private Shop shop;
-	
+
 	/**
 	 * Pane, um das eigentliche Spiel zu zeichnen
 	 */
-	
+
 	private Pane pane;
-	
+
 	/**
 	 * Canvas-Objekt auf dem gezeichnet wird und das auf dem Pane sitzt
 	 */
-	
+
 	private Canvas canvas;
-	
+
 	/**
 	 * Grafik-Kontext vom Canvas
 	 */
-	
+
 	private GraphicsContext gc;
-	
+
 	/**
 	 * Variable zur Bestimmen der Zeit zwischen Frames
 	 */
-	
+
 	private long lt;
-	
+
 	/**
 	 * ArrayList fuer aktuell gedrueckte Taste - eventuell fuer Tastenkuerzel
 	 */
-	
+
 	private ArrayList<KeyCode> keysPressed;
-	
+
 	/**
 	 * Variable zum Ein- und Ausschalten vom Sound
 	 */
-	
+
 	private boolean sound;
-	
+
 	/**
 	 * Das Spielfeld selbst auf dem Basen und Truppen plaziert werden
 	 */
-	
+
 	private Image background;
-	
+
 	/**
 	 * Thread welcher zeitlich das Geld an beide Bases verteilt
 	 */
-	
+
 	private Thread timeMoneyThread;
-	
+
 	/**
 	 * Controller zur Steuerung des Feindes
 	 */
-	
+
 	private EnemyController enemyController;
-	
+
 	/**
 	 * Statusbar zum Anzeigen des Geldes, der Zeit und den XP
 	 */
-	
+
 	private StatusBar statusBar;
-	
+
 	/**
 	 * Runnable, welches timeMoneyThread uebergeben wird zur Verteilung des Geldes
 	 */
-	
+
 	private MoneyRunnable mRunnable;
-	
+
 	/**
 	 * moneyProperty fuer die Statusbar
 	 */
 
 	private SimpleStringProperty moneyProperty;
-	
+
 	/**
 	 * xpProperty fuer die Statusbar
 	 */
-	
+
 	private SimpleStringProperty xpProperty;
-	
+
 	/**
 	 * timeProperty fuer die Statusbar
 	 */
-	
+
 	private SimpleStringProperty timeProperty;
-	
+
 	/**
 	 * Variable fuer die XP, die in der Statusbar angezeigt werden
 	 */
-	
+
 	private double xp;
-	
+
 	/**
 	 * Variable, die die Zeit seit Spielbeginn speichert
 	 */
-	
+
 	private long time;
 
 	/**
 	 * Variable zur Speicherung des Schwierigkeitsgrades
 	 */
-	
+
 	private int difficulty;
-	
+
 	/**
 	 * Enum zur Speicherung, welches Team gewonnen hat
 	 */
-	
+
 	private Team winner;
 
 	/**
 	 * Variable vom eigenen Geld-Stand
 	 */
-	
+
 	private double ownMoney;
-	
+
 	/**
 	 * Variable vom gegnerischen Geld-Stand
 	 */
-	
+
 	private double enemyMoney;
-	
+
 	/**
 	 * Spawn-Punkt fuer eigene Truppen
 	 */
 
-	private static final int PLAYER_SPAWN_X = 67;
-	
+	// private static final int PLAYER_SPAWN_X = 67;
+	private static final int PLAYER_SPAWN_X = 700;
 	/**
 	 * Spawn-Punkt fuer eigene Truppen
 	 */
-	
+
 	private static final int SPAWN_Y = 479;
-	
+
 	/**
 	 * Spawn-Punkt fuer feindliche Truppen
 	 */
-	
+
 	private static final int ENEMY_SPAWN_X = 855;
 
 	/**
 	 * Konstruktor fuer das Game-Objekt
-	 * @param gamePane Spielpane
-	 * @param sound Sound-Variable 
-	 * @param difficulty Schwierigkeitsgrad
+	 * 
+	 * @param gamePane
+	 *            Spielpane
+	 * @param sound
+	 *            Sound-Variable
+	 * @param difficulty
+	 *            Schwierigkeitsgrad
 	 */
-	
+
+	/**
+	 * Animation Timer fuer fixe Wiederholungsrate
+	 */
+	private AnimationTimer at;
+
+	/**
+	 * Speichert, wann das Spiel gewonnen wurde
+	 */
+	private long winTime;
+
 	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
 		this.sound = sound;
@@ -227,7 +248,7 @@ public class Game {
 		initGame();
 
 	}
-	
+
 	/**
 	 * Key-Listener zur Aufnahme von gedrueckten Tasten
 	 */
@@ -259,9 +280,10 @@ public class Game {
 		});
 
 	}
-	
+
 	/**
-	 * Methode, um das Game zu initialisierung (Fuer den Start wichtige und einmalige Methoden aufrufen)
+	 * Methode, um das Game zu initialisierung (Fuer den Start wichtige und
+	 * einmalige Methoden aufrufen)
 	 */
 
 	private void initGame() {
@@ -273,6 +295,7 @@ public class Game {
 		shop = new Shop(this, Paint.valueOf("BLUE"));
 
 		time = System.nanoTime();
+		winTime = -1;
 
 		moneyProperty = new SimpleStringProperty();
 		xpProperty = new SimpleStringProperty();
@@ -285,10 +308,10 @@ public class Game {
 		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 65));
 
 		ownMoney = 300;
-		enemyMoney = 50+this.getDifficulty()*20;
+		enemyMoney = 50 + this.getDifficulty() * 20;
 
 	}
-	
+
 	/**
 	 * Methode, um das Spiel zu starte
 	 */
@@ -296,7 +319,7 @@ public class Game {
 	public void run() {
 
 		lt = System.nanoTime();
-		AnimationTimer at = new AnimationTimer() {
+		at = new AnimationTimer() {
 
 			@Override
 			public void handle(long now) {
@@ -305,62 +328,62 @@ public class Game {
 				lt = now;
 				et /= 1000000000.0;
 
-				drawBackground();
 				if (winner == null) {
+					drawBackground();
 					ownCastle.update(et);
 					enemyCastle.update(et);
 					updateFigures(ownSprites, et);
 					updateFigures(enemySprites, et);
+
+					doAttacks();
+
+					ownCastle.render(gc);
+					enemyCastle.render(gc);
+					renderFigures(ownSprites, gc);
+					renderFigures(enemySprites, gc);
+					shop.render(gc);
+					statusBar.render(gc);
+					checkStateOfCastles();
 				}
-
-				doAttacks();
-
-				ownCastle.render(gc);
-				enemyCastle.render(gc);
-				renderFigures(ownSprites, gc);
-				renderFigures(enemySprites, gc);
-				shop.render(gc);
-				statusBar.render(gc);
-				checkStateOfCastles();
-
 				handleKeys();
 				refreshProperties();
 				if (isFinished()) {
-					Sprite sp=new Sprite();
-					if(winner== Team.PLAYER) {
-						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 1000, 380);
-						sp.render(gc);
-					}
-					else {
-						sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 110, 380);
-						sp.render(gc);
-					}
-					if (sound) {
-						MediaPlayer mp = new MediaPlayer(
-								new Media(new File("res/sound/castle_explode.wav").toURI().toString()));
-						mp.setCycleCount(1);
-						mp.play();
-					}
+
 					try {
-						DBManager db=new DBManager("res/databaseConnection.conf");
-						db.pushStats((int)xp, ""+getPlayTime());
+						DBManager db = new DBManager("res/databaseConnection.conf");
+						db.pushStats((int) xp, "" + getPlayTime());
 					} catch (ClassNotFoundException e) {
-						
+
 						e.printStackTrace();
 					} catch (SQLException e) {
-						
+
 						e.printStackTrace();
 					}
-					try{
-					    Thread.sleep(500);
-					}catch(InterruptedException e){
-					    e.printStackTrace();
+					if (winTime == -1) {
+						System.out.println("expl");
+						Sprite sp = new Sprite();
+						if (winner == Team.PLAYER) {
+							sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 1000, 380);
+							sp.render(gc);
+						} else {
+							sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 110, 380);
+							sp.render(gc);
+						}
+						if (sound) {
+							MediaPlayer mp = new MediaPlayer(
+									new Media(new File("res/sound/castle_explode.wav").toURI().toString()));
+							mp.setCycleCount(1);
+							mp.play();
+						}
+
+						winTime = System.currentTimeMillis();
 					}
-					this.stop();
-					EndRunnable ed= new EndRunnable(gc,winner);
-					Thread edt= new Thread(ed);
-					edt.start();
-					
+
+					if (System.currentTimeMillis() - winTime > 1000) {
+						at.stop();
+						showEndcard();
+					}
+
 				}
 			}
 
@@ -374,27 +397,28 @@ public class Game {
 		timeMoneyThread.start();
 		enemyController.start();
 	}
-	
+
 	/**
 	 * Properties fuer die Statusbar aktualisieren
 	 */
 
 	private void refreshProperties() {
-		moneyProperty.set("" + (int)ownMoney);
-		xpProperty.set("" + (int)xp);
+		moneyProperty.set("" + (int) ownMoney);
+		xpProperty.set("" + (int) xp);
 		timeProperty.set("" + getPlayTime());
-		
+
 	}
-	
+
 	/**
 	 * Methode, die die Zeit seit Spielbeginn zurueckgibt
+	 * 
 	 * @return Zeit
 	 */
-	
+
 	private int getPlayTime() {
-		return(int) ((double)(System.nanoTime() - time) / 1000000000.0);
+		return (int) ((double) (System.nanoTime() - time) / 1000000000.0);
 	}
-	
+
 	/**
 	 * Gibt das Leben der Basen zurueck
 	 */
@@ -408,11 +432,14 @@ public class Game {
 			winner = PLAYER;
 		}
 	}
-	
+
 	/**
 	 * Methode um die Sprites/Truppen zu updaten
-	 * @param sprites Sprites
-	 * @param et ET
+	 * 
+	 * @param sprites
+	 *            Sprites
+	 * @param et
+	 *            ET
 	 */
 
 	private void updateFigures(ArrayList<GameFigure> sprites, double et) {
@@ -420,7 +447,7 @@ public class Game {
 			s.update(et);
 		}
 	}
-	
+
 	/**
 	 * Spielfeld wird gezeichnet
 	 */
@@ -444,15 +471,16 @@ public class Game {
 
 				if (so != se) {
 
-					if (so.intersects(se) ) {
+					if (so.intersects(se)) {
 						so.setVelocityX(0);
 						vornFrei = false;
 					}
 				}
 				if (!deadSprites.contains(so) && !deadSprites.contains(se)) {
-					if(so.attack(se) || se.attack(so)) {
-						if(sound) {
-							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/sword_hit.wav").toURI().toString()));
+					if (so.attack(se) || se.attack(so)) {
+						if (sound) {
+							MediaPlayer mp = new MediaPlayer(
+									new Media(new File("res/sound/sword_hit.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
@@ -462,8 +490,9 @@ public class Game {
 				if (so.isDead()) {
 					if (!deadSprites.contains(so)) {
 						deadSprites.add(so);
-						if(sound) {
-							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_sound.wav").toURI().toString()));
+						if (sound) {
+							MediaPlayer mp = new MediaPlayer(
+									new Media(new File("res/sound/death_sound.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
@@ -473,13 +502,14 @@ public class Game {
 				if (se.isDead()) {
 					if (!deadSprites.contains(se)) {
 						deadSprites.add(se);
-						if(sound) {
-							MediaPlayer mp=new MediaPlayer(new Media(new File("res/sound/death_sound.wav").toURI().toString()));
+						if (sound) {
+							MediaPlayer mp = new MediaPlayer(
+									new Media(new File("res/sound/death_sound.wav").toURI().toString()));
 							mp.setCycleCount(1);
 							mp.play();
 						}
 						ownMoney += se.getEarnedMoney();
-						xp+=se.getEarnedMoney()*0.1;
+						xp += se.getEarnedMoney() * 0.1;
 					}
 				}
 
@@ -489,9 +519,9 @@ public class Game {
 				so.setVelocityX(0);
 				vornFrei = false;
 			}
-			
-			if(so.attack(enemyCastle)) {
-				
+
+			if (so.attack(enemyCastle)) {
+
 			}
 
 			if (vornFrei) {
@@ -540,21 +570,23 @@ public class Game {
 
 	/**
 	 * Methode zum Rendern der Figuren
-	 * @param sprites Sprite
-	 * @param gc Grafikkontext
+	 * 
+	 * @param sprites
+	 *            Sprite
+	 * @param gc
+	 *            Grafikkontext
 	 */
-	
+
 	private void renderFigures(ArrayList<GameFigure> sprites, GraphicsContext gc) {
 		for (GameFigure s : sprites) {
 			s.render(gc);
 		}
 	}
 
-	
 	/**
 	 * Methode, um die gedrueckten Keys einzulesen
 	 */
-	
+
 	private void handleKeys() {
 
 		for (KeyCode c : keysPressed) {
@@ -566,20 +598,24 @@ public class Game {
 		}
 
 	}
-	
+
 	/**
 	 * Gibt das Pane zurueck
+	 * 
 	 * @return Pane
 	 */
 
 	public Pane getPane() {
 		return this.pane;
 	}
-	
+
 	/**
 	 * Methode um Truppen zu spawnen
-	 * @param team Team
-	 * @param item Item
+	 * 
+	 * @param team
+	 *            Team
+	 * @param item
+	 *            Item
 	 */
 
 	public synchronized void spawn(Team team, shopItem item) {
@@ -602,20 +638,24 @@ public class Game {
 			}
 		}
 	}
-	
+
 	/**
 	 * Methode um zu ueberpruefen ob das Spiel zu Ende ist
+	 * 
 	 * @return Victory
 	 */
 
 	public boolean isFinished() {
 		return winner != null;
 	}
-	
+
 	/**
 	 * Methode um den Spielerkonten Geld hinzuzufuegen
-	 * @param player Spieler
-	 * @param moneyFromDifficulty Geldmenge
+	 * 
+	 * @param player
+	 *            Spieler
+	 * @param moneyFromDifficulty
+	 *            Geldmenge
 	 */
 
 	public void addMoney(Team player, double moneyFromDifficulty) {
@@ -625,20 +665,24 @@ public class Game {
 			enemyMoney += moneyFromDifficulty;
 		}
 	}
-	
+
 	/**
 	 * Gibt den Schwierigkeitsgrad zurueck
+	 * 
 	 * @return Schwierigkeit
 	 */
 
 	public double getDifficulty() {
 		return difficulty;
 	}
-	
+
 	/**
 	 * Methode um das Geld nach Einkauf im Shop upzudaten
-	 * @param team Team
-	 * @param item Item
+	 * 
+	 * @param team
+	 *            Team
+	 * @param item
+	 *            Item
 	 * @return Upgrade
 	 */
 
@@ -651,7 +695,7 @@ public class Game {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Methode um das Spiel zu stoppen
 	 */
@@ -659,7 +703,28 @@ public class Game {
 	public void stopGame() {
 		enemyController.stopController();
 		mRunnable.stopRunnable();
-		
+		at.stop();
+	}
+
+	private void showEndcard() {
+
+		Stage stage = (Stage) pane.getScene().getWindow();
+		AnchorPane pane = null;
+		String name = "";
+		if (winner == PLAYER) {
+			name = "endcard_victory.fxml";
+		} else {
+			name = "endcard_game_over.fxml";
+		}
+
+		try {
+			pane = (AnchorPane) FXMLLoader.load(Main.class.getResource(name));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Scene scene = new Scene(pane, 1000, 600);
+		stage.setScene(scene);
 	}
 
 }

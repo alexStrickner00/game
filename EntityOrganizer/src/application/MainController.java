@@ -219,9 +219,10 @@ public class MainController {
 		System.out.println("addNewEN");
 
 	}
-	
+
 	/**
-	 * Wird beim Klick auf ein Tabellenelement aufgerufen. Diese Methode aktualisiert die Daten in den Textfeldern.
+	 * Wird beim Klick auf ein Tabellenelement aufgerufen. Diese Methode
+	 * aktualisiert die Daten in den Textfeldern.
 	 */
 	public void refreshDetails() {
 		aktElement = table.getSelectionModel().getSelectedItems().get(0);
@@ -237,18 +238,22 @@ public class MainController {
 		if (aktElement.getImage() != null) {
 			BufferedImage bi = null;
 			bi = SwingFXUtils.fromFXImage(aktElement.getImage(), null);
+
+			int widthpi = bi.getWidth() / SPRITE_COUNT;
+			int height = bi.getHeight();
+
 			for (int i = 0; i < SPRITE_COUNT; i++) {
-				sprites[i] = SwingFXUtils.toFXImage(bi.getSubimage(i * SPRITE_WIDTH, 0, SPRITE_WIDTH, SPRITE_HEIGHT),
-						null);
+				sprites[i] = SwingFXUtils.toFXImage(bi.getSubimage(i * widthpi, 0, widthpi, height), null);
 			}
 
 		}
 	}
 
 	/**
-	 * Diese Methode oeffnet einen FileChooser-Dialog, und laesst somit den Benutzer ein Spritesheet hochladen.
+	 * Diese Methode oeffnet einen FileChooser-Dialog, und laesst somit den Benutzer
+	 * ein Spritesheet hochladen.
 	 */
-	public void uploadSpritesheet(){
+	public void uploadSpritesheet() {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Spritesheet auswaehlen...");
 		File file = chooser.showOpenDialog(null);

@@ -43,7 +43,7 @@ public class Healthbar implements Renderable {
 	/**
 	 * Konstruktor fuer die Schloss-Healthbar
 	 * 
-	 * @param parent
+	 * @param castleParent Castle, welchem die Healthbar zugeteilt ist
 	 */
 	public Healthbar(Castle castleParent) {
 		this.castleParent = castleParent;

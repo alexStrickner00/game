@@ -50,7 +50,7 @@ public class DBManager {
 
 	/**
 	 * Diese Methode gibt alle GameFigure-Objekte aus der Datenbank in einer
-	 * ArrayList zurück
+	 * ArrayList zurueck
 	 * 
 	 * @return ArrayList with type GameFigure
 	 * @throws SQLException
@@ -131,7 +131,7 @@ public class DBManager {
 	}
 
 	/**
-	 * Diese Methode gibt die gesamten Spieldaten(für alle Spiele, die gespielt
+	 * Diese Methode gibt die gesamten Spieldaten(fuer alle Spiele, die gespielt
 	 * wurden) aus der Datenbank in Form einer String-Array-List zurueck.
 	 * 
 	 * @return String Array

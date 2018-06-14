@@ -1,4 +1,8 @@
 application
+configuration
 database
+enums
+game
 hud
+interfaces
 sprites

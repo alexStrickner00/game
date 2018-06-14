@@ -33,11 +33,11 @@ public class Shop implements Renderable {
 
 	/**
 	 * Im Konstruktor werden die Figuren aus der Datenbank geholt, deren Position im
-	 * Shop festgelegt. Außerdem befindet sich darin die Handle Methode, für die
+	 * Shop festgelegt. Ausserdem befindet sich darin die Handle Methode, fuer die
 	 * Benutzereingabe(Truppe kaufen und upgraden)
 	 * 
 	 * @param game
-	 *            Wird benötigt um das Spielfeld zu erhalten, in dem der Shop
+	 *            Wird benÃ¶tigt um das Spielfeld zu erhalten, in dem der Shop
 	 *            gezeichnet wird
 	 * @param p
 	 *            Shopfarbe

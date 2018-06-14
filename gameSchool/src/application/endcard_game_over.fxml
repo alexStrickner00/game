@@ -5,9 +5,25 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="application.MainController">
-   <children>
-      <Pane prefHeight="600.0" prefWidth="1000.0" />
-      <Button layoutX="249.0" layoutY="353.0" mnemonicParsing="false" onAction="#switchToMenu" stylesheets="@application.css" text="Back to Menu" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+	xmlns="http://javafx.com/javafx/8.0.141"
+	fx:controller="application.MainController">
+	<children>
+		<Pane prefHeight="600.0" prefWidth="1000.0"
+			styleClass="background" stylesheets="@application.css">
+			<children>
+				<Button mnemonicParsing="false" onAction="#switchToMenu"
+					stylesheets="@application.css" text="Back to Menu" />
+				<Text layoutX="378.0" layoutY="246.0" strokeType="OUTSIDE"
+					strokeWidth="0.0" styleClass="endcard_text" text="Victory!" />
+				<ImageView fitHeight="162.0" fitWidth="474.0"
+					layoutX="263.0" layoutY="14.0" pickOnBounds="true"
+					preserveRatio="true">
+					<image>
+						<Image url="@../../res/LOGO.png" />
+					</image>
+				</ImageView>
+			</children>
+		</Pane>
+	</children>
 </AnchorPane>

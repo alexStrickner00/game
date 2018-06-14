@@ -1,0 +1,2 @@
+# entityId, entity_name, title, health, delay, damage, speed, image, costs
+'2', 'tank', 'Tank', '400', '1000', '50', '20', ?, '300'

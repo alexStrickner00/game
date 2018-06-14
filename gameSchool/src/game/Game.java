@@ -427,7 +427,6 @@ public class Game {
 
 	private void drawBackground() {
 		gc.drawImage(background, 0, 0);
-		System.out.println("back");
 	}
 
 	/**

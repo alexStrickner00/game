@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	@Override
 	/**
-	 * Erstellt bei Programmstart das Anwednugsfenster mit dem Menue und ladet alle notwendigen Elemente hinein(Buttons,Labels,...). 
+	 * Erstellt bei Programmstart das Anwendungsfenster mit dem Menue und ladet alle notwendigen Elemente hinein(Buttons,Labels,...). 
 	 */
 	public void start(Stage primaryStage) {
 		try {

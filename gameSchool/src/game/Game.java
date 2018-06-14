@@ -350,11 +350,20 @@ public class Game {
 				refreshProperties();
 				if (isFinished()) {
 
+					try {
+						DBManager db = new DBManager("res/databaseConnection.conf");
+						db.pushStats((int) xp, "" + getPlayTime());
+					} catch (ClassNotFoundException e) {
+
+						e.printStackTrace();
+					} catch (SQLException e) {
+
+						e.printStackTrace();
+					}
 					if (winTime == -1) {
 						System.out.println("expl");
 						Sprite sp = new Sprite();
 						if (winner == Team.PLAYER) {
-							xp+=100;
 							sp.setSprite(new Image(new File("res/castle_explosion.png").toURI().toString()), 1000, 380);
 							sp.render(gc);
 						} else {
@@ -742,23 +751,14 @@ public class Game {
 		Scene scene = new Scene(pane, 1000, 600);
 		stage.setScene(scene);
 		ArrayList<String> stats=db.getStats(); 
-		String[] results= new String[3];
-		for(int i=0;i<3;i++) {
-			if(stats.get(i)!=null) {
-				results[i]=stats.get(i);
-			}
-			else {
-				results[i]=" NO RESULT YET!";
-			}
-		}
+		
 		GraphicsContext gcc = canvas.getGraphicsContext2D();
 		gcc.fillText("BEST 3 RESULTS", 20, 10);
-		gcc.fillText("1. "+results[0], 30, 50);
-		gcc.fillText("2. "+results[1], 30, 90);
-		gcc.fillText("3. "+results[2], 30, 130);
+		gcc.fillText("1. "+stats.get(0), 30, 50);
+		gcc.fillText("2. "+stats.get(1), 30, 90);
+		gcc.fillText("3. "+stats.get(2), 30, 130);
 		gcc.fillText("CURRENT RESULT:", 20, 180);
-		gcc.fillText("XP: "+(int)xp , 30, 200);
-		gcc.fillText("Played Time: "+getPlayTime(), 30, 220);
+		gcc.fillText("xp: "+" Played Time: "+getPlayTime(), 30, 240);
 		
 	}
 

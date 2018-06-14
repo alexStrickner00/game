@@ -213,16 +213,7 @@ public class Game {
 
 	private static final int ENEMY_SPAWN_X = 855;
 
-	/**
-	 * Konstruktor fuer das Game-Objekt
-	 * 
-	 * @param gamePane
-	 *            Spielpane
-	 * @param sound
-	 *            Sound-Variable
-	 * @param difficulty
-	 *            Schwierigkeitsgrad
-	 */
+
 
 	/**
 	 * Animation Timer fuer fixe Wiederholungsrate
@@ -234,6 +225,16 @@ public class Game {
 	 */
 	private long winTime;
 
+	/**
+	 * Konstruktor fuer das Game-Objekt
+	 * 
+	 * @param gamePane
+	 *            Spielpane
+	 * @param sound
+	 *            Sound-Variable
+	 * @param difficulty
+	 *            Schwierigkeitsgrad
+	 */
 	public Game(Pane gamePane, boolean sound, int difficulty) {
 		this.pane = gamePane;
 		this.sound = sound;
@@ -706,6 +707,9 @@ public class Game {
 		at.stop();
 	}
 
+	/**
+	 * Methode, um zur Endcard Ansicht zu gelangen
+	 */
 	private void showEndcard() {
 
 		Stage stage = (Stage) pane.getScene().getWindow();

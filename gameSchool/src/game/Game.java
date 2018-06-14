@@ -199,8 +199,8 @@ public class Game {
 	 * Spawn-Punkt fuer eigene Truppen
 	 */
 
-	// private static final int PLAYER_SPAWN_X = 67;
-	private static final int PLAYER_SPAWN_X = 700;
+	private static final int PLAYER_SPAWN_X = 67;
+	//private static final int PLAYER_SPAWN_X = 700;
 	/**
 	 * Spawn-Punkt fuer eigene Truppen
 	 */

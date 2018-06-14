@@ -350,16 +350,7 @@ public class Game {
 				refreshProperties();
 				if (isFinished()) {
 
-					try {
-						DBManager db = new DBManager("res/databaseConnection.conf");
-						db.pushStats((int) xp, "" + getPlayTime());
-					} catch (ClassNotFoundException e) {
-
-						e.printStackTrace();
-					} catch (SQLException e) {
-
-						e.printStackTrace();
-					}
+					
 					if (winTime == -1) {
 						System.out.println("expl");
 						Sprite sp = new Sprite();
@@ -382,6 +373,19 @@ public class Game {
 
 					if (System.currentTimeMillis() - winTime > 1000) {
 						at.stop();
+						try {
+							DBManager db = new DBManager("res/databaseConnection.conf");
+							if(winner==Team.PLAYER) {
+								xp+=100;
+							}
+							db.pushStats((int) xp, "" + getPlayTime());
+						} catch (ClassNotFoundException e) {
+
+							e.printStackTrace();
+						} catch (SQLException e) {
+
+							e.printStackTrace();
+						}
 						showEndcard();
 					}
 

@@ -29,7 +29,7 @@ public class EndRunnable implements Runnable {
 	private Team winner;
 
 
-	/*
+	/**
 	 * Konstruktor fuer die Endscreens
 	 */
 	

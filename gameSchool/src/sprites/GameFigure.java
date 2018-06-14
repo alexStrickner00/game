@@ -199,8 +199,8 @@ public class GameFigure extends Sprite {
 
 		sprite = SwingFXUtils.fromFXImage(this.spritesheet, null);
 
-		int width = 60;
-		int height = 65;
+		int width = (int) (spritesheet.getWidth() / (ATTACK_IMAGE + 1));
+		int height = (int) spritesheet.getHeight();
 
 		for (int i = 0; i <= ATTACK_IMAGE; i++) {
 			sprites[i] = SwingFXUtils.toFXImage(sprite.getSubimage(width * i, 0, width, height), null);

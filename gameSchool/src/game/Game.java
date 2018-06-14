@@ -198,19 +198,13 @@ public class Game {
 	 * Spawn-Punkt fuer eigene Truppen
 	 */
 	
-	private static final int PLAYER_SPAWN_Y = 419;
+	private static final int SPAWN_Y = 479;
 	
 	/**
 	 * Spawn-Punkt fuer feindliche Truppen
 	 */
 	
 	private static final int ENEMY_SPAWN_X = 855;
-	
-	/**
-	 * Spawn-Punkt fuer feindliche Truppen
-	 */
-	
-	private static final int ENEMY_SPAWN_Y = 419;
 
 	/**
 	 * Konstruktor fuer das Game-Objekt
@@ -290,7 +284,7 @@ public class Game {
 		statusBar.addProperty(new BarProperty("Money", xpProperty, 795, 65));
 		statusBar.addProperty(new BarProperty("Money", timeProperty, 915, 65));
 
-		ownMoney = 100;
+		ownMoney = 300;
 		enemyMoney = 50+this.getDifficulty()*20;
 
 	}
@@ -433,6 +427,7 @@ public class Game {
 
 	private void drawBackground() {
 		gc.drawImage(background, 0, 0);
+		System.out.println("back");
 	}
 
 	/**
@@ -589,18 +584,19 @@ public class Game {
 	 */
 
 	public synchronized void spawn(Team team, shopItem item) {
+		int specY = (int) (SPAWN_Y - item.getFigure().getSpritesheet().getHeight());
 		GameFigure clone = item.getFigure().clone();
 		if (team == PLAYER) {
 			if (ownMoney >= item.getPrice()) {
 				clone.setX(PLAYER_SPAWN_X);
-				clone.setY(PLAYER_SPAWN_Y);
+				clone.setY(specY);
 				ownSprites.add(clone);
 				ownMoney -= item.getPrice();
 			}
 		} else if (team == ENEMY) {
 			if (enemyMoney >= item.getPrice()) {
 				clone.setX(ENEMY_SPAWN_X);
-				clone.setY(ENEMY_SPAWN_Y);
+				clone.setY(specY);
 				clone.inverseSpeed();
 				enemySprites.add(clone);
 				enemyMoney -= item.getPrice();

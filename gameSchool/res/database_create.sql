@@ -16,7 +16,7 @@ CREATE TABLE spielfigur(
 );
 
 CREATE TABLE stats(
+	timestamp TIMESTAMP,
 	xp INT NOT NULL,
-	gameTime VARCHAR(255) NOT NULL,
-	timestamp TIMESTAMP
+	gameTime VARCHAR(255) NOT NULL
 );

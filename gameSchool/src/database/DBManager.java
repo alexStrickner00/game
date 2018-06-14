@@ -27,7 +27,9 @@ public class DBManager {
 	// TODO: alle throws entfernen und innerhalb diese Klasse behandeln
 	/**
 	 * Im Konstruktur wird eine Verbindung zur Datenbank hergestellt
-	 * @param filePath Pfad zur Config-Datei
+	 * 
+	 * @param filePath
+	 *            Pfad zur Config-Datei
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -45,8 +47,11 @@ public class DBManager {
 		conn = DriverManager.getConnection(address, uname, pw);
 
 	}
+
 	/**
-	 * Diese Methode gibt alle GameFigure-Objekte aus der Datenbank in einer ArrayList zurück 
+	 * Diese Methode gibt alle GameFigure-Objekte aus der Datenbank in einer
+	 * ArrayList zurück
+	 * 
 	 * @return ArrayList with type GameFigure
 	 * @throws SQLException
 	 */
@@ -69,9 +74,13 @@ public class DBManager {
 		}
 		return list;
 	}
+
 	/**
-	 * Diese Methode gibt die GameFigure aus der Datenbank zurueck, deren Id mit dem Methodenparameter uebereinstimmt.
-	 * @param entityId Id of inquired GameFigure
+	 * Diese Methode gibt die GameFigure aus der Datenbank zurueck, deren Id mit dem
+	 * Methodenparameter uebereinstimmt.
+	 * 
+	 * @param entityId
+	 *            Id of inquired GameFigure
 	 * @return
 	 */
 	public GameFigure getGameFigureById(int entityId) {
@@ -99,10 +108,15 @@ public class DBManager {
 		return null;
 
 	}
+
 	/**
-	 * Diese Methode pusht die aktuellen Spieldaten(Fortschritt, Laufzeit) in die Datenbank
-	 * @param xp Fortschrittswert des Spielers im aktuellen Spiel
-	 * @param gameTime Aktuelle Laufzeit des Spiels
+	 * Diese Methode pusht die aktuellen Spieldaten(Fortschritt, Laufzeit) in die
+	 * Datenbank
+	 * 
+	 * @param xp
+	 *            Fortschrittswert des Spielers im aktuellen Spiel
+	 * @param gameTime
+	 *            Aktuelle Laufzeit des Spiels
 	 */
 	public void pushStats(int xp, String gameTime) {
 		try {
@@ -115,8 +129,28 @@ public class DBManager {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Diese Methode gibt die gesamten Spieldaten(für alle Spiele, die gespielt
+	 * wurden) aus der Datenbank in Form einer String-Array-List zurueck.
+	 * 
+	 * @return String Array
+	 * @throws SQLException
+	 */
+	public ArrayList<String> getStats() throws SQLException {
+		String sql = "SELECT * FROM stats ORDER BY timestamp";
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		ArrayList<String> stats = new ArrayList<String>();
+		while (rs.next()) {
+			stats.add(rs.getTimestamp("timestamp") + " " + rs.getInt("xp") + " " + rs.getString("gameTime"));
+		}
+		return stats;
+	}
+
 	/**
 	 * Verbindung zur Datenbank wird beendet
+	 * 
 	 * @throws SQLException
 	 */
 	public void closeConnection() throws SQLException {

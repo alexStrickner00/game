@@ -730,9 +730,18 @@ public class Game {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		Canvas canvas = new Canvas(600, 300);
+		canvas.setLayoutX(200);
+		canvas.setLayoutY(300);
+		
+		pane.getChildren().add(canvas);
 		Scene scene = new Scene(pane, 1000, 600);
 		stage.setScene(scene);
+		
+		GraphicsContext gcc = canvas.getGraphicsContext2D();
+		//TODO: stats mit gcc rendern
+		
 	}
 
 }
